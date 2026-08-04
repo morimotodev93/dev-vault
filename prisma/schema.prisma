@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Snippet {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  language    String
+  framework   String?
+  category    String?
+  tags        String
+  favorite    Boolean  @default(false)
+  priority    Int      @default(0)
+  code        String
+  memo        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

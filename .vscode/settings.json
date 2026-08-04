@@ -1,0 +1,63 @@
+{
+  // ========= Editor =========
+  "editor.tabSize": 2,
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  // ========= Default Formatter =========
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ========= Files =========
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // ========= Explorer =========
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+
+  // ========= TypeScript =========
+  "js/ts.tsdk": "node_modules/typescript/lib",
+
+  // ========= pnpm =========
+  "npm.packageManager": "pnpm",
+
+  // ========= CSS =========
+  "css.lint.unknownAtRules": "ignore",
+
+  // ========= Git =========
+  "git.autofetch": true,
+  "git.confirmSync": false,
+
+  // ========= Search =========
+  "search.exclude": {
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+
+  // ========= Files Exclude =========
+  "files.exclude": {
+    "**/.next": true
+  }
+}
