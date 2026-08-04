@@ -1,0 +1,11 @@
+.u-bg-cover {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.u-img {
+	width: 100%;
+	height: auto;
+	display: block;
+}

@@ -1,0 +1,175 @@
+/* CSS Variants（Design Token） */
+/* ================ Design Tokens ================ */
+
+/* Primitive Tokens */
+:root {
+	/* =====================
+       Primitive Colors (OKLCH)
+       ===================== */
+	/* Neutral */
+	--color-white: oklch(100% 0 0);
+	--color-black: oklch(22% 0 0);
+
+	/* Gray */
+	--color-gray-50: oklch(98% 0.003 260);
+	--color-gray-100: oklch(95% 0.003 260);
+	--color-gray-200: oklch(90% 0.004 260);
+	--color-gray-300: oklch(82% 0.005 260);
+	--color-gray-400: oklch(70% 0.006 260);
+	--color-gray-500: oklch(58% 0.007 260);
+	--color-gray-600: oklch(46% 0.008 260);
+	--color-gray-700: oklch(36% 0.008 260);
+	--color-gray-800: oklch(28% 0.007 260);
+	--color-gray-900: oklch(20% 0.006 260);
+
+	/* Blue */
+	--color-blue-100: oklch(95% 0.030 250);
+	--color-blue-300: oklch(82% 0.090 250);
+	--color-blue-500: oklch(62% 0.180 255);
+	--color-blue-700: oklch(48% 0.145 255);
+	--color-blue-900: oklch(34% 0.100 255);
+
+	/* Green */
+	--color-green-100: oklch(95% 0.035 145);
+	--color-green-300: oklch(85% 0.090 145);
+	--color-green-500: oklch(72% 0.180 145);
+	--color-green-700: oklch(55% 0.150 145);
+	--color-green-900: oklch(38% 0.100 145);
+
+	/* Yellow */
+	--color-yellow-100: oklch(97% 0.050 95);
+	--color-yellow-300: oklch(92% 0.110 95);
+	--color-yellow-500: oklch(86% 0.170 95);
+	--color-yellow-700: oklch(72% 0.150 95);
+	--color-yellow-900: oklch(55% 0.100 95);
+
+	/* Red */
+	--color-red-100: oklch(95% 0.040 25);
+	--color-red-300: oklch(84% 0.110 25);
+	--color-red-500: oklch(63% 0.230 25);
+	--color-red-700: oklch(50% 0.190 25);
+	--color-red-900: oklch(37% 0.140 25);
+
+	/* =====================
+       Font Families
+       ===================== */
+	--font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+
+	--font-ja: 'Noto Sans JP', 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', system-ui, sans-serif;
+	--font-zh-hans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', system-ui, sans-serif;
+	--font-zh-hant: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+	--font-ko: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+
+	/* =====================
+       Typography
+       ===================== */
+	--font-size-xs: 0.75rem;
+	/* 12px */
+	--font-size-sm: 0.875rem;
+	/* 14px */
+	--font-size-base: 1rem;
+	/* 16px */
+	--font-size-lg: 1.125rem;
+	/* 18px */
+	--font-size-xl: 1.25rem;
+	/* 20px */
+	--font-size-2xl: 1.5rem;
+	/* 24px */
+	--font-size-3xl: 1.875rem;
+	/* 30px */
+	--font-size-4xl: 2.25rem;
+	/* 36px */
+	--font-size-5xl: 3rem;
+	/* 48px */
+
+	--line-height-none: 1;
+	--line-height-tight: 1.25;
+	--line-height-normal: 1.5;
+	--line-height-relaxed: 1.75;
+
+	--letter-spacing-tight: -0.025em;
+	--letter-spacing-normal: 0;
+	--letter-spacing-wide: 0.025em;
+
+	/* =====================
+       Z-index
+       ===================== */
+	--z-base: 0;
+	--z-elevated: 10;
+	--z-sticky: 20;
+	--z-header: 30;
+	--z-dropdown: 40;
+	--z-overlay: 50;
+	--z-modal: 60;
+	--z-popover: 70;
+	--z-toast: 80;
+	--z-tooltip: 90;
+	--z-max: 9999;
+
+	/* =====================
+       Layout
+       ===================== */
+	--header-height-sm: 56px;
+	--header-height-md: 64px;
+	--header-height-lg: 80px;
+
+	/* =====================
+       Spacing
+       ===================== */
+
+	/* Spacing Scale（4px / 0.25rem Base） */
+	--space-0: 0;
+	--space-1: 0.25rem;
+	/* 4px */
+	--space-2: 0.5rem;
+	/* 8px */
+	--space-3: 0.75rem;
+	/* 12px */
+	--space-4: 1rem;
+	/* 16px */
+	--space-5: 1.25rem;
+	/* 20px */
+	--space-6: 1.5rem;
+	/* 24px */
+	--space-8: 2rem;
+	/* 32px */
+	--space-10: 2.5rem;
+	/* 40px */
+	--space-12: 3rem;
+	/* 48px */
+	--space-16: 4rem;
+	/* 64px */
+	--space-20: 5rem;
+	/* 80px */
+	--space-24: 6rem;
+	/* 96px */
+	/* =====================
+       Border Radius
+       ===================== */
+	--radius-sm: 0.25rem;
+	/* 4px */
+	--radius-md: 0.375rem;
+	/* 6px */
+	--radius-lg: 0.5rem;
+	/* 8px */
+	--radius-xl: 0.75rem;
+	/* 12px */
+	--radius-full: 9999px;
+
+	/* =====================
+       Shadow (Light)
+       ===================== */
+	--shadow-xs: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
+	--shadow-sm: 0 1px 3px 0 oklch(0% 0 0 / 0.08), 0 1px 2px -1px oklch(0% 0 0 / 0.06);
+	--shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.08), 0 2px 4px -2px oklch(0% 0 0 / 0.06);
+	--shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.08), 0 4px 6px -4px oklch(0% 0 0 / 0.05);
+	--shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.08), 0 8px 10px -6px oklch(0% 0 0 / 0.05);
+
+	/* Shadow (Dark) */
+	--shadow-xs-dark: 0 1px 2px 0 oklch(0% 0 0 / 0.25);
+	--shadow-sm-dark: 0 1px 3px 0 oklch(0% 0 0 / 0.30), 0 1px 2px -1px oklch(0% 0 0 / 0.20);
+	--shadow-md-dark: 0 4px 6px -1px oklch(0% 0 0 / 0.35), 0 2px 4px -2px oklch(0% 0 0 / 0.25);
+	--shadow-lg-dark: 0 10px 15px -3px oklch(0% 0 0 / 0.40), 0 4px 6px -4px oklch(0% 0 0 / 0.25);
+	--shadow-xl-dark: 0 20px 25px -5px oklch(0% 0 0 / 0.45), 0 8px 10px -6px oklch(0% 0 0 / 0.30);
+}

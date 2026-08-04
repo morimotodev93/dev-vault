@@ -1,0 +1,16 @@
+.u-en {
+	font-family: var(--font-en);
+}
+
+.u-number {
+	font-family: var(--font-number);
+}
+
+.u-line-clamp {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	/* HTML側で指定がない場合のデフォルト値を「2」に設定 */
+	-webkit-line-clamp: var(--line-clamp, 2);
+	line-clamp: 2;
+}

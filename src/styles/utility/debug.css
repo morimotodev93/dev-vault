@@ -1,0 +1,8 @@
+.u-debug {
+	background: rgb(255 0 0 / 0.08);
+	outline: 1px dashed red;
+}
+
+.u-debug-height {
+	min-height: 200dvh;
+}

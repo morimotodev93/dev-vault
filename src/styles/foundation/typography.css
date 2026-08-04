@@ -1,0 +1,136 @@
+/* typography.css */
+/* ④ Typography (headings, body, etc.) */
+
+/* =====================
+   Reset
+   ===================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+}
+
+/* =====================
+   Base
+   ===================== */
+body {
+	font-family: var(--font-sans);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-normal);
+	color: var(--fg);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+/* =====================
+   Headings
+   ===================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-sans);
+	font-weight: 600;
+	line-height: var(--line-height-tight);
+	color: var(--fg);
+	text-wrap: balance;
+	letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Scale（モジュラー・レスポンシブ） */
+h1 {
+	font-size: clamp(2.25rem, 5vw, 3.5rem);
+	/* ~36–56px */
+	font-weight: 700;
+	letter-spacing: -0.03em;
+}
+
+h2 {
+	font-size: clamp(1.875rem, 4vw, 2.5rem);
+	/* ~30–40px */
+	font-weight: 650;
+	letter-spacing: -0.025em;
+}
+
+h3 {
+	font-size: clamp(1.5rem, 3vw, 1.875rem);
+	/* ~24–30px */
+}
+
+h4 {
+	font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+	/* ~20–24px */
+	font-weight: 600;
+}
+
+h5 {
+	font-size: var(--font-size-lg);
+	/* 18px */
+	font-weight: 600;
+}
+
+h6 {
+	font-size: var(--font-size-base);
+	/* 16px */
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+	/* オプション：小さく使う場合に有効 */
+}
+
+/* =====================
+   Body text
+   ===================== */
+p {
+	font-size: var(--font-size-base);
+	line-height: var(--line-height-relaxed);
+	color: var(--fg);
+}
+
+p+p {
+	margin-top: 1.25em;
+	/* 段落間 */
+}
+
+/* =====================
+   Utility text styles
+   ===================== */
+.lead {
+	font-size: var(--font-size-lg);
+	line-height: var(--line-height-relaxed);
+	color: var(--fg-muted);
+}
+
+.small,
+small {
+	font-size: var(--font-size-sm);
+	line-height: var(--line-height-normal);
+	color: var(--fg-muted);
+}
+
+.muted {
+	color: var(--fg-muted);
+}
+
+/* =====================
+   Code / Mono
+   ===================== */
+code,
+kbd,
+samp,
+pre {
+	font-family: var(--font-mono);
+	font-size: 0.875em;
+}
+
+pre {
+	line-height: var(--line-height-normal);
+	overflow-x: auto;
+}

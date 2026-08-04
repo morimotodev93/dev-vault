@@ -1,0 +1,23 @@
+.l-container-sm {
+	width: calc(100% - 32px);
+	max-width: 425px;
+	margin-inline: auto;
+}
+
+.l-container-md {
+	width: calc(100% - 32px);
+	max-width: 768px;
+	margin-inline: auto;
+}
+
+.l-container-lg {
+	width: calc(100% - 32px);
+	max-width: 1024px;
+	margin-inline: auto;
+}
+
+.l-container-hamburger {
+	width: calc(100% - 32px);
+	max-width: 992px;
+	margin-inline: auto;
+}

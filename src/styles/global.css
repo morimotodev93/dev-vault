@@ -1,0 +1,46 @@
+/* =========================================
+   global.css
+   ========================================= */
+
+/* =========================================
+   Reset
+   ========================================= */
+@import "./reset.css";
+
+/* =========================================
+   Foundation (Tokens + Typography)
+   ========================================= */
+@import "./foundation/tokens/primitive.css";
+@import "./foundation/tokens/semantic.css";
+@import "./foundation/typography.css";
+
+/* =========================================
+   Layout
+   ========================================= */
+@import "./layout/container.css";
+@import "./layout/grid.css";
+
+/* =========================================
+   Utility
+   ========================================= */
+@import "./utility/background.css";
+@import "./utility/border.css";
+@import "./utility/display.css";
+@import "./utility/layout.css";
+@import "./utility/flex.css";
+@import "./utility/size.css";
+@import "./utility/spacing.css";
+@import "./utility/state.css";
+@import "./utility/typography.css";
+@import "./utility/debug.css";
+
+/* =========================================
+   Global Overrides / Helpers
+   ========================================= */
+
+/* モーダル表示時のスクロールロック */
+body.is-fixed {
+	overflow: hidden;
+	/* スクロールバー分のガタつき防止（任意） */
+	/* padding-right: var(--scrollbar-width, 0px); */
+}

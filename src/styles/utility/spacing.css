@@ -1,0 +1,112 @@
+/* utility/spacing.css */
+
+/* =====================
+   Margin
+   ===================== */
+.m-0 {
+	margin: 0;
+}
+
+.m-auto {
+	margin: auto;
+}
+
+.mt-0 {
+	margin-top: 0;
+}
+
+.mt-1 {
+	margin-top: var(--space-1);
+}
+
+.mt-2 {
+	margin-top: var(--space-2);
+}
+
+.mt-3 {
+	margin-top: var(--space-3);
+}
+
+.mt-4 {
+	margin-top: var(--space-4);
+}
+
+.mt-6 {
+	margin-top: var(--space-6);
+}
+
+.mt-8 {
+	margin-top: var(--space-8);
+}
+
+.mt-12 {
+	margin-top: var(--space-12);
+}
+
+.mt-16 {
+	margin-top: var(--space-16);
+}
+
+.mb-4 {
+	margin-bottom: var(--space-4);
+}
+
+/* 必要なものだけ追加 */
+
+.mx-auto {
+	margin-inline: auto;
+}
+
+.my-4 {
+	margin-block: var(--space-4);
+}
+
+/* =====================
+   Padding
+   ===================== */
+.p-4 {
+	padding: var(--space-4);
+}
+
+.px-4 {
+	padding-inline: var(--space-4);
+}
+
+.px-6 {
+	padding-inline: var(--space-6);
+}
+
+.py-4 {
+	padding-block: var(--space-4);
+}
+
+.py-8 {
+	padding-block: var(--space-8);
+}
+
+/* =====================
+   Gap（Flex / Grid用）
+   ===================== */
+.gap-1 {
+	gap: var(--space-1);
+}
+
+.gap-2 {
+	gap: var(--space-2);
+}
+
+.gap-3 {
+	gap: var(--space-3);
+}
+
+.gap-4 {
+	gap: var(--space-4);
+}
+
+.gap-6 {
+	gap: var(--space-6);
+}
+
+.gap-8 {
+	gap: var(--space-8);
+}
