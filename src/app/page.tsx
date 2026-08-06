@@ -1,1 +1,10 @@
-export default function Home() { return ( <main> <h1>DevVault</h1> </main> ); }
+// app/page.tsx
+import { Hero } from "./home";
+
+export default function Home() {
+  return (
+    <main>
+      <Hero />
+    </main>
+  );
+}

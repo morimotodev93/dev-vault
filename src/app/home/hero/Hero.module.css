@@ -1,0 +1,5 @@
+.title {
+	color: var(--fg);
+	font-size: var(--font-size-5xl);
+	margin-inline: auto;
+}

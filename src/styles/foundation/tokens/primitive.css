@@ -53,13 +53,55 @@
 	/* =====================
        Font Families
        ===================== */
-	--font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-	--font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+	/* UI */
+	--font-ui:
+		var(--font-jakarta),
+		system-ui,
+		sans-serif;
 
-	--font-ja: 'Noto Sans JP', 'IBM Plex Sans JP', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', system-ui, sans-serif;
-	--font-zh-hans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', system-ui, sans-serif;
-	--font-zh-hant: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
-	--font-ko: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', system-ui, sans-serif;
+
+	/* Code */
+	--font-code:
+		var(--font-jetbrains),
+		ui-monospace,
+		"Cascadia Code",
+		"SFMono-Regular",
+		Consolas,
+		monospace;
+
+
+	/* CJK */
+	--font-ja:
+		var(--font-noto-jp),
+		"Noto Sans JP",
+		"Hiragino Sans",
+		"Yu Gothic",
+		Meiryo,
+		sans-serif;
+
+
+	--font-zh-hans:
+		var(--font-noto-sc),
+		"Noto Sans SC",
+		"PingFang SC",
+		"Microsoft YaHei",
+		sans-serif;
+
+
+	--font-zh-hant:
+		var(--font-noto-tc),
+		"Noto Sans TC",
+		"PingFang TC",
+		"Microsoft JhengHei",
+		sans-serif;
+
+
+	--font-ko:
+		var(--font-noto-kr),
+		"Noto Sans KR",
+		"Apple SD Gothic Neo",
+		"Malgun Gothic",
+		sans-serif;
 
 	/* =====================
        Typography

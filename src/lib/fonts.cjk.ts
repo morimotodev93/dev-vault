@@ -24,7 +24,7 @@ export const notoSansSC = Noto_Sans_SC({
 export const notoSansTC = Noto_Sans_TC({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  variable: "--font-noto-sc",
+  variable: "--font-noto-tc",
   display: "swap",
   preload: false,
 });
@@ -32,7 +32,7 @@ export const notoSansTC = Noto_Sans_TC({
 export const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  variable: "--font-noto-sc",
+  variable: "--font-noto-kr",
   display: "swap",
   preload: false,
 });

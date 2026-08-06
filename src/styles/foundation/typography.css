@@ -15,10 +15,37 @@ p {
 }
 
 /* =====================
-   Base
+   Base Typography
    ===================== */
+
+html:lang(en) {
+	--font-ui: var(--font-jakarta);
+}
+
+
+html:lang(ja) {
+	--font-ui: var(--font-noto-jp);
+}
+
+
+html:lang(zh-Hans) {
+	--font-ui: var(--font-noto-sc);
+}
+
+
+html:lang(zh-Hant) {
+	--font-ui: var(--font-noto-tc);
+}
+
+
+html:lang(ko) {
+	--font-ui: var(--font-noto-kr);
+}
+
+
 body {
-	font-family: var(--font-sans);
+
+	font-family: var(--font-ui);
 	font-size: var(--font-size-base);
 	line-height: var(--line-height-normal);
 	color: var(--fg);
@@ -26,6 +53,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 }
+
 
 /* =====================
    Headings
@@ -36,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: var(--font-sans);
+	font-family: var(--font-ui);
 	font-weight: 600;
 	line-height: var(--line-height-tight);
 	color: var(--fg);
