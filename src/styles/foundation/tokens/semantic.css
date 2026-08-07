@@ -21,6 +21,16 @@
 	--primary-hover: var(--color-green-700);
 	--primary-fg: var(--color-white);
 
+	/* Secondary (Button用) */
+	--secondary: var(--color-gray-100);
+	--secondary-hover: var(--color-gray-200);
+	--secondary-fg: var(--color-gray-900);
+	--secondary-border: var(--color-gray-200);
+
+	/* Ghost / Subtle interaction */
+	--ghost-hover: var(--color-gray-100);
+
+
 	/* Accent */
 	--accent: var(--color-blue-500);
 	--accent-hover: var(--color-blue-700);
@@ -32,6 +42,7 @@
 	--warning: var(--color-yellow-500);
 	--warning-fg: var(--color-gray-900);
 	--destructive: var(--color-red-500);
+	--destructive-hover: var(--color-red-700);
 	--destructive-fg: var(--color-white);
 
 	/* Border */
@@ -67,6 +78,15 @@
 	--primary-hover: var(--color-green-100);
 	--primary-fg: var(--color-gray-900);
 
+	/* Secondary (Dark) */
+	--secondary: var(--color-gray-800);
+	--secondary-hover: var(--color-gray-700);
+	--secondary-fg: var(--color-gray-50);
+	--secondary-border: var(--color-gray-700);
+
+	/* Ghost */
+	--ghost-hover: var(--color-gray-800);
+
 	--accent: var(--color-blue-300);
 	--accent-hover: var(--color-blue-100);
 	--accent-fg: var(--color-gray-900);
@@ -74,6 +94,7 @@
 	--success: var(--color-green-300);
 	--warning: var(--color-yellow-300);
 	--destructive: var(--color-red-300);
+	--destructive-hover: var(--color-red-100);
 
 	--border: var(--color-gray-700);
 	--border-muted: var(--color-gray-800);

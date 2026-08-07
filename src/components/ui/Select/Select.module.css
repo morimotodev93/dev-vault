@@ -1,0 +1,120 @@
+/* =========================
+   Wrapper
+   ========================= */
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1);
+}
+
+.fullWidth {
+	width: 100%;
+}
+
+/* =========================
+   Label
+   ========================= */
+.label {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--fg);
+}
+
+/* =========================
+   Select
+   ========================= */
+.selectWrapper {
+	position: relative;
+	width: 100%;
+}
+
+.select {
+	width: 100%;
+	appearance: none;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background-color: var(--bg);
+	color: var(--fg);
+	font-family: inherit;
+	line-height: 1.25;
+	cursor: pointer;
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease,
+		background-color 0.15s ease;
+}
+
+/* カスタム矢印用の余白 */
+.select {
+	padding-right: var(--space-8);
+}
+
+.select:hover:not(:disabled):not(:focus) {
+	border-color: var(--border-strong);
+}
+
+.select:focus {
+	outline: none;
+	border-color: var(--ring);
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 25%, transparent);
+}
+
+.select:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	background-color: var(--bg-muted);
+}
+
+/* Error */
+.error {
+	border-color: var(--destructive);
+}
+
+.error:focus {
+	border-color: var(--destructive);
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 25%, transparent);
+}
+
+/* =========================
+   Chevron icon
+   ========================= */
+.chevron {
+	position: absolute;
+	top: 50%;
+	right: var(--space-3);
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: var(--fg-muted);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* =========================
+   Sizes
+   ========================= */
+.sm {
+	height: 32px;
+	padding: 0 var(--space-3);
+	font-size: 0.875rem;
+}
+
+.md {
+	height: 40px;
+	padding: 0 var(--space-4);
+	font-size: 0.9375rem;
+}
+
+.lg {
+	height: 48px;
+	padding: 0 var(--space-5);
+	font-size: 1rem;
+}
+
+/* =========================
+   Error message
+   ========================= */
+.errorMessage {
+	font-size: 0.8125rem;
+	color: var(--destructive);
+}

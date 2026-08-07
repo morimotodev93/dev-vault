@@ -33,13 +33,10 @@ The app directory contains Next.js App Router files.
 
 Current responsibilities:
 
-Root layout
-
-Global metadata
-
-Page-level routing
-
-Home page composition
+- Root layout
+- Global metadata
+- Page-level routing
+- Home page composition
 
 Current examples:
 
@@ -59,6 +56,7 @@ Current structure:
 src/components/
 ├─ icon/
 └─ primitives/
+├─ ui/
 ```
 
 ### Icons
@@ -77,19 +75,42 @@ src/components/icon/
 Primitive components are small reusable UI elements. The current implementation includes:
 
 ```text
-src/components/primitives/spacer/
+src/components/primitives/
+├─ Button/
+├─ Container/
+├─ Grid/
+├─Spacer/
+├─Stack/
 ```
 
 Future primitives may include:
 
-Button
-Text
-Heading
-Container
-Stack
-Grid
-Surface
-Link
+- Button
+- Text
+- Heading
+- Container
+- Stack
+- Grid
+- Surface
+- Link
+
+### UI
+
+UI components are grouped by purpose. The current implementation includes:
+
+```text
+src/components/ui/
+├─ Input/
+├─ Textarea/
+├─ Select/
+
+```
+
+Future UI components may include:
+
+- Input
+- TextArea
+- Select
 
 ### src/constants
 
@@ -128,13 +149,10 @@ src/lib/prisma.ts
 
 Responsibilities include:
 
-Font configuration
-
-Navigation configuration
-
-Prisma client setup
-
-Shared helpers
+- Font configuration
+- Navigation configuration
+- Prisma client setup
+- Shared helpers
 
 ### src/styles
 
