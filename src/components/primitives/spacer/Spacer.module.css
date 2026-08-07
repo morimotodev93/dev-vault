@@ -1,0 +1,37 @@
+.spacer {
+	flex-shrink: 0;
+	/* CSS変数から値を取得（未定義の場合はフォールバック） */
+	--s-base: var(--spacer-size, 1rem);
+	--s-mobile: var(--spacer-mobile, var(--s-base));
+	--s-desktop: var(--spacer-desktop, var(--s-mobile));
+}
+
+/* 縦方向（デフォルト） */
+.vertical {
+	height: var(--s-mobile);
+	width: var(--spacer-width, auto);
+}
+
+/* 横方向 */
+.horizontal {
+	width: var(--s-mobile);
+	height: var(--spacer-height, auto);
+}
+
+/* 768px以上のタブレットスタイル */
+@media (min-width: 768px) {
+	.vertical {
+		height: var(--s-desktop);
+	}
+
+	.horizontal {
+		width: var(--s-desktop);
+	}
+}
+
+
+/* 992px以上のラップトップスタイル */
+
+/* 1200px以上のデスクトップスタイル */
+
+/* 1440px以上のデスクトップスタイル */

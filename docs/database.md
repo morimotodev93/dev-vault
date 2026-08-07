@@ -1,0 +1,7 @@
+Snippet
+
+Tag
+
+Favorite
+
+Priority

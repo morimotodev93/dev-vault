@@ -1,91 +1,67 @@
-# Architecture Overview
+# Architecture
 
-This project is a lightweight knowledge-management application for storing and organizing development snippets, notes, and reusable code examples. The current implementation is a Next.js app with Prisma-based persistence and a simple folder structure designed for future expansion.
+## Purpose
 
-## 1. Goals
+このプロジェクトは、snippets / notes / tags / favorites を管理するための、シンプルで拡張しやすい知識管理アプリケーションです。
 
-- Provide a clean interface for saving and browsing code snippets
-- Keep the architecture simple and easy to extend
-- Support future multilingual and global usage
-- Separate business logic, UI, and data access clearly
+主な目的は、次の 4 点です。
 
-## 2. Tech Stack
+- UI を再利用可能な部品として整理する
+- 機能ごとに責務を分ける
+- 画面構成を明確に保つ
+- 今後の拡張をしやすくする
 
-- Next.js 16 (App Router)
-- React 19
-- TypeScript
-- Prisma ORM
-- SQLite for local development
-- Zod for schema validation
-- ESLint and Prettier for code quality
+---
 
-## 3. Project Structure
+## Design Principles
+
+このアプリケーションは、以下の考え方をもとに設計します。
+
+- Component Driven
+  - UI は小さな部品から組み立てる
+- Feature First
+  - 機能ごとに責務を分離する
+- Mobile First
+  - まず小さな画面で使いやすい構成を考える
+- Server First
+  - 初期表示やデータ取得はサーバー側で扱い、必要な場合のみクライアント側に寄せる
+- Type Safe
+  - TypeScript を使い、型によって構造を明確にする
+
+---
+
+## System Overview
+
+全体の構成は、次のようなレイヤーで考えます。
+
+- `app/`
+  - ルーティングとページの組み立て
+- `components/`
+  - UI コンポーネントの実装
+- `lib/`
+  - 共通ユーティリティや補助ロジック
+- `database/` または data layer
+  - データ取得・保存の責務
+
+基本的な流れとしては、ページが表示されるときに必要なデータを取得し、各機能のコンポーネントへ渡して構成します。
+
+---
+
+## Layer Architecture
 
 ```text
-src/
-├─ app/              # App Router pages, layouts, and global styles
-├─ components/       # Reusable UI and layout components
-├─ features/         # Feature-specific business logic
-├─ lib/              # Shared utilities and helpers
-├─ types/            # TypeScript type definitions
-└─ styles/           # Global and component-specific styles
+app/
+  └── page / route components
 
-prisma/
-├─ schema.prisma     # Database schema definition
-└─ migrations/       # Database migration history
+components/
+  ├── primitives
+  ├── common
+  ├── layout
+  └── features
+
+lib/
+  └── utilities / helpers / shared logic
+
+database/
+  └── data access layer
 ```
-
-## 4. Data Model
-
-The core data entity is the Snippet model, which stores:
-
-- title
-- description
-- language
-- framework
-- category
-- tags
-- favorite status
-- priority
-- code content
-- memo
-- creation and update timestamps
-
-This structure allows the app to grow from a simple snippet collection into a more advanced knowledge base.
-
-## 5. Runtime Flow
-
-1. A user opens the application in the browser.
-2. The Next.js app renders the relevant page from the App Router.
-3. Data is fetched or updated through Prisma.
-4. The UI displays the content using reusable components.
-5. Validation and formatting are handled before data is persisted.
-
-## 6. Internationalization and Global Readiness
-
-Although the current UI is minimal, the architecture is designed to support global usage in the future.
-
-Recommended direction:
-
-- Use locale-based routing such as /en and /ja
-- Separate user-facing text from business logic
-- Prepare content structures so they can be translated without changing the data model
-- Use locale-aware formatting for dates, numbers, and time zones
-- Keep the codebase language-agnostic where possible, especially for content and metadata
-
-## 7. Extensibility
-
-The current structure is intentionally simple, but it can be extended with:
-
-- user authentication
-- multi-user collaboration
-- search and filtering
-- tagging and categorization enhancements
-- cloud database support
-- multilingual UI and content translation
-
-## 8. Deployment Considerations
-
-For development, SQLite is sufficient. For production, the system can be migrated to a more scalable database such as PostgreSQL while keeping the Prisma layer unchanged.
-
-The app is compatible with standard Node.js hosting environments and can be deployed on platforms such as Vercel or similar providers.

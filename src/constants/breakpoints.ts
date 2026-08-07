@@ -1,7 +1,9 @@
 // constants/breakpoints.ts
 
 export const BREAKPOINT = {
-	sm: 768,
-	md: 992,
-	lg: 1200,
+  mobile: 425,
+  tablet: 768,
+  laptop: 992,
+  desktop: 1200,
+  wide: 1440,
 } as const;
