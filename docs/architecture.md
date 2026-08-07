@@ -1,67 +1,41 @@
-# Architecture
+# Architecture Overview
 
-## Purpose
+Dev Vault is a lightweight knowledge-management application for storing and organizing development snippets, notes, and reusable code examples.
 
-このプロジェクトは、snippets / notes / tags / favorites を管理するための、シンプルで拡張しやすい知識管理アプリケーションです。
+The current implementation is a Next.js application using the App Router, Prisma-based persistence, and a small component-oriented structure designed for future expansion.
 
-主な目的は、次の 4 点です。
+## Goals
 
-- UI を再利用可能な部品として整理する
-- 機能ごとに責務を分ける
-- 画面構成を明確に保つ
-- 今後の拡張をしやすくする
+- Provide a clean interface for saving and browsing code snippets.
+- Keep the architecture simple, understandable, and easy to extend.
+- Support future multilingual and global usage.
+- Separate UI, shared utilities, validation, and data access responsibilities.
+- Keep the codebase type-safe with TypeScript and schema validation.
 
----
+## Tech Stack
 
-## Design Principles
+- Next.js 16 with App Router
+- React 19
+- TypeScript
+- Prisma ORM
+- SQLite for local development
+- Zod for form and data validation
+- ESLint and Prettier for code quality
+- CSS Modules and global CSS utilities for styling
 
-このアプリケーションは、以下の考え方をもとに設計します。
-
-- Component Driven
-  - UI は小さな部品から組み立てる
-- Feature First
-  - 機能ごとに責務を分離する
-- Mobile First
-  - まず小さな画面で使いやすい構成を考える
-- Server First
-  - 初期表示やデータ取得はサーバー側で扱い、必要な場合のみクライアント側に寄せる
-- Type Safe
-  - TypeScript を使い、型によって構造を明確にする
-
----
-
-## System Overview
-
-全体の構成は、次のようなレイヤーで考えます。
-
-- `app/`
-  - ルーティングとページの組み立て
-- `components/`
-  - UI コンポーネントの実装
-- `lib/`
-  - 共通ユーティリティや補助ロジック
-- `database/` または data layer
-  - データ取得・保存の責務
-
-基本的な流れとしては、ページが表示されるときに必要なデータを取得し、各機能のコンポーネントへ渡して構成します。
-
----
-
-## Layer Architecture
+## Application Layers
 
 ```text
-app/
-  └── page / route components
+src/
+├─ app/          # App Router pages, layouts, and route-level UI
+├─ components/   # Reusable UI primitives, icons, and shared components
+├─ constants/    # Shared configuration values
+├─ hooks/        # Reusable React hooks
+├─ lib/          # Shared utilities, Prisma client, fonts, and navigation config
+├─ styles/       # Global CSS, design tokens, layout utilities, and reset styles
+└─ types/        # TypeScript types and Zod schemas
 
-components/
-  ├── primitives
-  ├── common
-  ├── layout
-  └── features
-
-lib/
-  └── utilities / helpers / shared logic
-
-database/
-  └── data access layer
+prisma/
+├─ schema.prisma # Prisma schema and data model
+└─ migrations/   # Database migration history
 ```
