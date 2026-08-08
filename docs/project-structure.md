@@ -79,8 +79,13 @@ src/components/primitives/
 ├─ Button/
 ├─ Container/
 ├─ Grid/
-├─Spacer/
-├─Stack/
+├─ Spacer/
+├─ Stack/
+├─ Text/
+├─ Heading/
+├─ Surface/
+├─ Link/
+└── index.ts
 ```
 
 Future primitives may include:
@@ -103,7 +108,7 @@ src/components/ui/
 ├─ Input/
 ├─ Textarea/
 ├─ Select/
-
+└── index.ts
 ```
 
 Future UI components may include:
@@ -111,6 +116,28 @@ Future UI components may include:
 - Input
 - TextArea
 - Select
+
+### Common
+
+Common components are shared, general-purpose UI elements used across the application. The current implementation includes:
+
+```text
+src/components/common/
+├─ EmptyState/
+├─ Loading/
+├─ Pagination/
+├─ SearchInput/
+├─ Tag/
+└── index.ts
+```
+
+Future common components may include:
+
+- EmptyState
+- Loading
+- Pagination
+- SearchInput
+- Tag
 
 ### src/constants
 
