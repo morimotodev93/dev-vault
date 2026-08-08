@@ -1,0 +1,84 @@
+.link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+	text-decoration: none;
+	transition: color 0.15s ease, text-decoration-color 0.15s ease;
+	cursor: pointer;
+}
+
+.link:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* Size */
+.size-sm {
+	font-size: var(--font-size-sm);
+}
+
+.size-base {
+	font-size: var(--font-size-base);
+}
+
+.size-lg {
+	font-size: var(--font-size-lg);
+}
+
+/* Weight */
+.weight-normal {
+	font-weight: 400;
+}
+
+.weight-medium {
+	font-weight: 500;
+}
+
+.weight-semibold {
+	font-weight: 600;
+}
+
+/* Variant */
+.variant-default {
+	color: var(--fg);
+}
+
+.variant-default:hover {
+	color: var(--primary);
+}
+
+.variant-muted {
+	color: var(--fg-muted);
+}
+
+.variant-muted:hover {
+	color: var(--fg);
+}
+
+.variant-subtle {
+	color: var(--fg-subtle);
+}
+
+.variant-subtle:hover {
+	color: var(--fg-muted);
+}
+
+.variant-primary {
+	color: var(--primary);
+}
+
+.variant-primary:hover {
+	color: var(--primary-hover);
+}
+
+/* Underline */
+.underline {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.underlineHover:hover {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}

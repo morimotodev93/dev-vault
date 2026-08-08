@@ -1,5 +1,9 @@
 export { Button } from "./Button";
 export { Container } from "./Container";
 export { Grid } from "./Grid";
+export { Heading } from "./Heading";
+export { Link } from "./Link";
 export { Spacer } from "./Spacer";
 export { Stack } from "./Stack";
+export { Surface } from "./Surface";
+export { Text } from "./Text";

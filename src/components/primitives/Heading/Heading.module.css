@@ -1,0 +1,67 @@
+.heading {
+	margin: 0;
+	line-height: var(--line-height-tight);
+	letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Size */
+.size-sm {
+	font-size: var(--font-size-lg);
+	/* 18px */
+}
+
+.size-md {
+	font-size: var(--font-size-xl);
+	/* 20px */
+}
+
+.size-lg {
+	font-size: var(--font-size-2xl);
+	/* 24px */
+}
+
+.size-xl {
+	font-size: var(--font-size-3xl);
+	/* 30px */
+}
+
+.size-2xl {
+	font-size: var(--font-size-4xl);
+	/* 36px */
+}
+
+.size-3xl {
+	font-size: var(--font-size-5xl);
+	/* 48px */
+}
+
+.size-4xl {
+	font-size: 3.75rem;
+	/* 60px - 必要に応じて token 追加 */
+}
+
+/* Color */
+.color-default {
+	color: var(--fg);
+}
+
+.color-muted {
+	color: var(--fg-muted);
+}
+
+.color-subtle {
+	color: var(--fg-subtle);
+}
+
+/* Weight */
+.weight-medium {
+	font-weight: 500;
+}
+
+.weight-semibold {
+	font-weight: 600;
+}
+
+.weight-bold {
+	font-weight: 700;
+}

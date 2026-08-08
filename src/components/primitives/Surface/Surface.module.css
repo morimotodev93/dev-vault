@@ -1,0 +1,76 @@
+.surface {
+	background-color: var(--bg-elevated);
+	color: var(--fg);
+}
+
+/* Padding */
+.padding-none {
+	padding: 0;
+}
+
+.padding-sm {
+	padding: var(--space-3);
+	/* 12px */
+}
+
+.padding-md {
+	padding: var(--space-4);
+	/* 16px */
+}
+
+.padding-lg {
+	padding: var(--space-6);
+	/* 24px */
+}
+
+.padding-xl {
+	padding: var(--space-8);
+	/* 32px */
+}
+
+/* Radius */
+.radius-none {
+	border-radius: 0;
+}
+
+.radius-sm {
+	border-radius: 0.25rem;
+	/* 4px */
+}
+
+.radius-md {
+	border-radius: 0.5rem;
+	/* 8px */
+}
+
+.radius-lg {
+	border-radius: 0.75rem;
+	/* 12px */
+}
+
+.radius-full {
+	border-radius: 9999px;
+}
+
+/* Variant */
+.variant-default {
+	background-color: var(--bg-elevated);
+}
+
+.variant-subtle {
+	background-color: var(--bg-subtle);
+}
+
+.variant-muted {
+	background-color: var(--bg-muted);
+}
+
+.variant-elevated {
+	background-color: var(--bg-elevated);
+	box-shadow: var(--shadow-card);
+}
+
+/* Border */
+.bordered {
+	border: 1px solid var(--border);
+}

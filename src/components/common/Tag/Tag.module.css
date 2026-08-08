@@ -1,0 +1,94 @@
+.tag {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+	font-weight: 500;
+	line-height: 1;
+	white-space: nowrap;
+	border-radius: 9999px;
+	transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+	user-select: none;
+}
+
+/* Size */
+.size-sm {
+	height: 22px;
+	padding-inline: var(--space-2);
+	font-size: var(--font-size-xs);
+}
+
+.size-md {
+	height: 26px;
+	padding-inline: var(--space-3);
+	font-size: var(--font-size-sm);
+}
+
+.size-lg {
+	height: 30px;
+	padding-inline: var(--space-4);
+	font-size: var(--font-size-base);
+}
+
+/* Variant */
+.variant-default {
+	background-color: var(--bg-muted);
+	color: var(--fg);
+}
+
+.variant-primary {
+	background-color: var(--primary);
+	color: var(--primary-fg);
+}
+
+.variant-secondary {
+	background-color: var(--secondary);
+	color: var(--secondary-fg);
+	border: 1px solid var(--secondary-border);
+}
+
+.variant-success {
+	background-color: var(--success);
+	color: var(--success-fg);
+}
+
+.variant-warning {
+	background-color: var(--warning);
+	color: var(--warning-fg);
+}
+
+.variant-destructive {
+	background-color: var(--destructive);
+	color: var(--destructive-fg);
+}
+
+.variant-outline {
+	background-color: transparent;
+	color: var(--fg);
+	border: 1px solid var(--border);
+}
+
+/* Active state */
+.active {
+	outline: 2px solid var(--ring);
+	outline-offset: 1px;
+}
+
+/* Interactive (clickable) */
+.interactive {
+	cursor: pointer;
+}
+
+.interactive:hover {
+	filter: brightness(0.97);
+}
+
+.interactive:focus-visible {
+	outline: 2px solid var(--ring);
+	outline-offset: 2px;
+}
+
+/* Dark mode 調整（必要に応じて） */
+:global([data-theme='dark']) .interactive:hover,
+:global(.dark) .interactive:hover {
+	filter: brightness(1.15);
+}
