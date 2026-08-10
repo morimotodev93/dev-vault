@@ -3,8 +3,9 @@ import { Hero } from "./home";
 
 export default function Home() {
   return (
-    <main className="px-4">
+    <main>
       <Hero />
+      {/* Continue */}[ CTA ]
     </main>
   );
 }
