@@ -56,6 +56,9 @@
     "**/coverage": true
   },
 
+  // ========= Workspace =========
+  "workbench.iconTheme": "material-icon-theme",
+
   // ========= Files Exclude =========
   "files.exclude": {
     "**/.next": true

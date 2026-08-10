@@ -17,12 +17,13 @@ Database access should be centralized through server-side modules. Prisma should
 
 Recommended future structure:
 
-````text
+```text
 src/features/snippets/
 ├─ actions/
 ├─ queries/
 ├─ schemas/
 └─ types/
+```
 
 ## Snippet Input Shape
 The current form schema is defined with Zod.
@@ -32,41 +33,27 @@ The current form schema is defined with Zod.
 
 Fields include:
 
-title
-
-description
-
-language
-
-framework
-
-category
-
-tags
-
-favorite
-
-priority
-
-code
-
-memo
+- title
+- description
+- language
+- framework
+- category
+- tags
+- favorite
+- priority
+- code
+- memo
 
 ## Recommended Server Actions
 
 Future snippet workflows may include server actions such as:
 
-createSnippet
-
-updateSnippet
-
-deleteSnippet
-
-toggleFavoriteSnippet
-
-listSnippets
-
-getSnippetById
+- createSnippet
+- updateSnippet
+- deleteSnippet
+- toggleFavoriteSnippet
+- listSnippets
+- getSnippetById
 
 ## Validation Boundary
 
@@ -74,13 +61,10 @@ All user-submitted data should be validated before persistence.
 
 Recommended flow:
 
-Receive form input.
-
-Validate with Zod.
-
-Transform UI-specific values into database-compatible values.
-
-Persist with Prisma.
+- Receive form input.
+- Validate with Zod.
+- Transform UI-specific values into database-compatible values.
+- Persist with Prisma.
 
 Return a typed result to the caller.
 
@@ -92,20 +76,15 @@ Example
 
 ```ts
 type ActionResult<T> = { ok: true; data: T } | { ok: false; error: string };
-````
+```
 
 ## Future HTTP API
 
 If a public or internal HTTP API is added later, it should document:
 
-Endpoint path
-
-HTTP method
-
-Request body
-
-Response body
-
-Error responses
-
-Authentication requirements
+- Endpoint path
+- HTTP method
+- Request body
+- Response body
+- Error responses
+- Authentication requirements

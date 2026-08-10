@@ -61,12 +61,15 @@ The project uses global CSS foundations and utilities.
 
 ## Current style structure:
 
+```text
 src/styles/
 ├─ foundation/
 ├─ layout/
 ├─ utility/
 ├─ global.css
 └─ reset.css
+```
+
 Guidelines:
 
 Keep design tokens in foundation files.
