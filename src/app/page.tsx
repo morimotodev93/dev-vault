@@ -1,11 +1,15 @@
 // app/page.tsx
-import { Hero } from "./home";
+import { Stack } from "@/components/primitives";
+import { Hero, QuickStats } from "./home";
 
 export default function Home() {
   return (
     <main>
-      <Hero />
-      {/* Continue */}[ CTA ]
+      <Stack>
+        <Hero />
+        {/* Continue */}
+        <QuickStats />
+      </Stack>
     </main>
   );
 }
