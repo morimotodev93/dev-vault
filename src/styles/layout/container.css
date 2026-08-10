@@ -1,21 +1,3 @@
-/* ③ レイアウト骨格（.layout, .layout-with-sidebar など） */
-.layout {
-    width: min(100% - 32px, 1200px);
-    margin-inline: auto;
-}
-
-.layout-shell {
-    display: grid;
-    grid-template-columns:
-        minmax(16px, 1fr)
-        min(1200px, 100%)
-        minmax(16px, 1fr);
-}
-
-.layout-shell > * {
-    grid-column: 2;
-}
-
 .header-adjustment {
     margin-top: var(--header-height);
 }

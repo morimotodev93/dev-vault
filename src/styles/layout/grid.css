@@ -1,49 +1,10 @@
-.l-grid--split-2 {
-    display: grid;
-    gap: var(--space-md);
+	.l-auto-grid {
+			--min: 240px;
+			--gap: 24px;
 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
+			display: grid;
+			gap: var(--gap);
 
-.l-grid {
-    --columns: 12;
-    --gap: 24px;
+			grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+	}
 
-    display: grid;
-    gap: var(--gap);
-
-    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
-}
-
-.l-grid > * {
-    grid-column: span var(--col, var(--columns));
-}
-
-/* そのまま並べて、特定の数で折り返し設定 */
-
-.l-cluster {
-    --columns: 3;
-    --gap: 24px;
-
-    display: grid;
-    gap: var(--gap);
-
-    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
-}
-
-/* 入るだけ入れる仕様 */
-
-.l-auto-grid {
-    --min: 240px;
-    --gap: 24px;
-
-    display: grid;
-    gap: var(--gap);
-
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
-}
-
-.l-grid-center {
-    display: grid;
-    place-content: center;
-}
