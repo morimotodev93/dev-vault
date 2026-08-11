@@ -2,7 +2,6 @@ import clsx from "clsx";
 import styles from "./Grid.module.css";
 import type { GridProps } from "./Grid.types";
 
-/** gap の数値を --space-* に変換 */
 const gapToVar = (value?: number) =>
   value === undefined ? undefined : `var(--space-${value})`;
 

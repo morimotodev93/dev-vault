@@ -23,7 +23,7 @@ export function Spacer<T extends ElementType = "div">({
 }: SpacerProps<T>) {
   const Component = as || "div";
 
-  // CSS変数としてスタイルを注入
+  // Insert as CSS variants
   const customProperties = {
     "--spacer-size": normalize(size),
     "--spacer-width": normalize(width),

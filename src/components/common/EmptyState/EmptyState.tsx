@@ -1,5 +1,4 @@
-import { Heading } from "@/components/primitives/Heading/Heading";
-import { Text } from "@/components/primitives/Text/Text";
+import { Heading, Text } from "@/components/primitives";
 import clsx from "clsx";
 import styles from "./EmptyState.module.css";
 import type { EmptyStateProps } from "./EmptyState.types";
