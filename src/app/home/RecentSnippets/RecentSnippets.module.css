@@ -1,0 +1,18 @@
+.recentSnippets {
+}
+
+.snippetsList {
+  --gap: var(--space-5);
+}
+
+.snippetsCard {
+  --gap: var(--space-5);
+  max-width: calc(400px - var(--gap));
+}
+
+.favoritButton {
+  width: fit-content;
+  margin: var(--space-2);
+  color: var(--color-yellow-500);
+  border: 1px solid var(--color-gray-500);
+}

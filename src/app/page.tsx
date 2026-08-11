@@ -1,14 +1,15 @@
 // app/page.tsx
 import { Stack } from "@/components/primitives";
-import { Hero, QuickStats } from "./home";
+import { Hero, QuickStats, RecentSnippets } from "./home";
 
 export default function Home() {
   return (
     <main>
-      <Stack>
+      <Stack gap={6}>
         <Hero />
-        {/* Continue */}
         <QuickStats />
+        <RecentSnippets />
+        {/* Continue */}
       </Stack>
     </main>
   );
