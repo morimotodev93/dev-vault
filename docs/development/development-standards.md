@@ -1,6 +1,8 @@
-# Configuration and Style Guide
+# Development Standards
 
-This document describes configuration and style conventions used in Dev Vault.
+This document describes the core development conventions used in Dev Vault.
+
+It covers language, architecture, component organization, styling, validation, and quality checks.
 
 ## Language
 
@@ -34,27 +36,61 @@ Guidelines:
 
 ## Components
 
-Reusable components should be small and focused.
+Reusable components should be small, focused, and easy to understand.
 
-Recommended component grouping:
+### Component Organization
+
+The project uses the following component hierarchy under src/components:
 
 ```text
 src/components/
-├─ primitives/
-├─ icon/
-├─ common/
-└─ layout/
+├─ primitives/   # low-level reusable building blocks
+├─ common/       # shared UI patterns used across multiple views
+├─ ui/           # higher-level controls and composed interfaces
+└─ icon/         # icon components grouped by purpose
 ```
 
-## Guidelines:
+### Guidelines
 
-Primitive components should not depend on feature-specific business logic.
+- Keep primitive components free from feature-specific business logic.
+- Place shared, reusable UI patterns in common when they are used across multiple screens.
+- Place composed controls or richer interface elements in ui.
+- Keep each component focused on a single responsibility.
+- Prefer composition over large, multi-purpose components.
+- Use CSS Modules for component-specific styling when appropriate.
 
-Feature-specific components should be colocated with their feature when the feature layer is introduced.
+### Component Usage
 
-Each component should have a clear responsibility.
+Use components in the following way:
 
-CSS Modules can be used for component-specific styling.
+- Use primitives for small building blocks such as Button, Text, Heading, Stack, or Container.
+- Use common for reusable patterns such as EmptyState, Loading, Pagination, SearchInput, or Tag.
+- Use ui for more complete controls such as Input, Select, or Textarea.
+- Keep route-level composition in src/app and avoid putting page-specific UI logic directly inside route files.
+
+### Directory Mapping
+
+Use the following mapping as a practical reference:
+
+| Directory                 | Purpose                                         | Typical contents                                       |
+| ------------------------- | ----------------------------------------------- | ------------------------------------------------------ |
+| src/components/primitives | Low-level reusable building blocks              | Button, Text, Heading, Stack, Container, Link, Surface |
+| src/components/common     | Shared UI patterns used across multiple screens | EmptyState, Loading, Pagination, SearchInput, Tag      |
+| src/components/ui         | Higher-level controls and composed interfaces   | Input, Select, Textarea                                |
+| src/components/icon       | Icons grouped by category                       | circle, navigation, util                               |
+
+### Component File Structure
+
+A component should usually follow this structure:
+
+```text
+ComponentName/
+├─ ComponentName.tsx
+├─ ComponentName.module.css
+└─ index.ts
+```
+
+This keeps the component self-contained and easy to import.
 
 Styling
 The project uses global CSS foundations and utilities.

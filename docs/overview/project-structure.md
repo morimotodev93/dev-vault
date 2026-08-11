@@ -50,6 +50,8 @@ src/app/home/hero/Hero.tsx
 
 The components directory contains reusable UI pieces.
 
+For guidance on how to organize components by abstraction level, see [development/components.md](development/components.md).
+
 Current structure:
 
 ```text
