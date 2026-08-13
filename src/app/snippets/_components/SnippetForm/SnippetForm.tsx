@@ -1,13 +1,52 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 import { Button, Stack } from "@/components/primitives";
 import { Input, Select, Textarea } from "@/components/ui";
 
-export function SnippetForm() {
-  return (
-    <form>
-      <Stack>
-        <Input label="Title" />
+import {
+  snippetFormSchema,
+  type SnippetFormInput,
+  type SnippetFormValues,
+} from "@/types/snippet";
 
-        <Textarea label="Description" />
+import { createSnippet } from "@/app/snippets/_actions/createSnippet";
+
+export function SnippetForm() {
+  const form = useForm<SnippetFormInput, unknown, SnippetFormValues>({
+    resolver: zodResolver(snippetFormSchema),
+
+    defaultValues: {
+      title: "",
+      description: "",
+      language: "",
+      framework: "",
+      category: "",
+      tags: "",
+      favorite: false,
+      priority: 0,
+      code: "",
+      memo: "",
+    },
+  });
+
+  const onSubmit = async (data: SnippetFormValues) => {
+    await createSnippet(data);
+  };
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <Stack>
+        <Input
+          label="Title"
+          {...form.register("title")}
+          error={!!form.formState.errors.title}
+          errorMessage={form.formState.errors.title?.message}
+        />
+
+        <Textarea label="Description" {...form.register("description")} />
 
         <Select
           label="Language"
@@ -20,24 +59,37 @@ export function SnippetForm() {
             { value: "sql", label: "SQL" },
           ]}
           placeholder="Select language"
+          {...form.register("language")}
+          error={!!form.formState.errors.language}
+          errorMessage={form.formState.errors.language?.message}
         />
 
-        <Textarea label="Code" />
+        <Textarea
+          label="Code"
+          {...form.register("code")}
+          error={!!form.formState.errors.code}
+          errorMessage={form.formState.errors.code?.message}
+        />
 
         <Select
           label="Priority"
           options={[
-            { value: "low", label: "Low" },
-            { value: "medium", label: "Medium" },
-            { value: "high", label: "High" },
+            { value: "0", label: "Low" },
+            { value: "3", label: "Medium" },
+            { value: "5", label: "High" },
           ]}
-          placeholder="Select priority"
+          {...form.register("priority", {
+            valueAsNumber: true,
+          })}
         />
 
-        <Input label="Tags" />
+        <Input label="Tags" {...form.register("tags")} />
 
         <Stack direction="row" justify="end" gap={3}>
-          <Button variant="secondary">Cancel</Button>
+          <Button type="button" variant="secondary">
+            Cancel
+          </Button>
+
           <Button type="submit">Save Snippet</Button>
         </Stack>
       </Stack>
