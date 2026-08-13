@@ -1,0 +1,5 @@
+.code {
+  font-family: var(--font-code);
+  color: var(--color-gray-200);
+  background: var(--color-gray-700);
+}
