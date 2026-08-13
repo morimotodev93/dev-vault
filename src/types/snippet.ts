@@ -24,6 +24,16 @@ export const snippetFormSchema = z.object({
   memo: z.string().max(2000).optional(),
 });
 
+export interface SnippetCardItem {
+  id: string;
+  title: string;
+  description?: string;
+  language: string;
+  tags: string;
+  favorite: boolean;
+  updatedAt: Date;
+}
+
 export type SnippetFormInput = z.input<typeof snippetFormSchema>;
 
 export type SnippetFormValues = z.output<typeof snippetFormSchema>;
