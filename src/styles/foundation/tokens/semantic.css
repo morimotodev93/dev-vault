@@ -1,111 +1,130 @@
 /* semantic.css */
 
+/* semantic.css */
+
 :root {
-	/* =====================
+  /* =====================
        Semantic Colors (Light)
        ===================== */
 
-	/* Background */
-	--bg: var(--color-white);
-	--bg-subtle: var(--color-gray-50);
-	--bg-muted: var(--color-gray-100);
-	--bg-elevated: var(--color-white);
+  /* Background */
+  --bg: var(--color-white);
+  --bg-subtle: var(--color-gray-50);
+  --bg-muted: var(--color-gray-100);
+  --bg-elevated: var(--color-white);
 
-	/* Foreground / Text */
-	--fg: var(--color-gray-900);
-	--fg-muted: var(--color-gray-600);
-	--fg-subtle: var(--color-gray-500);
+  /* Foreground / Text */
+  --fg: var(--color-gray-900);
+  --fg-muted: var(--color-gray-600);
+  --fg-subtle: var(--color-gray-500);
 
-	/* Primary (Brand) */
-	--primary: var(--color-green-500);
-	--primary-hover: var(--color-green-700);
-	--primary-fg: var(--color-white);
+  /* Primary (Brand) */
+  --primary: var(--color-green-500);
+  --primary-hover: var(--color-green-700);
+  --primary-fg: var(--color-white);
 
-	/* Secondary (Button用) */
-	--secondary: var(--color-gray-100);
-	--secondary-hover: var(--color-gray-200);
-	--secondary-fg: var(--color-gray-900);
-	--secondary-border: var(--color-gray-200);
+  /* Secondary (Button用) */
+  --secondary: var(--color-gray-100);
+  --secondary-hover: var(--color-gray-200);
+  --secondary-fg: var(--color-gray-900);
+  --secondary-border: var(--color-gray-200);
 
-	/* Ghost / Subtle interaction */
-	--ghost-hover: var(--color-gray-100);
+  /* Ghost / Subtle interaction */
+  --ghost-hover: var(--color-gray-100);
 
+  /* Accent */
+  --accent: var(--color-blue-500);
+  --accent-hover: var(--color-blue-700);
+  --accent-fg: var(--color-white);
 
-	/* Accent */
-	--accent: var(--color-blue-500);
-	--accent-hover: var(--color-blue-700);
-	--accent-fg: var(--color-white);
+  /* Feedback */
+  --success: var(--color-green-500);
+  --success-fg: var(--color-white);
 
-	/* Feedback */
-	--success: var(--color-green-500);
-	--success-fg: var(--color-white);
-	--warning: var(--color-yellow-500);
-	--warning-fg: var(--color-gray-900);
-	--destructive: var(--color-red-500);
-	--destructive-hover: var(--color-red-700);
-	--destructive-fg: var(--color-white);
+  --warning: var(--color-yellow-500);
+  --warning-fg: var(--color-gray-900);
 
-	/* Border */
-	--border: var(--color-gray-200);
-	--border-muted: var(--color-gray-100);
-	--border-strong: var(--color-gray-300);
+  --destructive: var(--color-red-500);
+  --destructive-hover: var(--color-red-700);
+  --destructive-fg: var(--color-white);
 
-	/* Ring / Focus */
-	--ring: var(--color-blue-500);
+  /* Info */
+  --info: var(--color-blue-500);
+  --info-hover: var(--color-blue-700);
+  --info-fg: var(--color-white);
 
-	/* Shadow (semantic) */
-	--shadow-card: var(--shadow-sm);
-	--shadow-dropdown: var(--shadow-md);
-	--shadow-modal: var(--shadow-lg);
-	--shadow-float: var(--shadow-xl);
+  /* Border */
+  --border: var(--color-gray-200);
+  --border-muted: var(--color-gray-100);
+  --border-strong: var(--color-gray-300);
+
+  /* Ring / Focus */
+  --ring: var(--color-blue-500);
+
+  /* Shadow (semantic) */
+  --shadow-card: var(--shadow-sm);
+  --shadow-dropdown: var(--shadow-md);
+  --shadow-modal: var(--shadow-lg);
+  --shadow-float: var(--shadow-xl);
 }
-
 /* =====================
    Dark Mode
    ===================== */
+
 [data-theme="dark"],
 .dark {
-	--bg: var(--color-gray-900);
-	--bg-subtle: var(--color-gray-800);
-	--bg-muted: var(--color-gray-800);
-	--bg-elevated: var(--color-gray-800);
+  --bg: var(--color-gray-900);
+  --bg-subtle: var(--color-gray-800);
+  --bg-muted: var(--color-gray-800);
+  --bg-elevated: var(--color-gray-800);
 
-	--fg: var(--color-gray-50);
-	--fg-muted: var(--color-gray-400);
-	--fg-subtle: var(--color-gray-500);
+  --fg: var(--color-gray-50);
+  --fg-muted: var(--color-gray-400);
+  --fg-subtle: var(--color-gray-500);
 
-	--primary: var(--color-green-300);
-	--primary-hover: var(--color-green-100);
-	--primary-fg: var(--color-gray-900);
+  --primary: var(--color-green-300);
+  --primary-hover: var(--color-green-100);
+  --primary-fg: var(--color-gray-900);
 
-	/* Secondary (Dark) */
-	--secondary: var(--color-gray-800);
-	--secondary-hover: var(--color-gray-700);
-	--secondary-fg: var(--color-gray-50);
-	--secondary-border: var(--color-gray-700);
+  /* Secondary (Dark) */
+  --secondary: var(--color-gray-800);
+  --secondary-hover: var(--color-gray-700);
+  --secondary-fg: var(--color-gray-50);
+  --secondary-border: var(--color-gray-700);
 
-	/* Ghost */
-	--ghost-hover: var(--color-gray-800);
+  /* Ghost */
+  --ghost-hover: var(--color-gray-800);
 
-	--accent: var(--color-blue-300);
-	--accent-hover: var(--color-blue-100);
-	--accent-fg: var(--color-gray-900);
+  --accent: var(--color-blue-300);
+  --accent-hover: var(--color-blue-100);
+  --accent-fg: var(--color-gray-900);
 
-	--success: var(--color-green-300);
-	--warning: var(--color-yellow-300);
-	--destructive: var(--color-red-300);
-	--destructive-hover: var(--color-red-100);
+  /* Feedback */
+  --success: var(--color-green-300);
+  --success-fg: var(--color-gray-900);
 
-	--border: var(--color-gray-700);
-	--border-muted: var(--color-gray-800);
-	--border-strong: var(--color-gray-600);
+  --warning: var(--color-yellow-300);
+  --warning-fg: var(--color-gray-900);
 
-	--ring: var(--color-blue-300);
+  --destructive: var(--color-red-300);
+  --destructive-hover: var(--color-red-100);
+  --destructive-fg: var(--color-gray-900);
 
-	/* Shadow override */
-	--shadow-xs: var(--shadow-xs-dark);
-	--shadow-sm: var(--shadow-sm-dark);
-	--shadow-md: var(--shadow-md-dark);
-	--shadow-lg: var(--shadow-lg-dark);
-	--shadow-xl: var(--shadow-xl-dark);
+  /* Info */
+  --info: var(--color-blue-300);
+  --info-hover: var(--color-blue-100);
+  --info-fg: var(--color-gray-900);
+
+  --border: var(--color-gray-700);
+  --border-muted: var(--color-gray-800);
+  --border-strong: var(--color-gray-600);
+
+  --ring: var(--color-blue-300);
+
+  /* Shadow override */
+  --shadow-xs: var(--shadow-xs-dark);
+  --shadow-sm: var(--shadow-sm-dark);
+  --shadow-md: var(--shadow-md-dark);
+  --shadow-lg: var(--shadow-lg-dark);
+  --shadow-xl: var(--shadow-xl-dark);
 }

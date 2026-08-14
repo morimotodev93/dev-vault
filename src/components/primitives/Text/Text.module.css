@@ -1,52 +1,83 @@
+/* =========================
+   Base
+   ========================= */
+
 .text {
-	margin: 0;
-	line-height: var(--line-height-normal);
-	letter-spacing: var(--letter-spacing-normal);
+  margin: 0;
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
 }
 
-/* Size */
+/* =========================
+   Size
+   ========================= */
+
 .size-xs {
-	font-size: var(--font-size-xs);
+  font-size: var(--font-size-xs);
 }
 
 .size-sm {
-	font-size: var(--font-size-sm);
+  font-size: var(--font-size-sm);
 }
 
 .size-base {
-	font-size: var(--font-size-base);
+  font-size: var(--font-size-base);
 }
 
 .size-lg {
-	font-size: var(--font-size-lg);
+  font-size: var(--font-size-lg);
 }
 
 .size-xl {
-	font-size: var(--font-size-xl);
+  font-size: var(--font-size-xl);
 }
 
-/* Color */
+/* =========================
+   Color
+   ========================= */
 .color-default {
-	color: var(--fg);
+  color: var(--fg);
 }
 
 .color-muted {
-	color: var(--fg-muted);
+  color: var(--fg-muted);
 }
 
 .color-subtle {
-	color: var(--fg-subtle);
+  color: var(--fg-subtle);
 }
 
-/* Weight */
+.color-primary {
+  color: var(--primary);
+}
+
+.color-info {
+  color: var(--info);
+}
+
+.color-success {
+  color: var(--success);
+}
+
+.color-warning {
+  color: var(--warning);
+}
+
+.color-danger {
+  color: var(--destructive);
+}
+/* =========================
+   Weight
+   ========================= */
+
 .weight-normal {
-	font-weight: 400;
+  font-weight: 400;
 }
 
 .weight-medium {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 .weight-semibold {
-	font-weight: 600;
+  font-weight: 600;
 }
