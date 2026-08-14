@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-import { Button, Stack } from "@/components/primitives";
+import { Button, Link, Stack } from "@/components/primitives";
 import { Input, Select, Textarea } from "@/components/ui";
 
 import {
@@ -34,6 +34,9 @@ interface SnippetFormProps {
 
 export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
   const router = useRouter();
+
+  const cancelHref =
+    mode === "edit" && snippet ? `/snippets/${snippet.id}` : "/snippets";
 
   const form = useForm<SnippetFormInput, unknown, SnippetFormValues>({
     resolver: zodResolver(snippetFormSchema),
@@ -136,9 +139,7 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
         />
 
         <Stack direction="row" justify="end" gap={3}>
-          <Button variant="secondary" type="button">
-            Cancel
-          </Button>
+          <Link href={cancelHref}>Cancel</Link>
 
           <Button type="submit">
             {mode === "edit" ? "Update Snippet" : "Save Snippet"}

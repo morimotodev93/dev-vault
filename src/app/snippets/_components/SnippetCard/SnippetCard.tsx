@@ -13,6 +13,19 @@ import styles from "./SnippetCard.module.css";
 
 type SnippetCardProps = Snippet;
 
+export function getPriorityConfig(priority: number) {
+  switch (priority) {
+    case 0:
+      return { label: "Low", variant: "default" as const };
+    case 3:
+      return { label: "Medium", variant: "warning" as const };
+    case 5:
+      return { label: "High", variant: "destructive" as const };
+    default:
+      return { label: "Unknown", variant: "default" as const };
+  }
+}
+
 export function SnippetCard({
   id,
   title,
@@ -24,6 +37,8 @@ export function SnippetCard({
   code,
   updatedAt,
 }: SnippetCardProps) {
+  const priorityConfig = getPriorityConfig(priority);
+
   return (
     <Link href={`/snippets/${id}`}>
       <Surface
@@ -39,6 +54,11 @@ export function SnippetCard({
             <Stack direction="row" gap={1}>
               <Tag size="sm">{language}</Tag>
               {tags && <Tag size="sm">{tags}</Tag>}
+              {/* Priority */}
+
+              <Tag variant={priorityConfig.variant} size="sm">
+                {priorityConfig.label}
+              </Tag>
             </Stack>
             {/* Update & Favorit Button Area */}
             <Stack direction="row" align="center" justify="between">
