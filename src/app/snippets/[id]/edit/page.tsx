@@ -1,5 +1,6 @@
 import {
   Container,
+  Heading,
   Link,
   Spacer,
   Stack,
@@ -7,6 +8,7 @@ import {
   Text,
 } from "@/components/primitives";
 
+import { SnippetForm } from "@/app/snippets/_components";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
@@ -31,9 +33,15 @@ export default async function SnippetEdit({
     <>
       <Container>
         <Stack gap={8}>
-          {/* Snippets List */}
+          {/* Page Header */}
+          <Heading as="h2" size="lg">
+            Edit Snippet
+          </Heading>
+
           <Stack gap={6}>
-            {/* Other Page Link */}
+            {/* Edit Form */}
+            <SnippetForm mode="edit" snippet={snippet} />
+
             <Stack gap={2} align="center" justify="end" direction="row">
               {/* Detail Return */}
               <Link href={`/snippets/${snippet.id}`}>

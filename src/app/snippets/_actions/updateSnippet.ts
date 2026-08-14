@@ -3,17 +3,20 @@
 import { prisma } from "@/lib/prisma";
 import { snippetFormSchema, type SnippetFormValues } from "@/types/snippet";
 
-export async function createSnippet(data: SnippetFormValues) {
+export async function updateSnippet(id: string, data: SnippetFormValues) {
   const result = snippetFormSchema.safeParse(data);
 
   if (!result.success) {
     return {
-      success: false as const,
+      success: false,
       error: "Invalid input",
     };
   }
 
-  const snippet = await prisma.snippet.create({
+  const snippet = await prisma.snippet.update({
+    where: {
+      id,
+    },
     data: {
       title: result.data.title,
       description: result.data.description,
@@ -29,7 +32,7 @@ export async function createSnippet(data: SnippetFormValues) {
   });
 
   return {
-    success: true as const,
+    success: true,
     data: snippet,
   };
 }

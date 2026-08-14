@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { Button, Stack } from "@/components/primitives";
@@ -12,28 +13,65 @@ import {
   type SnippetFormValues,
 } from "@/types/snippet";
 
-import { createSnippet } from "@/app/snippets/_actions/createSnippet";
+import { createSnippet, updateSnippet } from "@/app/snippets/_actions";
 
-export function SnippetForm() {
+interface SnippetFormProps {
+  mode?: "create" | "edit";
+  snippet?: {
+    id: string;
+    title: string;
+    description: string | null;
+    language: string;
+    framework: string | null;
+    category: string | null;
+    tags: string;
+    favorite: boolean;
+    priority: number;
+    code: string;
+    memo: string | null;
+  };
+}
+
+export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
+  const router = useRouter();
+
   const form = useForm<SnippetFormInput, unknown, SnippetFormValues>({
     resolver: zodResolver(snippetFormSchema),
 
     defaultValues: {
-      title: "",
-      description: "",
-      language: "",
-      framework: "",
-      category: "",
-      tags: "",
-      favorite: false,
-      priority: 0,
-      code: "",
-      memo: "",
+      title: snippet?.title ?? "",
+      description: snippet?.description ?? "",
+      language: snippet?.language ?? "",
+      framework: snippet?.framework ?? "",
+      category: snippet?.category ?? "",
+      tags: snippet?.tags ?? "",
+      favorite: snippet?.favorite ?? false,
+      priority: snippet?.priority ?? 0,
+      code: snippet?.code ?? "",
+      memo: snippet?.memo ?? "",
     },
   });
 
   const onSubmit = async (data: SnippetFormValues) => {
-    await createSnippet(data);
+    if (mode === "create") {
+      const result = await createSnippet(data);
+
+      if (result.success) {
+        router.push(`/snippets/${result.data.id}`);
+      }
+
+      return;
+    }
+
+    if (mode === "edit" && snippet) {
+      const result = await updateSnippet(snippet.id, data);
+
+      if (result.success) {
+        router.push(`/snippets/${snippet.id}`);
+      }
+
+      return;
+    }
   };
 
   return (
@@ -46,7 +84,12 @@ export function SnippetForm() {
           errorMessage={form.formState.errors.title?.message}
         />
 
-        <Textarea label="Description" {...form.register("description")} />
+        <Textarea
+          label="Description"
+          {...form.register("description")}
+          error={!!form.formState.errors.description}
+          errorMessage={form.formState.errors.description?.message}
+        />
 
         <Select
           label="Language"
@@ -81,16 +124,25 @@ export function SnippetForm() {
           {...form.register("priority", {
             valueAsNumber: true,
           })}
+          error={!!form.formState.errors.priority}
+          errorMessage={form.formState.errors.priority?.message}
         />
 
-        <Input label="Tags" {...form.register("tags")} />
+        <Input
+          label="Tags"
+          {...form.register("tags")}
+          error={!!form.formState.errors.tags}
+          errorMessage={form.formState.errors.tags?.message}
+        />
 
         <Stack direction="row" justify="end" gap={3}>
-          <Button type="button" variant="secondary">
+          <Button variant="secondary" type="button">
             Cancel
           </Button>
 
-          <Button type="submit">Save Snippet</Button>
+          <Button type="submit">
+            {mode === "edit" ? "Update Snippet" : "Save Snippet"}
+          </Button>
         </Stack>
       </Stack>
     </form>
