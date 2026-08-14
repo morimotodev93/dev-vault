@@ -4,8 +4,10 @@ import { useRouter } from "next/navigation";
 
 import { deleteSnippet } from "@/app/snippets/_actions";
 
-import { Button, Stack, Text } from "@/components/primitives";
+import { Button, Stack } from "@/components/primitives";
 import styles from "./DeleteButton.module.css";
+
+console.log("DeleteButton styles:", styles);
 
 type DeleteButtonProps = {
   id: string;
@@ -36,15 +38,9 @@ export function DeleteButton({ id }: DeleteButtonProps) {
   };
 
   return (
-    <Button
-      variant="danger"
-      onClick={handleDelete}
-      className={styles.deleteButton}
-    >
+    <Button variant="danger" size="lg" onClick={handleDelete}>
       <Stack justify="center" align="center">
-        <Text size="xs" className={styles.deleteButton__text}>
-          Delete
-        </Text>
+        Delete
       </Stack>
     </Button>
   );

@@ -46,33 +46,35 @@ export default async function SnippetDetail({
 
             <Text>{snippet.tags}</Text>
 
-            <Text className={styles.code}>{snippet.code}</Text>
+            <pre className={styles.code}>
+              <code>{snippet.code}</code>
+            </pre>
 
             {/* Other Page Link */}
-            <Stack gap={2} align="center" justify="end" direction="row">
+            <Stack gap={2} wrap align="center" justify="end" direction="row">
               {/* Delete Snippets */}
               <DeleteButton id={snippet.id} />
               {/* Edit Snippets */}
               <Link href={`/snippets/${snippet.id}/edit`}>
-                <Surface radius="md" bordered>
+                <Surface radius="sm" padding="sm" bordered>
                   <Stack justify="center" align="center">
-                    <Text size="xs">Edit</Text>
+                    <Text>Edit</Text>
                   </Stack>
                 </Surface>
               </Link>
               {/* New Snippets */}
               <Link href="/snippets/new">
-                <Surface radius="md" bordered>
+                <Surface radius="sm" padding="sm" bordered>
                   <Stack justify="center" align="center">
-                    <Text size="xs">New Snippet</Text>
+                    <Text>New Snippet</Text>
                   </Stack>
                 </Surface>
               </Link>
               {/*  Snippets List */}
               <Link href="/snippets">
-                <Surface radius="md" bordered>
+                <Surface radius="sm" padding="sm" bordered>
                   <Stack justify="center" align="center">
-                    <Text size="xs"> Snippet List</Text>
+                    <Text> Snippet List</Text>
                   </Stack>
                 </Surface>
               </Link>
