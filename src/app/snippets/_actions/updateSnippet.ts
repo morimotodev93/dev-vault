@@ -8,7 +8,7 @@ export async function updateSnippet(id: string, data: SnippetFormValues) {
 
   if (!result.success) {
     return {
-      success: false,
+      success: false as const,
       error: "Invalid input",
     };
   }
@@ -32,7 +32,7 @@ export async function updateSnippet(id: string, data: SnippetFormValues) {
   });
 
   return {
-    success: true,
+    success: true as const,
     data: snippet,
   };
 }

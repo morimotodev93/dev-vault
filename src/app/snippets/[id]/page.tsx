@@ -8,6 +8,7 @@ import {
   Text,
 } from "@/components/primitives";
 
+import { DeleteButton } from "@/app/snippets/_components/DeleteButton";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import styles from "./SnippetDetail.module.css";
@@ -49,11 +50,13 @@ export default async function SnippetDetail({
 
             {/* Other Page Link */}
             <Stack gap={2} align="center" justify="end" direction="row">
+              {/* Delete Snippets */}
+              <DeleteButton id={snippet.id} />
               {/* Edit Snippets */}
               <Link href={`/snippets/${snippet.id}/edit`}>
                 <Surface radius="md" bordered>
                   <Stack justify="center" align="center">
-                    <Text>Edit</Text>
+                    <Text size="xs">Edit</Text>
                   </Stack>
                 </Surface>
               </Link>
@@ -61,7 +64,7 @@ export default async function SnippetDetail({
               <Link href="/snippets/new">
                 <Surface radius="md" bordered>
                   <Stack justify="center" align="center">
-                    <Text>New Snippet</Text>
+                    <Text size="xs">New Snippet</Text>
                   </Stack>
                 </Surface>
               </Link>
@@ -69,7 +72,7 @@ export default async function SnippetDetail({
               <Link href="/snippets">
                 <Surface radius="md" bordered>
                   <Stack justify="center" align="center">
-                    <Text> Snippet List</Text>
+                    <Text size="xs"> Snippet List</Text>
                   </Stack>
                 </Surface>
               </Link>
