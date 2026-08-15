@@ -1,61 +1,50 @@
----
-
-## Suggested `docs/roadmap.md`
-
-```md
 # Roadmap
 
 This roadmap describes the planned direction for Dev Vault.
 
 ## Current Phase
 
-The project is currently in an early foundation phase.
+The project is currently focused on expanding the core snippet management experience.
 
-Implemented or partially implemented foundations include:
+Completed foundations include:
 
 - Next.js App Router setup
 - Root layout and metadata
 - Global styles and CSS tokens
-- Basic home page structure
-- Reusable icon components
-- Basic primitive component structure
-- Navigation configuration
-- Prisma schema
-- Snippet validation schema
+- Reusable UI primitives
+- Prisma schema and database integration
+- Zod validation
+- Snippet CRUD
+- Snippet detail pages
+- Empty states
+- Pagination
+- Keyword search
 
 ## Near-Term Goals
 
-### Snippet Management
-
-- Create snippet form
-- Edit existing snippets
-- Delete snippets
-- Display snippet detail pages
-- Show recent snippets on the home page
-
 ### Browsing and Organization
 
-- List all snippets
 - Filter snippets by language
 - Filter snippets by framework
 - Filter snippets by category
 - Filter favorite snippets
 - Sort by priority or update date
 
-### UI Foundation
+### Snippet Features
 
-- Add reusable primitive components
-- Add layout components such as header, footer, sidebar, and main layout
+- Improve favorite management
+- Expand tag management
+- Support multiple tags
+- Improve snippet organization
+
+### User Experience
+
+- Improve loading states
+- Add keyboard-friendly interactions
 - Improve responsive behavior
-- Expand design tokens and utility classes
+- Improve search and pagination UX
 
 ## Mid-Term Goals
-
-### Search
-
-- Add keyword search
-- Search across title, description, code, memo, tags, and category
-- Add search result highlighting
 
 ### Tag and Category Enhancements
 
@@ -63,13 +52,16 @@ Implemented or partially implemented foundations include:
 - Add category management
 - Support nested or grouped categories
 
+### Search
+
+- Search across title, description, code, memo, tags, and category
+- Add search result highlighting
+
 ### User Experience
 
-- Add empty states
-- Add loading states
-- Add confirmation dialogs
-- Add keyboard-friendly interactions
-- Add better mobile navigation
+- Add confirmation dialogs where appropriate
+- Improve mobile navigation
+- Improve accessibility
 
 ## Long-Term Goals
 
@@ -102,4 +94,3 @@ Implemented or partially implemented foundations include:
 ## Guiding Principle
 
 The project should remain simple while making it easy to add features incrementally.
-```
