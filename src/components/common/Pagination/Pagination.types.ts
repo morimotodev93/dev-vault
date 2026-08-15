@@ -5,8 +5,7 @@ export type PaginationProps = HTMLAttributes<HTMLElement> & {
   currentPage: number;
   /** 総ページ数 */
   totalPages: number;
-  /** ページ変更時のコールバック */
-  onPageChange: (page: number) => void;
+
   /** 左右に表示する隣接ページ数 */
   siblingCount?: number;
   /** サイズ */
