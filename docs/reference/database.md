@@ -1,10 +1,12 @@
 # Database
 
-Dev Vault uses Prisma ORM for database access. The current local development database is SQLite.
+Dev Vault uses Prisma ORM for database access.
 
-## Current Database Provider
+SQLite is currently used for local development, with `better-sqlite3` as the runtime SQLite driver.
 
-The Prisma datasource is configured for SQLite.
+## Database Configuration
+
+The Prisma datasource is configured to use SQLite.
 
 ```prisma
 datasource db {
@@ -12,7 +14,9 @@ datasource db {
 }
 ```
 
-The runtime Prisma client uses @prisma/adapter-better-sqlite3 and reads the database URL from DATABASE_URL. If the environment variable is not set, it falls back to:
+The runtime Prisma client uses `@prisma/adapter-better-sqlite3` and reads the database URL from `DATABASE_URL`.
+
+If `DATABASE_URL` is not set, the application falls back to:
 
 `file:./dev.db`
 
@@ -33,7 +37,7 @@ The shared Prisma client is defined in:
 
 ## Data Model
 
-The core entity is Snippet.
+The core data model is `Snippet`.
 
 ```prisma
 model Snippet {
@@ -74,6 +78,7 @@ model Snippet {
 ## Validation
 
 Form-level validation is defined with Zod in:
+
 `src/types/snippets.ts`
 
 The current validation schema includes:
@@ -85,28 +90,50 @@ The current validation schema includes:
 - Optional category
 - Tag array input
 - Favorite flag
-- Priority range from 0 to 5
+- Priority range from `0` to `5`
 - Required code
 - Optional memo
-- Notes About Tags
 
-## Notes About Tags
+## Tags
 
 The Prisma model currently stores `tags` as a `String`, while the Zod form schema represents tags as an array of strings.
 
-When implementing persistence, the application should explicitly serialize and deserialize tags at the data access boundary. For example:
+The application should explicitly serialize and deserialize tags at the data access boundary.
 
-UI/form layer: `string[]`
+The current conceptual representation is:
 
-Database layer: serialized string
+```text
+UI / Form layer
+string[]
+      ↓
+Data access layer
+serialized string
+      ↓
+SQLite
+String
+```
 
-Future versions may replace this with a normalized `Tag` model or a JSON-compatible database representation.
+This approach allows the form layer to work with an array while keeping the current database schema simple.
+
+A future version may replace this representation with a normalized `Tag` model or another structured database representation.
+
+## Database Migrations
+
+Prisma Migrate is used to manage database schema changes.
+
+Migration files are stored in:
+
+`prisma/migrations/`
+
+When the Prisma schema is changed, create and apply a migration during development.
 
 ## Future Database Direction
 
-SQLite is suitable for local development and early prototyping. For production, the application can migrate to PostgreSQL or another scalable database while keeping Prisma as the primary data access layer.
+SQLite is suitable for local development and early prototyping.
 
-Potential future models:
+For production, the application may migrate to PostgreSQL or another production-oriented database while keeping Prisma as the primary data access layer.
+
+Potential future models include:
 
 - `User`
 - `Tag`
