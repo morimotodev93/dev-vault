@@ -4,6 +4,10 @@ This directory contains the project documentation for Dev Vault.
 
 Use this guide as the starting point when you need to understand the project structure, development conventions, setup steps, or operational guidance.
 
+- [Roadmap](planning/roadmap.md)
+- [Development Progress](planning/progress.md)
+- [Changelog](planning/changelog.md)
+
 ## Documentation Map
 
 ```text
