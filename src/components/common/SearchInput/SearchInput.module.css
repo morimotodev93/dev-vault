@@ -1,87 +1,94 @@
 .wrapper {
-	position: relative;
-	display: flex;
-	align-items: center;
-	width: fit-content;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
 }
 
 .fullWidth {
-	width: 100%;
+  width: 100%;
 }
 
 /* Search Icon */
 .icon {
-	position: absolute;
-	left: var(--space-3);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--fg-subtle);
-	pointer-events: none;
-	z-index: 1;
+  position: absolute;
+  left: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg-subtle);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* size ごとのアイコン位置調整 */
 .size-sm .icon {
-	left: var(--space-3);
+  left: var(--space-3);
 }
 
 .size-md .icon {
-	left: var(--space-4);
+  left: var(--space-4);
 }
 
 .size-lg .icon {
-	left: var(--space-5);
+  left: var(--space-5);
 }
 
 /* Input の左側にアイコン分の余白を追加 */
 .input {
-	padding-left: 2.25rem !important;
-	/* アイコン分 */
+  padding-left: 2.25rem !important;
+  /* アイコン分 */
 }
 
 .size-sm .input {
-	padding-left: 2rem !important;
+  padding-left: 2rem !important;
 }
 
 .size-md .input {
-	padding-left: 2.5rem !important;
+  padding-left: 2.5rem !important;
 }
 
 .size-lg .input {
-	padding-left: 2.75rem !important;
+  padding-left: 2.75rem !important;
 }
 
 /* クリアボタンがあるときの右側余白 */
 .wrapper:has(.clearButton) .input {
-	padding-right: 2.25rem !important;
+  padding-right: 2.25rem !important;
 }
 
 /* Clear Button */
 .clearButton {
-	position: absolute;
-	right: var(--space-2);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 24px;
-	height: 24px;
-	padding: 0;
-	border: none;
-	border-radius: 9999px;
-	background: transparent;
-	color: var(--fg-subtle);
-	cursor: pointer;
-	transition: background-color 0.15s ease, color 0.15s ease;
-	z-index: 1;
+  position: absolute;
+  right: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--fg-subtle);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+  z-index: 1;
 }
 
 .clearButton:hover {
-	background-color: var(--bg-muted);
-	color: var(--fg);
+  background-color: var(--bg-muted);
+  color: var(--fg);
 }
 
 .clearButton:focus-visible {
-	outline: 2px solid var(--ring);
-	outline-offset: 1px;
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
