@@ -1,2 +1,2 @@
-export * from "./alert";
-export * from "./help";
+export * from "./Alert";
+export * from "./Help";

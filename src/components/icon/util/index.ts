@@ -1,3 +1,4 @@
+export * from "./Close";
 export * from "./Github";
-export * from "./plus";
-export * from "./star";
+export * from "./Plus";
+export * from "./Star";
