@@ -3,3 +3,4 @@ export { Loading } from "./Loading";
 export { Pagination } from "./Pagination";
 export { SearchInput } from "./SearchInput";
 export { Tag } from "./Tag";
+export { TagInput } from "./TagInput";

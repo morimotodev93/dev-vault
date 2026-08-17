@@ -1,4 +1,5 @@
 import { Tag } from "@/components/common";
+import { StarIcon } from "@/components/icon";
 import {
   Button,
   Heading,
@@ -53,8 +54,17 @@ export function SnippetCard({
             {/* Language Tag Area*/}
             <Stack direction="row" gap={1}>
               <Tag size="sm">{language}</Tag>
-              {tags && <Tag size="sm">{tags}</Tag>}
-              {/* Priority */}
+
+              {tags &&
+                tags
+                  .split(",")
+                  .map((tag) => tag.trim())
+                  .filter(Boolean)
+                  .map((tag) => (
+                    <Tag key={tag} size="sm">
+                      {tag}
+                    </Tag>
+                  ))}
 
               <Tag variant={priorityConfig.variant} size="sm">
                 {priorityConfig.label}
@@ -69,7 +79,7 @@ export function SnippetCard({
                   size="sm"
                   className={styles.favoriteButton}
                 >
-                  ★
+                  <StarIcon />
                 </Button>
               )}
             </Stack>

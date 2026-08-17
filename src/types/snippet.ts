@@ -1,7 +1,6 @@
 // src/types/snippet.ts
 
 import { z } from "zod";
-
 export const snippetFormSchema = z.object({
   title: z.string().min(1, "Title is required").max(200),
 
@@ -13,7 +12,7 @@ export const snippetFormSchema = z.object({
 
   category: z.string().optional(),
 
-  tags: z.string(),
+  tags: z.array(z.string().trim().min(1, "Tag cannot be empty")).default([]),
 
   favorite: z.boolean().default(false),
 

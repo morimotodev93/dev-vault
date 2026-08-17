@@ -20,7 +20,7 @@ export async function createSnippet(data: SnippetFormValues) {
       language: result.data.language,
       framework: result.data.framework,
       category: result.data.category,
-      tags: result.data.tags,
+      tags: result.data.tags.join(","),
       favorite: result.data.favorite,
       priority: result.data.priority,
       code: result.data.code,

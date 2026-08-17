@@ -1,10 +1,9 @@
-	.l-auto-grid {
-			--min: 240px;
-			--gap: 24px;
+.l-auto-grid {
+  --min: 240px;
+  --gap: var(--space-6);
 
-			display: grid;
-			gap: var(--gap);
+  display: grid;
+  gap: var(--gap);
 
-			grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
-	}
-
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+}

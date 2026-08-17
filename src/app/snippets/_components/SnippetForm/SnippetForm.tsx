@@ -2,8 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
+import { TagInput } from "@/components/common";
 import { Button, Link, Stack } from "@/components/primitives";
 import { Input, Select, Textarea } from "@/components/ui";
 
@@ -47,7 +48,12 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
       language: snippet?.language ?? "",
       framework: snippet?.framework ?? "",
       category: snippet?.category ?? "",
-      tags: snippet?.tags ?? "",
+      tags: snippet?.tags
+        ? snippet.tags
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter(Boolean)
+        : [],
       favorite: snippet?.favorite ?? false,
       priority: snippet?.priority ?? 0,
       code: snippet?.code ?? "",
@@ -131,11 +137,18 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           errorMessage={form.formState.errors.priority?.message}
         />
 
-        <Input
-          label="Tags"
-          {...form.register("tags")}
-          error={!!form.formState.errors.tags}
-          errorMessage={form.formState.errors.tags?.message}
+        <Controller
+          name="tags"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <TagInput
+              label="Tags"
+              value={field.value ?? []}
+              onChange={field.onChange}
+              error={!!fieldState.error}
+              errorMessage={fieldState.error?.message}
+            />
+          )}
         />
 
         <Stack direction="row" justify="end" gap={3}>
