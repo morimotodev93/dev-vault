@@ -48,6 +48,7 @@ function generatePagination(
 export function Pagination({
   currentPage,
   totalPages,
+  searchParams,
   siblingCount = 1,
   size = "md",
   showLabels = false,
@@ -62,7 +63,11 @@ export function Pagination({
   const canGoNext = currentPage < totalPages;
 
   const createPageHref = (page: number) => {
-    return `/snippets?page=${page}`;
+    const params = new URLSearchParams(searchParams);
+
+    params.set("page", String(page));
+
+    return `/snippets?${params.toString()}`;
   };
 
   return (

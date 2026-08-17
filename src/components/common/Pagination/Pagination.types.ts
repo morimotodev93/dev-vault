@@ -6,6 +6,9 @@ export type PaginationProps = HTMLAttributes<HTMLElement> & {
   /** 総ページ数 */
   totalPages: number;
 
+  /** 現在のQuery Parameter */
+  searchParams?: string;
+
   /** 左右に表示する隣接ページ数 */
   siblingCount?: number;
   /** サイズ */

@@ -29,6 +29,16 @@ export default async function Snippet({
   const query = params.query ?? "";
   const requestedPage = Number(params.page ?? "1");
 
+  const paginationParams = new URLSearchParams();
+
+  if (params.query) {
+    paginationParams.set("query", params.query);
+  }
+
+  if (params.query) {
+    paginationParams.set("query", params.query);
+  }
+
   // Invalid page parameter
   if (!Number.isInteger(requestedPage) || requestedPage < 1) {
     redirect("/snippets");
@@ -37,9 +47,23 @@ export default async function Snippet({
   // Search condition
   const where = query
     ? {
-        title: {
-          contains: query,
-        },
+        OR: [
+          {
+            title: {
+              contains: query,
+            },
+          },
+          {
+            language: {
+              contains: query,
+            },
+          },
+          {
+            tags: {
+              contains: query,
+            },
+          },
+        ],
       }
     : undefined;
 
@@ -67,8 +91,6 @@ export default async function Snippet({
       createdAt: "desc",
     },
   });
-
-  console.log(query);
 
   return (
     <>
@@ -100,7 +122,11 @@ export default async function Snippet({
               </div>
 
               {totalPages > 1 && (
-                <Pagination currentPage={currentPage} totalPages={totalPages} />
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  searchParams={paginationParams.toString()}
+                />
               )}
             </>
           )}
