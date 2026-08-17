@@ -8,7 +8,11 @@ import {
   Text,
 } from "@/components/primitives";
 
-import { SnippetCard, SnippetSearch } from "@/app/snippets/_components";
+import {
+  SnippetCard,
+  SnippetFilter,
+  SnippetSearch,
+} from "@/app/snippets/_components";
 import { EmptyState, Pagination } from "@/components/common";
 import { prisma } from "@/lib/prisma";
 import clsx from "clsx";
@@ -21,12 +25,20 @@ export default async function Snippet({
   searchParams: Promise<{
     page?: string;
     query?: string;
+    language?: string;
+    priority?: string;
+    favorite?: string;
   }>;
 }) {
   const params = await searchParams;
 
   const pageSize = 10;
-  const query = params.query ?? "";
+
+  const searchQuery = params.query ?? "";
+  const selectedLanguage = params.language ?? "";
+  const selectedPriority = params.priority ?? "";
+  const selectedFavorite = params.favorite ?? "";
+
   const requestedPage = Number(params.page ?? "1");
 
   const paginationParams = new URLSearchParams();
@@ -35,8 +47,16 @@ export default async function Snippet({
     paginationParams.set("query", params.query);
   }
 
-  if (params.query) {
-    paginationParams.set("query", params.query);
+  if (params.language) {
+    paginationParams.set("language", params.language);
+  }
+
+  if (params.priority) {
+    paginationParams.set("priority", params.priority);
+  }
+
+  if (params.favorite) {
+    paginationParams.set("favorite", params.favorite);
   }
 
   // Invalid page parameter
@@ -44,28 +64,52 @@ export default async function Snippet({
     redirect("/snippets");
   }
 
-  // Search condition
-  const where = query
-    ? {
-        OR: [
-          {
-            title: {
-              contains: query,
-            },
-          },
-          {
-            language: {
-              contains: query,
-            },
-          },
-          {
-            tags: {
-              contains: query,
-            },
-          },
-        ],
-      }
-    : undefined;
+  const conditions = [];
+
+  // Query
+  if (searchQuery) {
+    conditions.push({
+      OR: [
+        { title: { contains: searchQuery } },
+        { language: { contains: searchQuery } },
+        { tags: { contains: searchQuery } },
+      ],
+    });
+  }
+
+  // Language
+  if (selectedLanguage) {
+    conditions.push({
+      language: selectedLanguage,
+    });
+  }
+
+  // Priority
+  const priorityValue = Number(selectedPriority);
+  if (
+    selectedPriority &&
+    Number.isInteger(priorityValue) &&
+    [0, 3, 5].includes(priorityValue)
+  ) {
+    conditions.push({
+      priority: priorityValue,
+    });
+  }
+
+  // Favorite
+
+  if (selectedFavorite === "true") {
+    conditions.push({
+      favorite: true,
+    });
+  }
+
+  const where =
+    conditions.length > 0
+      ? {
+          AND: conditions,
+        }
+      : undefined;
 
   // Pagination
   const totalCount = await prisma.snippet.count({
@@ -101,6 +145,8 @@ export default async function Snippet({
           </Heading>
           {/* Search Input */}
           <SnippetSearch />
+          {/* Test Sunippet Fileter */}
+          <SnippetFilter />
           {/* Snippets Menu */}
           {totalCount === 0 ? (
             <Stack
