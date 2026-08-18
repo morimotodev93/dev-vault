@@ -1,15 +1,9 @@
+import { FavoriteButton } from "@/app/snippets/_components";
 import { Tag } from "@/components/common";
-import { StarIcon } from "@/components/icon";
-import {
-  Button,
-  Heading,
-  Link,
-  Stack,
-  Surface,
-  Text,
-} from "@/components/primitives";
+import { Heading, Link, Stack, Surface, Text } from "@/components/primitives";
 import type { Snippet } from "@/generated/prisma/client";
 import clsx from "clsx";
+
 import styles from "./SnippetCard.module.css";
 
 type SnippetCardProps = Snippet;
@@ -41,20 +35,21 @@ export function SnippetCard({
   const priorityConfig = getPriorityConfig(priority);
 
   return (
-    <Link href={`/snippets/${id}`}>
-      <Surface
-        radius="sm"
-        bordered
-        className={clsx("w-full", styles.snippetsCard)}
-      >
-        <Stack>
-          <Heading size="sm">{title}</Heading>
-          <Text>{description}</Text>
-          <Stack gap={1}>
-            {/* Language Tag Area*/}
+    <Surface
+      radius="sm"
+      bordered
+      className={clsx("w-full", styles.snippetsCard)}
+    >
+      <Stack>
+        {/* Content / Link */}
+        <Link href={`/snippets/${id}`}>
+          <Stack>
+            <Heading size="sm">{title}</Heading>
+            <Text>{description}</Text>
+
             <Stack direction="row" gap={1}>
               <Tag size="sm">{language}</Tag>
-
+              {/* tags */}
               {tags &&
                 tags
                   .split(",")
@@ -65,27 +60,20 @@ export function SnippetCard({
                       {tag}
                     </Tag>
                   ))}
-
               <Tag variant={priorityConfig.variant} size="sm">
                 {priorityConfig.label}
               </Tag>
             </Stack>
-            {/* Update & Favorit Button Area */}
-            <Stack direction="row" align="center" justify="between">
-              <Text size="sm">Updated: {updatedAt.toLocaleDateString()}</Text>
-              {favorite && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={styles.favoriteButton}
-                >
-                  <StarIcon />
-                </Button>
-              )}
-            </Stack>
           </Stack>
+        </Link>
+
+        {/* Actions */}
+        <Stack direction="row" align="center" justify="between">
+          <Text size="sm">Updated: {updatedAt.toLocaleDateString()}</Text>
+
+          <FavoriteButton id={id} favorite={favorite} />
         </Stack>
-      </Surface>
-    </Link>
+      </Stack>
+    </Surface>
   );
 }
