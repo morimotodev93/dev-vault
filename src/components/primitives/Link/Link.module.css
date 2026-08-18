@@ -1,84 +1,132 @@
+/* =========================
+   Base
+   ========================= */
+
 .link {
-	display: inline-flex;
-	align-items: center;
-	gap: var(--space-1);
-	text-decoration: none;
-	transition: color 0.15s ease, text-decoration-color 0.15s ease;
-	cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .link:focus-visible {
-	outline: 2px solid var(--ring);
-	outline-offset: 2px;
-	border-radius: 2px;
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
 }
 
-/* Size */
+/* =========================
+   Size
+   ========================= */
+
 .size-sm {
-	font-size: var(--font-size-sm);
+  min-height: 32px;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
 }
 
 .size-base {
-	font-size: var(--font-size-base);
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  font-size: 0.9375rem;
 }
 
 .size-lg {
-	font-size: var(--font-size-lg);
+  min-height: 48px;
+  padding: 0 var(--space-6);
+  font-size: var(--font-size-base);
 }
 
-/* Weight */
+/* =========================
+   Weight
+   ========================= */
+
 .weight-normal {
-	font-weight: 400;
+  font-weight: 400;
 }
 
 .weight-medium {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 .weight-semibold {
-	font-weight: 600;
+  font-weight: 600;
 }
 
-/* Variant */
+/* =========================
+   Variants
+   ========================= */
+
 .variant-default {
-	color: var(--fg);
+  color: var(--fg);
 }
 
 .variant-default:hover {
-	color: var(--primary);
+  color: var(--primary);
 }
 
 .variant-muted {
-	color: var(--fg-muted);
+  color: var(--fg-muted);
 }
 
 .variant-muted:hover {
-	color: var(--fg);
+  color: var(--fg);
 }
 
 .variant-subtle {
-	color: var(--fg-subtle);
+  color: var(--fg-subtle);
 }
 
 .variant-subtle:hover {
-	color: var(--fg-muted);
+  color: var(--fg-muted);
 }
 
 .variant-primary {
-	color: var(--primary);
+  color: var(--primary);
 }
 
 .variant-primary:hover {
-	color: var(--primary-hover);
+  color: var(--primary-hover);
 }
 
-/* Underline */
+/* Button-like Link */
+
+.variant-button {
+  border-color: var(--primary);
+  border-radius: var(--radius-md);
+  background-color: var(--primary);
+  color: var(--primary-fg);
+  font-weight: 500;
+}
+
+.variant-button:hover {
+  border-color: var(--primary-hover);
+  background-color: var(--primary-hover);
+  color: var(--primary-fg);
+}
+
+/* =========================
+   Underline
+   ========================= */
+
 .underline {
-	text-decoration: underline;
-	text-underline-offset: 3px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .underlineHover:hover {
-	text-decoration: underline;
-	text-underline-offset: 3px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

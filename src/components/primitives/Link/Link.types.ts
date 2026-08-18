@@ -1,6 +1,7 @@
 import { AnchorHTMLAttributes, ReactNode } from "react";
 
-export type LinkVariant = "default" | "muted" | "subtle" | "primary";
+export type LinkVariant = "default" | "muted" | "subtle" | "primary" | "button";
+
 export type LinkSize = "sm" | "base" | "lg";
 export type LinkWeight = "normal" | "medium" | "semibold";
 
@@ -11,5 +12,5 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   size?: LinkSize;
   weight?: LinkWeight;
   underline?: boolean | "hover";
-  external?: boolean; // 外部リンクかどうか（target="_blank" などを自動付与）
+  external?: boolean;
 };
