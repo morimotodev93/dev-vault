@@ -4,7 +4,7 @@ This roadmap describes the planned direction for Dev Vault.
 
 ## Current Phase
 
-The project is currently focused on expanding the core snippet management experience.
+The project is currently focused on improving snippet browsing, organization, and user experience.
 
 Completed foundations include:
 
@@ -19,30 +19,37 @@ Completed foundations include:
 - Empty states
 - Pagination
 - Keyword search
+- Search across title, description, language, tags, and code
+- Language filtering
+- Priority filtering
+- Favorite filtering
+- Favorite toggle and database persistence
+- Multiple tag input and display
 
 ## Near-Term Goals
 
 ### Browsing and Organization
 
-- Filter snippets by language
-- Filter snippets by framework
 - Filter snippets by category
-- Filter favorite snippets
-- Sort by priority or update date
+- Sort snippets by priority
+- Sort snippets by update date
+- Support newest and oldest sorting
+- Improve combined search, filtering, and sorting
 
 ### Snippet Features
 
 - Improve favorite management
 - Expand tag management
-- Support multiple tags
 - Improve snippet organization
+- Improve category management
 
 ### User Experience
 
 - Improve loading states
 - Add keyboard-friendly interactions
 - Improve responsive behavior
-- Improve search and pagination UX
+- Improve search, filtering, sorting, and pagination UX
+- Complete UI/UX refinement
 
 ## Mid-Term Goals
 
@@ -54,7 +61,7 @@ Completed foundations include:
 
 ### Search
 
-- Search across title, description, code, memo, tags, and category
+- Expand search across memo and additional snippet metadata
 - Add search result highlighting
 
 ### User Experience
@@ -94,3 +101,32 @@ Completed foundations include:
 ## Guiding Principle
 
 The project should remain simple while making it easy to add features incrementally.
+
+## Snippet Management
+
+### Completed
+
+- CRUD
+- Search
+- Pagination
+- Language filter
+- Priority filter
+- Favorite filter
+- Favorite toggle
+- Multiple tag input
+- Multiple tag display
+
+### In Progress
+
+- UI/UX refinement
+
+### Planned
+
+- Category filter
+- Sorting
+  - Newest
+  - Oldest
+  - Priority
+  - Updated
+- Improved combined search, filtering, sorting, and pagination
+- Expanded tag and category management

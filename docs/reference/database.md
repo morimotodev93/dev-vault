@@ -47,7 +47,7 @@ model Snippet {
   language    String
   framework   String?
   category    String?
-  tags        String
+  tags        String[]
   favorite    Boolean  @default(false)
   priority    Int      @default(0)
   code        String
@@ -67,13 +67,15 @@ model Snippet {
 | `language`    | `String`   | Yes      | Programming language or syntax category                   |
 | `framework`   | `String?`  | No       | Optional framework name such as React, Next.js, or Prisma |
 | `category`    | `String?`  | No       | Optional high-level grouping                              |
-| `tags`        | `String`   | Yes      | Serialized tag data                                       |
+| `tags`        | `String[]` | Yes      | Multiple tags associated with the snippet                 |
 | `favorite`    | `Boolean`  | Yes      | Whether the snippet is marked as a favorite               |
 | `priority`    | `Int`      | Yes      | Priority score, defaulting to `0`                         |
 | `code`        | `String`   | Yes      | Main code content                                         |
 | `memo`        | `String?`  | No       | Additional notes                                          |
 | `createdAt`   | `DateTime` | Yes      | Creation timestamp                                        |
 | `updatedAt`   | `DateTime` | Yes      | Last update timestamp                                     |
+
+                                 |
 
 ## Validation
 
@@ -96,26 +98,48 @@ The current validation schema includes:
 
 ## Tags
 
-The Prisma model currently stores `tags` as a `String`, while the Zod form schema represents tags as an array of strings.
+Tags are represented as an array of strings throughout the application.
 
-The application should explicitly serialize and deserialize tags at the data access boundary.
+The form layer uses:
 
-The current conceptual representation is:
-
-```text
-UI / Form layer
+```ts
 string[]
-      ↓
-Data access layer
-serialized string
-      ↓
-SQLite
-String
 ```
 
-This approach allows the form layer to work with an array while keeping the current database schema simple.
+and the Prisma model also stores:
 
-A future version may replace this representation with a normalized `Tag` model or another structured database representation.
+```prisma
+tags String[]
+```
+
+This allows a snippet to have multiple tags without requiring serialization or deserialization between the form and database layers.
+
+For example:
+
+```ts
+["typescript", "react", "nextjs"];
+```
+
+A snippet can therefore contain multiple tags, and each tag can be displayed independently in the UI.
+
+## Tag Operations
+
+The tag input supports:
+
+- Adding a tag
+- Preventing duplicate tags
+- Removing a tag
+- Displaying multiple tags
+
+The current implementation keeps tag management directly on the Snippet model.
+
+A future version may normalize tags into a dedicated Tag model if tag management becomes more complex, such as:
+
+- Shared tag metadata
+- Tag-based statistics
+- Tag management pages
+- Tag relationships across snippets
+- Advanced tag filtering
 
 ## Database Migrations
 
