@@ -8,7 +8,7 @@ import {
   Text,
 } from "@/components/primitives";
 
-import { DeleteButton } from "@/app/snippets/_components/DeleteButton";
+import { DeleteButton, FavoriteButton } from "@/app/snippets/_components";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import styles from "./SnippetDetail.module.css";
@@ -49,6 +49,10 @@ export default async function SnippetDetail({
             <pre className={styles.code}>
               <code>{snippet.code}</code>
             </pre>
+            <Stack direction="row" align="center" justify="end">
+              <Text>Favorite</Text>
+              <FavoriteButton id={snippet.id} favorite={snippet.favorite} />
+            </Stack>
 
             {/* Other Page Link */}
             <Stack gap={2} wrap align="center" justify="end" direction="row">

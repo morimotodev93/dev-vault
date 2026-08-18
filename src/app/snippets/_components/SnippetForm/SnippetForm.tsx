@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { TagInput } from "@/components/common";
 import { Button, Link, Stack } from "@/components/primitives";
-import { Input, Select, Textarea } from "@/components/ui";
+import { Checkbox, Input, Select, Textarea } from "@/components/ui";
 
 import {
   snippetFormSchema,
@@ -92,14 +92,14 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           error={!!form.formState.errors.title}
           errorMessage={form.formState.errors.title?.message}
         />
-
+        {/* Description */}
         <Textarea
           label="Description"
           {...form.register("description")}
           error={!!form.formState.errors.description}
           errorMessage={form.formState.errors.description?.message}
         />
-
+        {/* Language */}
         <Select
           label="Language"
           options={[
@@ -115,14 +115,14 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           error={!!form.formState.errors.language}
           errorMessage={form.formState.errors.language?.message}
         />
-
+        {/* Code */}
         <Textarea
           label="Code"
           {...form.register("code")}
           error={!!form.formState.errors.code}
           errorMessage={form.formState.errors.code?.message}
         />
-
+        {/* Priority */}
         <Select
           label="Priority"
           options={[
@@ -136,7 +136,7 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           error={!!form.formState.errors.priority}
           errorMessage={form.formState.errors.priority?.message}
         />
-
+        {/* Tags */}
         <Controller
           name="tags"
           control={form.control}
@@ -150,7 +150,14 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
             />
           )}
         />
-
+        {/* Favorite */}
+        <Checkbox
+          label="Favorite"
+          {...form.register("favorite")}
+          error={!!form.formState.errors.favorite}
+          errorMessage={form.formState.errors.favorite?.message}
+        />
+        {/* Decision */}
         <Stack direction="row" justify="end" gap={3}>
           <Link href={cancelHref}>Cancel</Link>
 
