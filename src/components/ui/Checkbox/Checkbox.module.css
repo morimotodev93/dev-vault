@@ -1,0 +1,122 @@
+.wrapper {
+  width: 100%;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  color: var(--fg);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.25;
+}
+
+.label:hover .checkbox:not(:disabled) {
+  border-color: var(--border-strong);
+}
+
+.checkbox {
+  appearance: none;
+  flex-shrink: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background-color 0.15s;
+}
+
+.checkbox:focus-visible {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 25%, transparent);
+  outline: none;
+}
+
+.checkbox:checked {
+  border-color: var(--ring);
+  background-color: var(--ring);
+}
+
+.checkbox:checked::after {
+  display: block;
+  margin: 1px auto 0;
+  width: 5px;
+  height: 9px;
+  border: solid var(--bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.checkbox:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--bg-muted);
+}
+
+.label:has(.checkbox:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.labelText {
+  user-select: none;
+}
+
+/* Size */
+
+.size-sm {
+  min-height: 32px;
+  font-size: 0.875rem;
+}
+
+.size-md {
+  min-height: 40px;
+  font-size: 0.9375rem;
+}
+
+.size-lg {
+  min-height: 48px;
+  font-size: 1rem;
+}
+
+/* Checkbox size */
+
+.size-sm .checkbox {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.size-md .checkbox {
+  width: 1rem;
+  height: 1rem;
+}
+
+.size-lg .checkbox {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Error */
+
+.error .checkbox {
+  border-color: var(--destructive);
+}
+
+.error .checkbox:focus-visible {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 25%, transparent);
+}
+
+.errorMessage {
+  margin: var(--space-1) 0 0;
+  color: var(--destructive);
+  font-size: 0.875rem;
+}

@@ -1,0 +1,160 @@
+.wrapper {
+  width: 100%;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  color: var(--fg);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1.25;
+}
+
+.label:hover .track {
+  border-color: var(--border-strong);
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.track {
+  position: relative;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  background-color: var(--bg-muted);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  border-radius: 50%;
+  background-color: var(--fg-muted);
+  transform: translateY(-50%);
+  transition:
+    transform 0.15s,
+    background-color 0.15s;
+}
+
+/* Focus */
+
+.input:focus-visible + .track {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 25%, transparent);
+}
+
+/* Checked */
+
+.input:checked + .track {
+  border-color: var(--ring);
+  background-color: var(--ring);
+}
+
+.input:checked + .track .thumb {
+  background-color: var(--bg);
+  transform: translateY(-50%);
+}
+
+/* Disabled */
+
+.input:disabled + .track {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.label:has(.input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Size */
+
+.size-sm {
+  min-height: 32px;
+  font-size: 0.875rem;
+}
+
+.size-md {
+  min-height: 40px;
+  font-size: 0.9375rem;
+}
+
+.size-lg {
+  min-height: 48px;
+  font-size: 1rem;
+}
+
+/* Switch size */
+
+.size-sm .track {
+  width: 32px;
+  height: 18px;
+}
+
+.size-sm .thumb {
+  width: 12px;
+  height: 12px;
+}
+
+.size-sm .input:checked + .track .thumb {
+  transform: translate(14px, -50%);
+}
+
+.size-md .track {
+  width: 40px;
+  height: 22px;
+}
+
+.size-md .thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.size-md .input:checked + .track .thumb {
+  transform: translate(16px, -50%);
+}
+
+.size-lg .track {
+  width: 48px;
+  height: 26px;
+}
+
+.size-lg .thumb {
+  width: 20px;
+  height: 20px;
+}
+
+.size-lg .input:checked + .track .thumb {
+  transform: translate(20px, -50%);
+}
+
+/* Error */
+
+.error .track {
+  border-color: var(--destructive);
+}
+
+.error .input:focus-visible + .track {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 25%, transparent);
+}
+
+.errorMessage {
+  margin: var(--space-1) 0 0;
+  color: var(--destructive);
+  font-size: 0.875rem;
+}
