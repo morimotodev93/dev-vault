@@ -2,18 +2,18 @@
 
 ## Snippet Management
 
-| Feature    | Status  |
-| ---------- | ------- |
-| Create     | Done    |
-| Read       | Done    |
-| Update     | Done    |
-| Delete     | Done    |
-| Search     | Done    |
-| Pagination | Done    |
-| Favorite   | Planned |
-| Tags       | Planned |
-| Filtering  | Planned |
-| Sorting    | Planned |
+| Feature    | Status |
+| ---------- | ------ |
+| Create     | Done   |
+| Read       | Done   |
+| Update     | Done   |
+| Delete     | Done   |
+| Search     | Done   |
+| Pagination | Done   |
+| Favorite   | Done   |
+| Tags       | Done   |
+| Filtering  | Done   |
+| Sorting    | Done   |
 
 ## Documentation
 
@@ -45,14 +45,14 @@
 - [x] Language
 - [x] Priority
 - [x] Favorite
-- [ ] Category
+- [x] Category
 
 ## Sort
 
-- [ ] Newest
-- [ ] Oldest
-- [ ] Priority
-- [ ] Updated
+- [x] Newest
+- [x] Oldest
+- [x] Priority
+- [x] Updated
 
 ## Favorite
 
