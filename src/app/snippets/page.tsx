@@ -12,12 +12,16 @@ import {
   SnippetCard,
   SnippetFilter,
   SnippetSearch,
+  SnippetSort,
 } from "@/app/snippets/_components";
 import { EmptyState, Pagination } from "@/components/common";
 import { prisma } from "@/lib/prisma";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 import styles from "./snippet.module.css";
+
+const SORT_OPTIONS = ["newest", "oldest", "priority", "updated"] as const;
+type SortOption = (typeof SORT_OPTIONS)[number];
 
 export default async function Snippet({
   searchParams,
@@ -28,6 +32,7 @@ export default async function Snippet({
     language?: string;
     priority?: string;
     favorite?: string;
+    sort?: string;
   }>;
 }) {
   const params = await searchParams;
@@ -38,6 +43,13 @@ export default async function Snippet({
   const selectedLanguage = params.language ?? "";
   const selectedPriority = params.priority ?? "";
   const selectedFavorite = params.favorite ?? "";
+
+  // Sort
+  const selectedSort: SortOption = SORT_OPTIONS.includes(
+    params.sort as SortOption,
+  )
+    ? (params.sort as SortOption)
+    : "newest";
 
   const requestedPage = Number(params.page ?? "1");
 
@@ -57,6 +69,10 @@ export default async function Snippet({
 
   if (params.favorite) {
     paginationParams.set("favorite", params.favorite);
+  }
+
+  if (params.sort) {
+    paginationParams.set("sort", params.sort);
   }
 
   // Invalid page parameter
@@ -97,7 +113,6 @@ export default async function Snippet({
   }
 
   // Favorite
-
   if (selectedFavorite === "true") {
     conditions.push({
       favorite: true,
@@ -110,6 +125,25 @@ export default async function Snippet({
           AND: conditions,
         }
       : undefined;
+
+  // Sort -> Prisma orderBy
+  const orderBy = ((): {
+    createdAt?: "asc" | "desc";
+    updatedAt?: "asc" | "desc";
+    priority?: "asc" | "desc";
+  } => {
+    switch (selectedSort) {
+      case "oldest":
+        return { createdAt: "asc" };
+      case "priority":
+        return { priority: "desc" };
+      case "updated":
+        return { updatedAt: "desc" };
+      case "newest":
+      default:
+        return { createdAt: "desc" };
+    }
+  })();
 
   // Pagination
   const totalCount = await prisma.snippet.count({
@@ -129,11 +163,9 @@ export default async function Snippet({
   // Snippets
   const snippets = await prisma.snippet.findMany({
     where,
+    orderBy,
     skip,
     take: pageSize,
-    orderBy: {
-      createdAt: "desc",
-    },
   });
 
   return (
@@ -145,8 +177,10 @@ export default async function Snippet({
           </Heading>
           {/* Search Input */}
           <SnippetSearch />
-          {/* Test Sunippet Fileter */}
+          {/* Snippet Filter */}
           <SnippetFilter />
+          {/* Snippet Sort */}
+          <SnippetSort />
           {/* Snippets Menu */}
           {totalCount === 0 ? (
             <Stack
