@@ -1,4 +1,26 @@
+.main {
+  position: relative;
+}
+
+.aside {
+  position: relative;
+  display: none;
+  min-height: 100%;
+}
+
 .snippetsZero {
   border: 1px solid var(--info);
   padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .mobileSnippetControls {
+    display: none;
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

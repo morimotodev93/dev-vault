@@ -1,0 +1,38 @@
+.snippetContent {
+  position: fixed;
+  top: 50%;
+  right: 0;
+
+  transform: translate(100%, -50%);
+  transition: transform 0.2s ease;
+}
+
+.snippetContent.open {
+  transform: translate(0, -50%);
+}
+
+.sidebarToggle {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: var(--z-elevated);
+}
+
+.snippetControl {
+  width: 100%;
+  padding-block: 10rem;
+
+  padding-inline: 1rem;
+}
+
+@media (min-width: 992px) {
+  .snippetContent {
+    max-width: 16rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .snippetContent {
+    max-width: 18rem;
+  }
+}
