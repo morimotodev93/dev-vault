@@ -40,35 +40,46 @@ export function SnippetCard({
       bordered
       className={clsx("w-full", styles.snippetsCard)}
     >
-      <Stack>
+      <Stack justify="between" className={styles.snippetsCard__inner}>
         {/* Content / Link */}
-        <Link href={`/snippets/${id}`}>
-          <Stack>
-            <Heading size="sm">{title}</Heading>
-            <Text>{description}</Text>
+        <Link
+          className={styles.snippetsCard__link}
+          size="sm"
+          href={`/snippets/${id}`}
+        >
+          <Heading className="u-line-clamp" level={4} size="sm">
+            {title}
+          </Heading>
+          <Text className={clsx("u-line-clamp", styles.snippetsCard__text)}>
+            {description}
+          </Text>
 
-            <Stack direction="row" gap={1}>
-              <Tag size="sm">{language}</Tag>
-              {/* tags */}
-              {tags &&
-                tags
-                  .split(",")
-                  .map((tag) => tag.trim())
-                  .filter(Boolean)
-                  .map((tag) => (
-                    <Tag key={tag} size="sm">
-                      {tag}
-                    </Tag>
-                  ))}
-              <Tag variant={priorityConfig.variant} size="sm">
-                {priorityConfig.label}
-              </Tag>
-            </Stack>
+          <Stack direction="row" wrap gap={2}>
+            <Tag size="sm">{language}</Tag>
+            {/* tags */}
+            {tags &&
+              tags
+                .split(",")
+                .map((tag) => tag.trim())
+                .filter(Boolean)
+                .map((tag) => (
+                  <Tag key={tag} size="sm">
+                    {tag}
+                  </Tag>
+                ))}
+            <Tag variant={priorityConfig.variant} size="sm">
+              {priorityConfig.label}
+            </Tag>
           </Stack>
         </Link>
 
         {/* Actions */}
-        <Stack direction="row" align="center" justify="between">
+        <Stack
+          className={styles.snippetsCard__action}
+          direction="row"
+          align="center"
+          justify="between"
+        >
           <Text size="sm">Updated: {updatedAt.toLocaleDateString()}</Text>
 
           <FavoriteButton id={id} favorite={favorite} />

@@ -6,7 +6,8 @@ import {
   SnippetSearch,
   SnippetSort,
 } from "@/app/snippets/_components";
-import { Stack } from "@/components/primitives";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icon";
+import { Stack, Surface } from "@/components/primitives";
 import clsx from "clsx";
 import { useState } from "react";
 import styles from "./SnippetSidebar.module.css";
@@ -21,9 +22,25 @@ export function SnippetSidebar() {
         aria-expanded={isOpen}
         aria-controls="snippet-sidebar"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={styles.sidebarToggle}
+        className={clsx(styles.sidebarToggle, isOpen && styles.open)}
       >
-        {isOpen ? "→" : "←"}
+        {isOpen ? (
+          <Surface
+            padding="sm"
+            radius="full"
+            className={styles.sidebarToggleCircle}
+          >
+            <ChevronRightIcon className={styles.sidebarToggleIcon} />
+          </Surface>
+        ) : (
+          <Surface
+            padding="sm"
+            radius="full"
+            className={styles.sidebarToggleCircle}
+          >
+            <ChevronLeftIcon className={styles.sidebarToggleIcon} />
+          </Surface>
+        )}
       </button>
 
       <div

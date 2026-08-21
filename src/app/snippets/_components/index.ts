@@ -1,3 +1,4 @@
+export * from "./CodeBlock";
 export * from "./DeleteButton";
 export * from "./FavoriteButton";
 export * from "./SnippetCard";

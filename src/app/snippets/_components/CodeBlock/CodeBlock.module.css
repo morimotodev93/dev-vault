@@ -1,0 +1,17 @@
+.copyButton {
+  max-width: 8rem;
+}
+
+.code {
+  margin: 0;
+  padding: var(--space-4);
+
+  overflow-x: auto;
+
+  font-family: var(--font-code);
+  color: var(--fg);
+  background: var(--bg-muted);
+
+  border-radius: var(--radius-md);
+  white-space: pre;
+}

@@ -8,10 +8,13 @@ import {
   Text,
 } from "@/components/primitives";
 
-import { DeleteButton, FavoriteButton } from "@/app/snippets/_components";
+import {
+  CodeBlock,
+  DeleteButton,
+  FavoriteButton,
+} from "@/app/snippets/_components";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import styles from "./SnippetDetail.module.css";
 
 export default async function SnippetDetail({
   params,
@@ -46,9 +49,8 @@ export default async function SnippetDetail({
 
             <Text>{snippet.tags}</Text>
 
-            <pre className={styles.code}>
-              <code>{snippet.code}</code>
-            </pre>
+            <CodeBlock code={snippet.code} />
+
             <Stack direction="row" align="center" justify="end">
               <Text>Favorite</Text>
               <FavoriteButton id={snippet.id} favorite={snippet.favorite} />

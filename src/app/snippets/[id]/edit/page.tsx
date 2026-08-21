@@ -69,7 +69,7 @@ export default async function SnippetEdit({
               </Link>
             </Stack>
           </Stack>
-          <Spacer />
+          <Spacer mobile={40} desktop={60} />
         </Stack>
       </Container>
     </>

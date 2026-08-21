@@ -1,7 +1,27 @@
+:root {
+  --snippet-sidebar-width: 14rem;
+  --snippet-sidebar-button-left: -16rem;
+}
+
+@media (min-width: 992px) {
+  :root {
+    --snippet-sidebar-width: 16rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --snippet-sidebar-width: 18rem;
+  }
+}
+
 .snippetContent {
   position: fixed;
   top: 50%;
   right: 0;
+
+  width: 100%;
+  max-width: var(--snippet-sidebar-width);
 
   transform: translate(100%, -50%);
   transition: transform 0.2s ease;
@@ -15,14 +35,30 @@
   position: fixed;
   top: 50%;
   right: 0;
-  z-index: var(--z-elevated);
+  z-index: var(--z-sidebar-toggle);
+  color: var(--accent);
+}
+
+.sidebarToggle.open {
+  transform: translate(calc(var(--snippet-sidebar-width) * -1), 0);
+}
+
+.sidebarToggleCircle {
+  box-shadow: var(--shadow-dropdown);
+}
+
+.sidebarToggleIcon {
+  color: var(--accent);
 }
 
 .snippetControl {
   width: 100%;
+  /* terminal treatment */
   padding-block: 10rem;
 
   padding-inline: 1rem;
+  background: var(--info);
+  z-index: var(--z-sidebar);
 }
 
 @media (min-width: 992px) {
