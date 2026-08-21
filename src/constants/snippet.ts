@@ -1,3 +1,4 @@
+// constants/snippet.ts
 export const SNIPPET_LANGUAGE_OPTIONS = [
   { value: "typescript", label: "TypeScript" },
   { value: "javascript", label: "JavaScript" },
