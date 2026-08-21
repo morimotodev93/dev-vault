@@ -35,17 +35,17 @@
 ## Search
 
 - [x] Search by title
-- [x] Search by description
 - [x] Search by language
 - [x] Search by tags
-- [x] Search by code
 
 ## Filter
 
 - [x] Language
 - [x] Priority
 - [x] Favorite
-- [x] Category
+
+> Category filtering was considered but removed from the current scope.
+> Existing categories are sufficient for the current application requirements.
 
 ## Sort
 
@@ -65,4 +65,13 @@
 - [x] SnippetCard refinement
 - [x] Tag display
 - [x] Favorite button
-- [ ] Final UI/UX refinement
+- [x] Responsive layout
+- [x] Sidebar controls
+- [x] Code copy
+- [x] Final UI/UX refinement
+
+## Current Status
+
+The Snippet management features are currently complete.
+
+The next development phase will focus on expanding the application beyond the Snippet CRUD workflow.
