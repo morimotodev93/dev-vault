@@ -149,9 +149,10 @@ This keeps collections understandable while matching the existing filters alread
 4. Treat tags as user labels, language as execution/syntax scope, framework as ecosystem context, and category as a broader filing bucket.
 5. Default collection sort order to newest so browsing is time-oriented and predictable.
 
-### Mesugaki Review
+### Design Review
 
-「ざぁこ♡ いま collections 作ったら、`language` と `tags` と `category` がぐちゃぐちゃになって、あとで検索条件の意味を自分で説明できなくなるやつじゃん。タグに `typescript` も `react` も `frontend` も全部入れたら、言語フィルターとタグ検索がケンカするでしょ？ しかも `tags` が文字列保存のままだと、表記ゆれ・重複・空白・大文字小文字で簡単に壊れるんだから、先にルール決めなきゃだめだよね〜♡」
+Collections should not be introduced until the semantics of
+language, framework, category, and tags are stable.
 
 ### Expert Review
 
