@@ -1,13 +1,17 @@
-// components/icon/util/Close.tsx
+// components/icon/ui/ChevronRight.tsx
 import clsx from "clsx";
 
-type CloseProps = {
+type ChevronRightProps = {
   className?: string;
   width?: number | string;
   height?: number | string;
 };
 
-export function CloseIcon({ className, width = 24, height = 24 }: CloseProps) {
+export function ChevronRightIcon({
+  className,
+  width = 24,
+  height = 24,
+}: ChevronRightProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,10 +23,13 @@ export function CloseIcon({ className, width = 24, height = 24 }: CloseProps) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={clsx("lucide lucide-x-icon lucide-x", className)}
+      className={clsx(
+        "lucide lucide-chevrons-right-icon lucide-chevrons-right",
+        className,
+      )}
     >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
+      <path d="m6 17 5-5-5-5" />
+      <path d="m13 17 5-5-5-5" />
     </svg>
   );
 }
