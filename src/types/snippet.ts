@@ -1,12 +1,22 @@
 // src/types/snippet.ts
 
+import { SNIPPET_LANGUAGE_VALUES, SNIPPET_PRIORITY_VALUES } from "@/constants";
 import { z } from "zod";
 export const snippetFormSchema = z.object({
   title: z.string().min(1, "Title is required").max(200),
 
   description: z.string().max(2000).optional(),
 
-  language: z.string().min(1, "Language is required"),
+  language: z
+    .string()
+    .min(1, "Language is required")
+    .refine(
+      (value) =>
+        SNIPPET_LANGUAGE_VALUES.includes(
+          value as (typeof SNIPPET_LANGUAGE_VALUES)[number],
+        ),
+      "Language is invalid",
+    ),
 
   framework: z.string().optional(),
 
@@ -16,7 +26,17 @@ export const snippetFormSchema = z.object({
 
   favorite: z.boolean().default(false),
 
-  priority: z.number().int().min(0).max(5).default(0),
+  priority: z
+    .number()
+    .int()
+    .refine(
+      (value) =>
+        SNIPPET_PRIORITY_VALUES.includes(
+          value as (typeof SNIPPET_PRIORITY_VALUES)[number],
+        ),
+      "Priority is invalid",
+    )
+    .default(0),
 
   code: z.string().min(1, "Code is required"),
 

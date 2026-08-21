@@ -43,6 +43,14 @@ Completed foundations include:
 - Improve snippet organization
 - Improve category management
 
+### Collection Planning
+
+- Define collection semantics as saved snippet views before adding folder-like behavior
+- Document the distinction between language, framework, category, tags, and collections
+- Add newest-first sorting as the default collection browsing behavior
+- Stabilize combined search, filtering, sorting, and pagination before creating a Collection model
+- Evaluate tag/category normalization after collection criteria are validated in the UI
+
 ### User Experience
 
 - Improve loading states

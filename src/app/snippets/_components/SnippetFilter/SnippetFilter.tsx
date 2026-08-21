@@ -2,6 +2,10 @@
 
 import { Stack } from "@/components/primitives";
 import { Select, Switch } from "@/components/ui";
+import {
+  SNIPPET_LANGUAGE_OPTIONS,
+  SNIPPET_PRIORITY_OPTIONS,
+} from "@/constants";
 import { updateSearchParam } from "@/lib/navigation/updateSearchParam";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -14,15 +18,7 @@ export function SnippetFilter() {
       {/* Language */}
       <Select
         value={searchParams.get("language") ?? ""}
-        options={[
-          { value: "", label: "All Languages" },
-          { value: "typescript", label: "TypeScript" },
-          { value: "javascript", label: "JavaScript" },
-          { value: "css", label: "CSS" },
-          { value: "html", label: "HTML" },
-          { value: "python", label: "Python" },
-          { value: "sql", label: "SQL" },
-        ]}
+        options={[...SNIPPET_LANGUAGE_OPTIONS]}
         onChange={(event) =>
           updateSearchParam(
             router,
@@ -36,12 +32,7 @@ export function SnippetFilter() {
       {/* Priority */}
       <Select
         value={searchParams.get("priority") ?? ""}
-        options={[
-          { value: "", label: "All Priorities" },
-          { value: "0", label: "Low" },
-          { value: "3", label: "Medium" },
-          { value: "5", label: "High" },
-        ]}
+        options={[...SNIPPET_PRIORITY_OPTIONS]}
         onChange={(event) =>
           updateSearchParam(
             router,

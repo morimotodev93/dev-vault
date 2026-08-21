@@ -15,15 +15,19 @@ import {
   SnippetSidebar,
   SnippetSort,
 } from "@/app/snippets/_components";
+
 import { EmptyState, Pagination } from "@/components/common";
+import {
+  DEFAULT_SNIPPET_SORT,
+  SNIPPET_PRIORITY_VALUES,
+  SNIPPET_SORT_OPTIONS,
+  type SnippetSortOption,
+} from "@/constants";
 import { prisma } from "@/lib/prisma";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 
 import styles from "./snippet.module.css";
-
-const SORT_OPTIONS = ["newest", "oldest", "priority", "updated"] as const;
-type SortOption = (typeof SORT_OPTIONS)[number];
 
 export default async function Snippet({
   searchParams,
@@ -47,11 +51,11 @@ export default async function Snippet({
   const selectedFavorite = params.favorite ?? "";
 
   // Sort
-  const selectedSort: SortOption = SORT_OPTIONS.includes(
-    params.sort as SortOption,
+  const selectedSort: SnippetSortOption = SNIPPET_SORT_OPTIONS.some(
+    (option) => option.value === params.sort,
   )
-    ? (params.sort as SortOption)
-    : "newest";
+    ? (params.sort as SnippetSortOption)
+    : DEFAULT_SNIPPET_SORT;
 
   const requestedPage = Number(params.page ?? "1");
 
@@ -107,7 +111,9 @@ export default async function Snippet({
   if (
     selectedPriority &&
     Number.isInteger(priorityValue) &&
-    [0, 3, 5].includes(priorityValue)
+    SNIPPET_PRIORITY_VALUES.includes(
+      priorityValue as (typeof SNIPPET_PRIORITY_VALUES)[number],
+    )
   ) {
     conditions.push({
       priority: priorityValue,

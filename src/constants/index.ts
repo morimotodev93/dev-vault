@@ -1,1 +1,2 @@
-export { BREAKPOINT } from './breakpoints';
+export { BREAKPOINT } from "./breakpoints";
+export * from "./snippet";

@@ -9,6 +9,11 @@ import { Button, Link, Stack } from "@/components/primitives";
 import { Checkbox, Input, Select, Textarea } from "@/components/ui";
 
 import {
+  SNIPPET_LANGUAGE_OPTIONS,
+  SNIPPET_PRIORITY_OPTIONS,
+} from "@/constants";
+
+import {
   snippetFormSchema,
   type SnippetFormInput,
   type SnippetFormValues,
@@ -102,14 +107,7 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
         {/* Language */}
         <Select
           label="Language"
-          options={[
-            { value: "typescript", label: "TypeScript" },
-            { value: "javascript", label: "JavaScript" },
-            { value: "css", label: "CSS" },
-            { value: "html", label: "HTML" },
-            { value: "python", label: "Python" },
-            { value: "sql", label: "SQL" },
-          ]}
+          options={[...SNIPPET_LANGUAGE_OPTIONS]}
           placeholder="Select language"
           {...form.register("language")}
           error={!!form.formState.errors.language}
@@ -125,11 +123,7 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
         {/* Priority */}
         <Select
           label="Priority"
-          options={[
-            { value: "0", label: "Low" },
-            { value: "3", label: "Medium" },
-            { value: "5", label: "High" },
-          ]}
+          options={[...SNIPPET_PRIORITY_OPTIONS]}
           {...form.register("priority", {
             valueAsNumber: true,
           })}

@@ -2,10 +2,9 @@
 "use client";
 
 import { Select } from "@/components/ui";
+import { DEFAULT_SNIPPET_SORT, SNIPPET_SORT_OPTIONS } from "@/constants";
 import { updateSearchParam } from "@/lib/navigation/updateSearchParam";
 import { useRouter, useSearchParams } from "next/navigation";
-
-const DEFAULT_SORT = "newest";
 
 export function SnippetSort() {
   const router = useRouter();
@@ -13,19 +12,15 @@ export function SnippetSort() {
 
   return (
     <Select
-      value={searchParams.get("sort") ?? DEFAULT_SORT}
-      options={[
-        { value: "newest", label: "Newest" },
-        { value: "oldest", label: "Oldest" },
-        { value: "priority", label: "Priority" },
-        { value: "updated", label: "Recently Updated" },
-      ]}
+      value={searchParams.get("sort") ?? DEFAULT_SNIPPET_SORT}
+      options={[...SNIPPET_SORT_OPTIONS]}
+
       onChange={(event) =>
         updateSearchParam(
           router,
           searchParams,
           "sort",
-          event.target.value === DEFAULT_SORT ? "" : event.target.value,
+          event.target.value === DEFAULT_SNIPPET_SORT ? "" : event.target.value,
         )
       }
     />

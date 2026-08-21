@@ -29,7 +29,6 @@ export function SnippetCard({
   tags,
   favorite,
   priority,
-  code,
   updatedAt,
 }: SnippetCardProps) {
   const priorityConfig = getPriorityConfig(priority);
@@ -60,9 +59,9 @@ export function SnippetCard({
             {tags &&
               tags
                 .split(",")
-                .map((tag) => tag.trim())
+                .map((tag: string) => tag.trim())
                 .filter(Boolean)
-                .map((tag) => (
+                .map((tag: string) => (
                   <Tag key={tag} size="sm">
                     {tag}
                   </Tag>
