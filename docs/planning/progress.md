@@ -50,13 +50,13 @@
 - [x] Search by language
 - [x] Search by tags
 - [x] Confirm single-tag search with current tag storage
-- [x] Confirm current search does not support structured AND / OR conditions
+- [x] Confirm free-text search remains separate from structured AND / OR conditions
 
 ### Search Direction
 
-- [ ] Keep free-text search separate from structured filtering
-- [ ] Define the responsibility of `SnippetSearch`
-- [ ] Define the responsibility of `SnippetFilter`
+- [x] Keep free-text search separate from structured filtering
+- [x] Define the responsibility of `SnippetSearch`
+- [x] Define the responsibility of `SnippetFilter`
 
 ## Filter
 
@@ -64,9 +64,9 @@
 - [x] Priority
 - [x] Favorite
 - [ ] Framework
-- [ ] Tags
-- [ ] Define Tag matching behavior
-- [ ] Evaluate Tag `Any` / `All` conditions
+- [x] Tags
+- [x] Define Tag matching behavior
+- [x] Evaluate Tag `Any` / `All` conditions
 
 > Category filtering was removed from the current scope.
 > Category will not be reintroduced into Snippet unless future requirements justify it.
@@ -80,14 +80,14 @@
 
 ### Default Sort
 
-- [ ] Confirm `Newest` as the default collection and snippet browsing order
-- [ ] Define whether `Newest` refers to `createdAt` or another timestamp
+- [x] Confirm `Newest` as the default collection and snippet browsing order
+- [x] Define whether `Newest` refers to `createdAt` or another timestamp
 
 ## Combined Query
 
-- [ ] Combine Search and Filter
-- [ ] Combine Filter and Sort
-- [ ] Combine Search, Filter, Sort, and Pagination
+- [x] Combine Search and Filter
+- [x] Combine Filter and Sort
+- [x] Combine Search, Filter, Sort, and Pagination
 - [ ] Validate query parameter behavior
 - [ ] Validate empty-result behavior
 - [ ] Validate multiple filter conditions
@@ -97,9 +97,9 @@
 - [x] Store tags as serialized values
 - [x] Search by a single tag
 - [x] Confirm free-text search limitations
-- [ ] Design Tag filtering
-- [ ] Evaluate `Any` / `All` matching
-- [ ] Evaluate exact Tag matching
+- [x] Design Tag filtering
+- [x] Evaluate `Any` / `All` matching
+- [x] Evaluate exact Tag matching
 - [ ] Evaluate whether tag normalization is necessary
 
 > Tag normalization is deferred until actual filtering requirements
@@ -127,8 +127,8 @@
 - [x] Sidebar controls
 - [x] Code copy
 - [x] Final UI/UX refinement
-- [ ] Refine filtering UI
-- [ ] Evaluate Tag filter UI
+- [x] Refine filtering UI
+- [x] Evaluate Tag filter UI
 - [ ] Validate combined control behavior
 
 ## Current Phase
@@ -140,10 +140,7 @@ and combined query behavior before introducing Collections.
 
 ### Next Steps
 
-1. Define `SnippetFilter` responsibilities.
-2. Evaluate Framework filtering.
-3. Design Tag filtering.
-4. Evaluate Tag `Any` / `All` behavior.
-5. Stabilize Search + Filter + Sort + Pagination.
-6. Define Collection semantics.
-7. Evaluate the Collection data model.
+1. Evaluate Framework filtering.
+2. Validate Search + Filter + Sort + Pagination.
+3. Define Collection semantics.
+4. Evaluate the Collection data model.
