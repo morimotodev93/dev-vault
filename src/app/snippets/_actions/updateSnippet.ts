@@ -22,7 +22,6 @@ export async function updateSnippet(id: string, data: SnippetFormValues) {
       description: result.data.description,
       language: result.data.language,
       framework: result.data.framework,
-      category: result.data.category,
       tags: result.data.tags.join(","),
       favorite: result.data.favorite,
       priority: result.data.priority,

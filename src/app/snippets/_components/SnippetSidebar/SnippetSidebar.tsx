@@ -6,7 +6,7 @@ import {
   SnippetSearch,
   SnippetSort,
 } from "@/app/snippets/_components";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icon";
+import { ChevronsLeftIcon, ChevronsRightIcon } from "@/components/icon";
 import { Stack, Surface } from "@/components/primitives";
 import clsx from "clsx";
 import { useState } from "react";
@@ -30,7 +30,7 @@ export function SnippetSidebar() {
             radius="full"
             className={styles.sidebarToggleCircle}
           >
-            <ChevronRightIcon className={styles.sidebarToggleIcon} />
+            <ChevronsRightIcon className={styles.sidebarToggleIcon} />
           </Surface>
         ) : (
           <Surface
@@ -38,7 +38,7 @@ export function SnippetSidebar() {
             radius="full"
             className={styles.sidebarToggleCircle}
           >
-            <ChevronLeftIcon className={styles.sidebarToggleIcon} />
+            <ChevronsLeftIcon className={styles.sidebarToggleIcon} />
           </Surface>
         )}
       </button>

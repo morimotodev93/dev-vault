@@ -27,9 +27,8 @@ interface SnippetFormProps {
     id: string;
     title: string;
     description: string | null;
-    language: string;
+    language: string | null;
     framework: string | null;
-    category: string | null;
     tags: string;
     favorite: boolean;
     priority: number;
@@ -52,7 +51,6 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
       description: snippet?.description ?? "",
       language: snippet?.language ?? "",
       framework: snippet?.framework ?? "",
-      category: snippet?.category ?? "",
       tags: snippet?.tags
         ? snippet.tags
             .split(",")
@@ -83,8 +81,6 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
       if (result.success) {
         router.push(`/snippets/${snippet.id}`);
       }
-
-      return;
     }
   };
 
@@ -97,13 +93,14 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           error={!!form.formState.errors.title}
           errorMessage={form.formState.errors.title?.message}
         />
-        {/* Description */}
+
         <Textarea
           label="Description"
           {...form.register("description")}
           error={!!form.formState.errors.description}
           errorMessage={form.formState.errors.description?.message}
         />
+
         {/* Language */}
         <Select
           label="Language"
@@ -113,14 +110,23 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           error={!!form.formState.errors.language}
           errorMessage={form.formState.errors.language?.message}
         />
-        {/* Code */}
+
+        {/* Framework / Library */}
+        <Input
+          label="Framework / Library"
+          placeholder="e.g. React, Next.js, Zod"
+          {...form.register("framework")}
+          error={!!form.formState.errors.framework}
+          errorMessage={form.formState.errors.framework?.message}
+        />
+
         <Textarea
           label="Code"
           {...form.register("code")}
           error={!!form.formState.errors.code}
           errorMessage={form.formState.errors.code?.message}
         />
-        {/* Priority */}
+
         <Select
           label="Priority"
           options={[...SNIPPET_PRIORITY_OPTIONS]}
@@ -130,7 +136,7 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
           error={!!form.formState.errors.priority}
           errorMessage={form.formState.errors.priority?.message}
         />
-        {/* Tags */}
+
         <Controller
           name="tags"
           control={form.control}
@@ -144,14 +150,14 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
             />
           )}
         />
-        {/* Favorite */}
+
         <Checkbox
           label="Favorite"
           {...form.register("favorite")}
           error={!!form.formState.errors.favorite}
           errorMessage={form.formState.errors.favorite?.message}
         />
-        {/* Decision */}
+
         <Stack direction="row" justify="end" gap={3}>
           <Link href={cancelHref}>Cancel</Link>
 

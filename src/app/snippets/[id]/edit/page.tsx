@@ -42,9 +42,9 @@ export default async function SnippetEdit({
             {/* Edit Form */}
             <SnippetForm mode="edit" snippet={snippet} />
 
-            <Stack gap={2} align="center" justify="end" direction="row">
+            <Stack wrap gap={2} align="center" justify="end" direction="row">
               {/* Detail Return */}
-              <Link href={`/snippets/${snippet.id}`}>
+              <Link href={`/snippets/${snippet.id}`} appearance="content">
                 <Surface radius="md" bordered>
                   <Stack justify="center" align="center">
                     <Text>Return</Text>
@@ -52,7 +52,7 @@ export default async function SnippetEdit({
                 </Surface>
               </Link>
               {/* New Snippets */}
-              <Link href="/snippets/new">
+              <Link href="/snippets/new" appearance="content">
                 <Surface radius="md" bordered>
                   <Stack justify="center" align="center">
                     <Text>New Snippet</Text>
@@ -60,7 +60,7 @@ export default async function SnippetEdit({
                 </Surface>
               </Link>
               {/*  Snippets List */}
-              <Link href="/snippets">
+              <Link href="/snippets" appearance="content">
                 <Surface radius="md" bordered>
                   <Stack justify="center" align="center">
                     <Text> Snippet List</Text>

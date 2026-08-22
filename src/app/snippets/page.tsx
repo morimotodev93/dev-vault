@@ -37,6 +37,8 @@ export default async function Snippet({
     query?: string;
     language?: string;
     priority?: string;
+    tags?: string;
+    tagsMode?: string;
     favorite?: string;
     sort?: string;
   }>;
@@ -48,6 +50,11 @@ export default async function Snippet({
   const searchQuery = params.query ?? "";
   const selectedLanguage = params.language ?? "";
   const selectedPriority = params.priority ?? "";
+  const selectedTags = (params.tags ?? "")
+    .split(",")
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+  const selectedTagsMode = params.tagsMode === "or" ? "or" : "and";
   const selectedFavorite = params.favorite ?? "";
 
   // Sort
@@ -71,6 +78,11 @@ export default async function Snippet({
 
   if (params.priority) {
     paginationParams.set("priority", params.priority);
+  }
+
+  if (selectedTags.length > 0) {
+    paginationParams.set("tags", selectedTags.join(","));
+    paginationParams.set("tagsMode", selectedTagsMode);
   }
 
   if (params.favorite) {
@@ -97,6 +109,24 @@ export default async function Snippet({
         { tags: { contains: searchQuery } },
       ],
     });
+  }
+
+  // Tags
+  if (selectedTags.length > 0) {
+    const tagConditions = selectedTags.map((tag) => ({
+      OR: [
+        { tags: tag },
+        { tags: { startsWith: `${tag},` } },
+        { tags: { endsWith: `,${tag}` } },
+        { tags: { contains: `,${tag},` } },
+      ],
+    }));
+
+    conditions.push(
+      selectedTagsMode === "or"
+        ? { OR: tagConditions }
+        : { AND: tagConditions },
+    );
   }
 
   // Language

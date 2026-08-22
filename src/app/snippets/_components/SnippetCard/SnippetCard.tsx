@@ -42,6 +42,7 @@ export function SnippetCard({
       <Stack justify="between" className={styles.snippetsCard__inner}>
         {/* Content / Link */}
         <Link
+          appearance="content"
           className={styles.snippetsCard__link}
           size="sm"
           href={`/snippets/${id}`}
