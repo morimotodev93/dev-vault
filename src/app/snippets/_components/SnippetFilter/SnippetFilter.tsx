@@ -17,6 +17,7 @@ export function SnippetFilter() {
     const params = new URLSearchParams(searchParams);
 
     params.delete("language");
+    params.delete("framework");
     params.delete("priority");
     params.delete("tags");
     params.delete("tagsMode");
@@ -39,6 +40,20 @@ export function SnippetFilter() {
             router,
             searchParams,
             "language",
+            event.target.value,
+          )
+        }
+      />
+
+      {/* Framework */}
+      <Input
+        label="Framework"
+        value={searchParams.get("framework") ?? ""}
+        onChange={(event) =>
+          updateSearchParam(
+            router,
+            searchParams,
+            "framework",
             event.target.value,
           )
         }

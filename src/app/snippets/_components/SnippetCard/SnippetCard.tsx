@@ -26,6 +26,7 @@ export function SnippetCard({
   title,
   description,
   language,
+  framework,
   tags,
   favorite,
   priority,
@@ -55,7 +56,17 @@ export function SnippetCard({
           </Text>
 
           <Stack direction="row" wrap gap={2}>
-            <Tag size="sm">{language}</Tag>
+            {language && (
+              <Tag color="accent" size="sm">
+                {language}
+              </Tag>
+            )}
+
+            {framework && (
+              <Tag color="success" size="sm">
+                {framework}
+              </Tag>
+            )}
             {/* tags */}
             {tags &&
               tags

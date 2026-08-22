@@ -45,7 +45,13 @@ export default async function SnippetDetail({
 
             <Text>{snippet.description}</Text>
 
+            {/* Language */}
+
             <Text>{snippet.language}</Text>
+
+            {/* Framework */}
+
+            <Text>{snippet.framework}</Text>
 
             <Text>{snippet.tags}</Text>
 

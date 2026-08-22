@@ -36,6 +36,7 @@ export default async function Snippet({
     page?: string;
     query?: string;
     language?: string;
+    framework?: string;
     priority?: string;
     tags?: string;
     tagsMode?: string;
@@ -49,6 +50,7 @@ export default async function Snippet({
 
   const searchQuery = params.query ?? "";
   const selectedLanguage = params.language ?? "";
+  const selectedFramework = params.framework ?? "";
   const selectedPriority = params.priority ?? "";
   const selectedTags = (params.tags ?? "")
     .split(",")
@@ -74,6 +76,10 @@ export default async function Snippet({
 
   if (params.language) {
     paginationParams.set("language", params.language);
+  }
+
+  if (params.framework) {
+    paginationParams.set("framework", params.framework);
   }
 
   if (params.priority) {
@@ -106,6 +112,7 @@ export default async function Snippet({
       OR: [
         { title: { contains: searchQuery } },
         { language: { contains: searchQuery } },
+        { framework: { contains: searchQuery } },
         { tags: { contains: searchQuery } },
       ],
     });
@@ -133,6 +140,15 @@ export default async function Snippet({
   if (selectedLanguage) {
     conditions.push({
       language: selectedLanguage,
+    });
+  }
+
+  // Framework
+  if (selectedFramework) {
+    conditions.push({
+      framework: {
+        contains: selectedFramework,
+      },
     });
   }
 
