@@ -44,6 +44,36 @@
     background-color 0.15s ease;
 }
 
+/* Semantic colors */
+.color-default {
+  color: var(--fg);
+}
+
+.color-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.color-accent {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.color-success {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.color-warning {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.color-destructive {
+  color: var(--destructive);
+  border-color: var(--destructive);
+}
+
 .select:hover:not(:disabled):not(:focus) {
   border-color: var(--border-strong);
 }

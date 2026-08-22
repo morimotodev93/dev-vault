@@ -8,6 +8,7 @@ import type { SelectProps } from "./Select.types";
 
 export function Select({
   size = "md",
+  color = "default",
   showChevron = true,
   chevronSize = size,
   fullWidth = false,
@@ -45,6 +46,7 @@ export function Select({
           className={clsx(
             styles.select,
             styles[size],
+            styles[`color-${color}`],
             showChevron && styles.withChevron,
             error && styles.error,
             selectClassName,

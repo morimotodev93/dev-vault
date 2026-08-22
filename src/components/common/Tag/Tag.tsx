@@ -5,6 +5,7 @@ import type { TagProps } from "./Tag.types";
 export function Tag({
   children,
   variant = "default",
+  color,
   size = "md",
   active = false,
   onClick,
@@ -18,6 +19,7 @@ export function Tag({
       className={clsx(
         styles.tag,
         styles[`variant-${variant}`],
+        color && styles[`color-${color}`],
         styles[`size-${size}`],
         active && styles.active,
         isInteractive && styles.interactive,
