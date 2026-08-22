@@ -1,17 +1,17 @@
-// components/icon/ui/ChevronRight.tsx
+// components/icon/ui/ChevronDown.tsx
 import clsx from "clsx";
 
-type ChevronRightProps = {
+type ChevronDownProps = {
   className?: string;
   width?: number | string;
   height?: number | string;
 };
 
-export function ChevronRightIcon({
+export function ChevronDownIcon({
   className,
   width = 24,
   height = 24,
-}: ChevronRightProps) {
+}: ChevronDownProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -24,12 +24,11 @@ export function ChevronRightIcon({
       strokeLinecap="round"
       strokeLinejoin="round"
       className={clsx(
-        "lucide lucide-chevrons-right-icon lucide-chevrons-right",
+        "lucide lucide-chevron-down-icon lucide-chevron-down",
         className,
       )}
     >
-      <path d="m6 17 5-5-5-5" />
-      <path d="m13 17 5-5-5-5" />
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }
