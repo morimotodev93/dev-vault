@@ -61,7 +61,7 @@ export default async function SnippetDetail({
               {/* Delete Snippets */}
               <DeleteButton id={snippet.id} />
               {/* Edit Snippets */}
-              <Link href={`/snippets/${snippet.id}/edit`}>
+              <Link href={`/snippets/${snippet.id}/edit`} appearance="content">
                 <Surface radius="sm" padding="sm" bordered>
                   <Stack justify="center" align="center">
                     <Text>Edit</Text>
@@ -69,7 +69,7 @@ export default async function SnippetDetail({
                 </Surface>
               </Link>
               {/* New Snippets */}
-              <Link href="/snippets/new">
+              <Link href="/snippets/new" appearance="content">
                 <Surface radius="sm" padding="sm" bordered>
                   <Stack justify="center" align="center">
                     <Text>New Snippet</Text>
@@ -77,7 +77,7 @@ export default async function SnippetDetail({
                 </Surface>
               </Link>
               {/*  Snippets List */}
-              <Link href="/snippets">
+              <Link href="/snippets" appearance="content">
                 <Surface radius="sm" padding="sm" bordered>
                   <Stack justify="center" align="center">
                     <Text> Snippet List</Text>

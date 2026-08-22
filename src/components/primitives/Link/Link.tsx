@@ -7,6 +7,7 @@ export function Link({
   href,
   children,
   variant = "default",
+  appearance = "default",
   size = "base",
   weight = "normal",
   underline = "hover",
@@ -19,6 +20,7 @@ export function Link({
   const classNames = clsx(
     styles.link,
     styles[`variant-${variant}`],
+    styles[`appearance-${appearance}`],
     styles[`size-${size}`],
     styles[`weight-${weight}`],
     underline === true && styles.underline,
