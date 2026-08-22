@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDownIcon } from "@/components/icon";
 import clsx from "clsx";
 import { useId } from "react";
 import styles from "./Select.module.css";
@@ -7,6 +8,8 @@ import type { SelectProps } from "./Select.types";
 
 export function Select({
   size = "md",
+  showChevron = true,
+  chevronSize = size,
   fullWidth = false,
   error = false,
   errorMessage,
@@ -42,6 +45,7 @@ export function Select({
           className={clsx(
             styles.select,
             styles[size],
+            showChevron && styles.withChevron,
             error && styles.error,
             selectClassName,
           )}
@@ -63,23 +67,14 @@ export function Select({
           ))}
         </select>
 
-        <span className={styles.chevron} aria-hidden="true">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {showChevron && (
+          <span
+            className={clsx(styles.chevron, styles[`chevron-${chevronSize}`])}
+            aria-hidden="true"
           >
-            <path
-              d="M4 6L8 10L12 6"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
+            <ChevronDownIcon />
+          </span>
+        )}
       </div>
 
       {error && errorMessage && (

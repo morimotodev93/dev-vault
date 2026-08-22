@@ -1,6 +1,7 @@
 import type { ReactNode, SelectHTMLAttributes } from "react";
 
 export type SelectSize = "sm" | "md" | "lg";
+export type SelectChevronSize = "sm" | "md" | "lg";
 
 export type SelectOption = {
   value: string;
@@ -14,6 +15,10 @@ export type SelectProps = Omit<
 > & {
   /** サイズ */
   size?: SelectSize;
+  /** 下向き矢印を表示するか */
+  showChevron?: boolean;
+  /** 下向き矢印のサイズ */
+  chevronSize?: SelectChevronSize;
   /** 幅いっぱい */
   fullWidth?: boolean;
   /** エラー状態 */
