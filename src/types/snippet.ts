@@ -59,6 +59,17 @@ export interface SnippetCardItem {
   updatedAt: Date;
 }
 
+export interface SnippetSearchParams {
+  query?: string;
+  language?: string;
+  framework?: string;
+  priority?: string;
+  tags?: string;
+  tagsMode?: string;
+  favorite?: string;
+  sort?: string;
+}
+
 export type SnippetFormInput = z.input<typeof snippetFormSchema>;
 
 export type SnippetFormValues = z.output<typeof snippetFormSchema>;

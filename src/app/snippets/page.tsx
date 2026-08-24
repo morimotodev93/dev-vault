@@ -18,7 +18,7 @@ import {
 
 import { EmptyState, Pagination } from "@/components/common";
 
-import type { SnippetSearchParams } from "@/lib/snippets";
+import type { SnippetSearchParams } from "@/types/snippet";
 
 import { prisma } from "@/lib/prisma";
 import {
@@ -26,6 +26,7 @@ import {
   createSnippetPaginationParams,
   createSnippetWhere,
   getSnippetSort,
+  normalizeSnippetSearchParams,
 } from "@/lib/snippets";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
@@ -39,17 +40,48 @@ export default async function Snippet({
 }) {
   const params = await searchParams;
 
+  const normalizedParams = normalizeSnippetSearchParams(params);
+
+  // URL normalization
+  const currentParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined) {
+      currentParams.set(key, value);
+    }
+  });
+
+  const currentWithoutPage = new URLSearchParams(currentParams);
+  currentWithoutPage.delete("page");
+
+  const normalizedWithoutPage = new URLSearchParams(normalizedParams);
+  normalizedWithoutPage.delete("page");
+
+  const hasChanged =
+    currentWithoutPage.toString() !== normalizedWithoutPage.toString();
+
+  if (hasChanged) {
+    normalizedParams.delete("page");
+
+    const queryString = normalizedParams.toString();
+
+    redirect(queryString ? `/snippets?${queryString}` : "/snippets");
+  }
+
   const pageSize = 10;
 
   const searchQuery = params.query ?? "";
   const selectedLanguage = params.language ?? "";
   const selectedFramework = params.framework ?? "";
   const selectedPriority = params.priority ?? "";
+
   const selectedTags = (params.tags ?? "")
     .split(",")
     .map((tag) => tag.trim())
     .filter(Boolean);
+
   const selectedTagsMode = params.tagsMode === "or" ? "or" : "and";
+
   const selectedFavorite = params.favorite ?? "";
 
   const selectedSort = getSnippetSort(params.sort);
@@ -57,11 +89,6 @@ export default async function Snippet({
   const requestedPage = Number(params.page ?? "1");
 
   const paginationParams = createSnippetPaginationParams(params);
-
-  // Invalid page parameter
-  if (!Number.isInteger(requestedPage) || requestedPage < 1) {
-    redirect("/snippets");
-  }
 
   const where = createSnippetWhere({
     query: searchQuery,
