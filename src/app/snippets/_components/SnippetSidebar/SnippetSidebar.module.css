@@ -52,12 +52,13 @@
 }
 
 .snippetControl {
+  position: relative;
   width: 100%;
   /* terminal treatment */
   padding-block: 10rem;
 
   padding-inline: 1rem;
-  background: var(--info);
+  background: var(--sidebar-bg);
   z-index: var(--z-sidebar);
 }
 
