@@ -4,73 +4,74 @@ This roadmap describes the planned direction for Dev Vault.
 
 ## Current Phase
 
-The project is currently focused on improving snippet browsing, organization, and user experience.
+Snippet CRUD, search, filtering, sorting, and pagination are complete.
+The Collection concept, metadata, and lifecycle rules are defined.
+The current phase focuses on completing the Collection data model and UI
+design before implementation.
 
-Completed foundations include:
+## Completed Foundations
 
 - Next.js App Router setup
 - Root layout and metadata
-- Global styles and CSS tokens
-- Reusable UI primitives
+- Global styles, CSS tokens, and reusable UI primitives
 - Prisma schema and database integration
 - Zod validation
-- Snippet CRUD
-- Snippet detail pages
-- Empty states
-- Pagination
-- Keyword search
+- Snippet CRUD and detail pages
+- Empty and loading states
 - Search across title, description, language, tags, and code
-- Language filtering
-- Priority filtering
-- Favorite filtering
+- Pagination with search and query parameter handling
+- Language, priority, favorite, framework, and tag filtering
+- Newest, oldest, priority, and updated sorting
+- Combined search, filtering, sorting, and pagination
 - Favorite toggle and database persistence
 - Multiple tag input and display
+- Responsive layout and final UI/UX refinement
+- Snippet usage, architecture, project structure, components, and database documentation
+- Collection purpose, metadata, Snippet references, and lifecycle rules
 
 ## Near-Term Goals
 
-### Browsing and Organization
+### Collection Definition
 
-- Filter snippets by category
-- Sort snippets by priority
-- Sort snippets by update date
-- Support newest and oldest sorting
-- Improve combined search, filtering, and sorting
+- Define the Prisma Collection model
+- Define the final JSON structure for `Collection.snippets`
+- Decide between JSON references and a dedicated relation
+- Define Collection to Snippet relationship and delete behavior
+- Define Collection CRUD requirements
 
-### Snippet Features
+### Collection UI
 
-- Improve favorite management
-- Expand tag management
-- Improve snippet organization
-- Improve category management
+- Define the Collection list and detail pages
+- Define the Collection form
+- Design manual Snippet selection from Search / Filter results
+- Add a `New Snippet` action to the Collection workflow
+- Define Collection Snippet cards and removal UI
+- Add filename and directory inputs
+- Add Interest and Practicality controls
 
-### Collection Planning
+### Collection Implementation
 
-- Define collection semantics as saved snippet views before adding folder-like behavior
-- Document the distinction between language, framework, category, tags, and collections
-- Add newest-first sorting as the default collection browsing behavior
-- Stabilize combined search, filtering, sorting, and pagination before creating a Collection model
-- Evaluate tag/category normalization after collection criteria are validated in the UI
+- Create Collection
+- Read Collection
+- Update Collection
+- Delete Collection
+- Preserve existing Snippets when they are removed from a Collection
+- Reflect Snippet updates in Collections that reference them
+- Define automatic cleanup when a referenced Snippet is deleted
 
-### User Experience
+## Deferred Decisions
 
-- Improve loading states
-- Add keyboard-friendly interactions
-- Improve responsive behavior
-- Improve search, filtering, sorting, and pagination UX
-- Complete UI/UX refinement
+- Tag normalization remains deferred until the current serialized storage proves insufficient.
+- Snippet category is outside the current scope and should not be reintroduced without new requirements.
+- Collection frameworks are display metadata and are not currently search criteria.
 
 ## Mid-Term Goals
 
-### Tag and Category Enhancements
+### Search and Organization
 
-- Normalize tags into a dedicated model
-- Add category management
-- Support nested or grouped categories
-
-### Search
-
-- Expand search across memo and additional snippet metadata
+- Expand search across memo and additional Snippet metadata
 - Add search result highlighting
+- Revisit tag normalization if Collection requirements require it
 
 ### User Experience
 
@@ -83,12 +84,12 @@ Completed foundations include:
 ### Authentication
 
 - Add user accounts
-- Associate snippets with users
+- Associate snippets and collections with users
 - Support private and shared snippets
 
 ### Collaboration
 
-- Share snippets with other users
+- Share snippets and collections with other users
 - Add team or workspace support
 - Add role-based permissions
 
@@ -109,32 +110,3 @@ Completed foundations include:
 ## Guiding Principle
 
 The project should remain simple while making it easy to add features incrementally.
-
-## Snippet Management
-
-### Completed
-
-- CRUD
-- Search
-- Pagination
-- Language filter
-- Priority filter
-- Favorite filter
-- Favorite toggle
-- Multiple tag input
-- Multiple tag display
-
-### In Progress
-
-- UI/UX refinement
-
-### Planned
-
-- Category filter
-- Sorting
-  - Newest
-  - Oldest
-  - Priority
-  - Updated
-- Improved combined search, filtering, sorting, and pagination
-- Expanded tag and category management

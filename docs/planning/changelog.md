@@ -104,9 +104,30 @@ Minor implementation details are intentionally omitted when they are already cov
 - Documented the Snippet data model and database responsibilities.
 - Documented Snippet CRUD, search, and pagination workflows.
 
+## 0.5.0 — Snippet Organization and Collection Planning
+
+### Added
+
+- Favorite toggle with database persistence.
+- Multiple tag input and display.
+- Language, priority, favorite, framework, and tag filtering.
+- Newest, oldest, priority, and updated sorting.
+- Combined search, filtering, sorting, and pagination.
+- Responsive layout, sidebar controls, code copy interaction, and final UI/UX refinement.
+- Collection planning for purpose, metadata, Snippet references, and lifecycle rules.
+
+### Changed
+
+- Search and structured filtering responsibilities are now defined separately.
+- Tag matching behavior, including `Any` / `All` and exact matching, is documented.
+- Snippet category was removed from the current scope.
+- Tag normalization was deferred until the current serialized storage proves insufficient.
+- Collection planning now treats Collections as manually curated groups of existing Snippets.
+
 ## Current Status
 
-The core Snippet management workflow is implemented.
+The Snippet management workflow is implemented, including browsing,
+organization, and combined query controls.
 
 Current functionality includes:
 
@@ -121,5 +142,12 @@ Current functionality includes:
 - Reusable UI primitives
 - Form validation
 - Prisma-based persistence
+- Favorites
+- Tags
+- Filtering
+- Sorting
+- Responsive snippet browsing and code copy
 
-Future development will focus on improving snippet organization and user experience, including favorites, tags, filtering, and sorting.
+Collection implementation is the next development focus. Future work includes
+the Collection data model, CRUD operations, UI, manual Snippet selection, and
+cleanup behavior for deleted referenced Snippets.
