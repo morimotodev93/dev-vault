@@ -8,19 +8,25 @@
   min-height: 100%;
 }
 
+.mobileSnippetControls {
+  display: none;
+}
+
 .snippetsZero {
   border: 1px solid var(--info);
   padding: 1rem;
 }
 
 @media (min-width: 768px) {
-  .mobileSnippetControls {
-    display: none;
-  }
-
   .aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobileSnippetControls {
+    display: flex;
   }
 }
