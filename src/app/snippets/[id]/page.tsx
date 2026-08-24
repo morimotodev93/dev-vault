@@ -8,6 +8,8 @@ import {
   Text,
 } from "@/components/primitives";
 
+import { Tag } from "@/components/common";
+
 import {
   CodeBlock,
   DeleteButton,
@@ -47,13 +49,27 @@ export default async function SnippetDetail({
 
             {/* Language */}
 
-            <Text>{snippet.language}</Text>
+            {snippet.language && <Text>{snippet.language}</Text>}
 
             {/* Framework */}
 
-            <Text>{snippet.framework}</Text>
+            {snippet.framework && <Text>{snippet.framework}</Text>}
 
-            <Text>{snippet.tags}</Text>
+            {/* Tag */}
+
+            {snippet.tags && (
+              <Stack direction="row" gap={2}>
+                {snippet.tags
+                  .split(",")
+                  .map((tag: string) => tag.trim())
+                  .filter(Boolean)
+                  .map((tag: string) => (
+                    <Tag key={tag} size="sm">
+                      {tag}
+                    </Tag>
+                  ))}
+              </Stack>
+            )}
 
             <CodeBlock code={snippet.code} />
 
