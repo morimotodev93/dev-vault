@@ -73,7 +73,7 @@ export function SnippetFilter() {
         }
       />
 
-      <Stack direction="row" justify="between" align="center">
+      <Stack direction="row" justify="between" align="end">
         {/* Tags */}
         <Input
           label="Tags Search"
@@ -86,6 +86,7 @@ export function SnippetFilter() {
         {/* Tag Match Mode */}
         <Select
           label="Tag Match"
+          size="sm"
           showChevron={false}
           value={searchParams.get("tagsMode") ?? "and"}
           options={[

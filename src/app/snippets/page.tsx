@@ -17,13 +17,16 @@ import {
 } from "@/app/snippets/_components";
 
 import { EmptyState, Pagination } from "@/components/common";
-import {
-  DEFAULT_SNIPPET_SORT,
-  SNIPPET_PRIORITY_VALUES,
-  SNIPPET_SORT_OPTIONS,
-  type SnippetSortOption,
-} from "@/constants";
+
+import type { SnippetSearchParams } from "@/lib/snippets";
+
 import { prisma } from "@/lib/prisma";
+import {
+  createSnippetOrderBy,
+  createSnippetPaginationParams,
+  createSnippetWhere,
+  getSnippetSort,
+} from "@/lib/snippets";
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 
@@ -32,17 +35,7 @@ import styles from "./snippet.module.css";
 export default async function Snippet({
   searchParams,
 }: {
-  searchParams: Promise<{
-    page?: string;
-    query?: string;
-    language?: string;
-    framework?: string;
-    priority?: string;
-    tags?: string;
-    tagsMode?: string;
-    favorite?: string;
-    sort?: string;
-  }>;
+  searchParams: Promise<SnippetSearchParams & { page?: string }>;
 }) {
   const params = await searchParams;
 
@@ -59,145 +52,29 @@ export default async function Snippet({
   const selectedTagsMode = params.tagsMode === "or" ? "or" : "and";
   const selectedFavorite = params.favorite ?? "";
 
-  // Sort
-  const selectedSort: SnippetSortOption = SNIPPET_SORT_OPTIONS.some(
-    (option) => option.value === params.sort,
-  )
-    ? (params.sort as SnippetSortOption)
-    : DEFAULT_SNIPPET_SORT;
+  const selectedSort = getSnippetSort(params.sort);
 
   const requestedPage = Number(params.page ?? "1");
 
-  const paginationParams = new URLSearchParams();
-
-  if (params.query) {
-    paginationParams.set("query", params.query);
-  }
-
-  if (params.language) {
-    paginationParams.set("language", params.language);
-  }
-
-  if (params.framework) {
-    paginationParams.set("framework", params.framework);
-  }
-
-  if (params.priority) {
-    paginationParams.set("priority", params.priority);
-  }
-
-  if (selectedTags.length > 0) {
-    paginationParams.set("tags", selectedTags.join(","));
-    paginationParams.set("tagsMode", selectedTagsMode);
-  }
-
-  if (params.favorite) {
-    paginationParams.set("favorite", params.favorite);
-  }
-
-  if (params.sort) {
-    paginationParams.set("sort", params.sort);
-  }
+  const paginationParams = createSnippetPaginationParams(params);
 
   // Invalid page parameter
   if (!Number.isInteger(requestedPage) || requestedPage < 1) {
     redirect("/snippets");
   }
 
-  const conditions = [];
-
-  // Query
-  if (searchQuery) {
-    conditions.push({
-      OR: [
-        { title: { contains: searchQuery } },
-        { language: { contains: searchQuery } },
-        { framework: { contains: searchQuery } },
-        { tags: { contains: searchQuery } },
-      ],
-    });
-  }
-
-  // Tags
-  if (selectedTags.length > 0) {
-    const tagConditions = selectedTags.map((tag) => ({
-      OR: [
-        { tags: tag },
-        { tags: { startsWith: `${tag},` } },
-        { tags: { endsWith: `,${tag}` } },
-        { tags: { contains: `,${tag},` } },
-      ],
-    }));
-
-    conditions.push(
-      selectedTagsMode === "or"
-        ? { OR: tagConditions }
-        : { AND: tagConditions },
-    );
-  }
-
-  // Language
-  if (selectedLanguage) {
-    conditions.push({
-      language: selectedLanguage,
-    });
-  }
-
-  // Framework
-  if (selectedFramework) {
-    conditions.push({
-      framework: {
-        contains: selectedFramework,
-      },
-    });
-  }
-
-  // Priority
-  const priorityValue = Number(selectedPriority);
-  if (
-    selectedPriority &&
-    Number.isInteger(priorityValue) &&
-    SNIPPET_PRIORITY_VALUES.includes(
-      priorityValue as (typeof SNIPPET_PRIORITY_VALUES)[number],
-    )
-  ) {
-    conditions.push({
-      priority: priorityValue,
-    });
-  }
-
-  // Favorite
-  if (selectedFavorite === "true") {
-    conditions.push({
-      favorite: true,
-    });
-  }
-
-  const where =
-    conditions.length > 0
-      ? {
-          AND: conditions,
-        }
-      : undefined;
+  const where = createSnippetWhere({
+    query: searchQuery,
+    language: selectedLanguage,
+    framework: selectedFramework,
+    priority: selectedPriority,
+    tags: selectedTags,
+    tagsMode: selectedTagsMode,
+    favorite: selectedFavorite,
+  });
 
   // Sort -> Prisma orderBy
-  const orderBy = ((): {
-    createdAt?: "asc" | "desc";
-    updatedAt?: "asc" | "desc";
-    priority?: "asc" | "desc";
-  } => {
-    switch (selectedSort) {
-      case "oldest":
-        return { createdAt: "asc" };
-      case "priority":
-        return { priority: "desc" };
-      case "updated":
-        return { updatedAt: "desc" };
-      case "newest":
-      default:
-        return { createdAt: "desc" };
-    }
-  })();
+  const orderBy = createSnippetOrderBy(selectedSort);
 
   // Pagination
   const totalCount = await prisma.snippet.count({
