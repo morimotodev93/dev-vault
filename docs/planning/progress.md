@@ -193,9 +193,11 @@ type CollectionSnippetReference = {
 
 ### Collection UI
 
-- [ ] Define Collection list page
-- [ ] Define Collection detail page
-- [ ] Define Collection form
+- [x] Define Collection list page
+- [x] Define Collection detail page
+- [x] Define Collection form
+- [x] Define Collection card
+- [x] Add Collection pagination
 - [ ] Define Collection Snippet card
 - [ ] Define manual Snippet selection UI
 - [ ] Add "New Snippet" action from Collection workflow
@@ -206,10 +208,10 @@ type CollectionSnippetReference = {
 
 ### Collection CRUD
 
-- [ ] Create Collection
-- [ ] Read Collection
-- [ ] Update Collection
-- [ ] Delete Collection
+- [x] Create Collection
+- [x] Read Collection
+- [x] Update Collection
+- [x] Delete Collection
 
 ### Collection Data Model
 
@@ -283,4 +285,6 @@ focuses on implementing the Collection UI and CRUD flows.
 
 ### Next Steps
 
-1. Design the Collection UI and manual Snippet selection workflow.
+1. Implement the Collection Snippet card and manual Snippet selection workflow.
+2. Add path input and Snippet removal from a Collection.
+3. Add Collection search, filtering, and sorting when requirements are defined.
