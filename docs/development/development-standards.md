@@ -136,7 +136,7 @@ Use Zod for validating user-submitted data.
 
 The current snippet form schema lives in:
 
-`src/types/snippets.ts`
+`src/types/snippet.ts`
 
 Validation should happen before data reaches Prisma.
 

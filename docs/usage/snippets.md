@@ -62,7 +62,8 @@ Available filters:
 - Language
 - Priority
 - Favorite
-- Category
+- Framework
+- Tags
 
 Filters can be combined with search and other filters.
 

@@ -43,7 +43,10 @@ Current examples:
 ```text
 src/app/layout.tsx
 src/app/page.tsx
-src/app/home/hero/Hero.tsx
+src/app/home/Hero/Hero.tsx
+src/app/home/QuickStats/QuickStats.tsx
+src/app/home/RecentSnippets/RecentSnippets.tsx
+src/app/snippets/page.tsx
 ```
 
 ### src/components
@@ -57,8 +60,9 @@ Current structure:
 ```text
 src/components/
 ├─ icon/
-└─ primitives/
+├─ primitives/
 ├─ ui/
+└─ common/
 ```
 
 ### Icons
@@ -90,17 +94,6 @@ src/components/primitives/
 └── index.ts
 ```
 
-Future primitives may include:
-
-- Button
-- Text
-- Heading
-- Container
-- Stack
-- Grid
-- Surface
-- Link
-
 ### UI
 
 UI components are grouped by purpose. The current implementation includes:
@@ -113,11 +106,7 @@ src/components/ui/
 └── index.ts
 ```
 
-Future UI components may include:
-
-- Input
-- TextArea
-- Select
+Additional UI controls include `Checkbox` and `Switch`.
 
 ### Common
 
@@ -133,13 +122,7 @@ src/components/common/
 └── index.ts
 ```
 
-Future common components may include:
-
-- EmptyState
-- Loading
-- Pagination
-- SearchInput
-- Tag
+`TagInput` is also available for editing multiple tags.
 
 ### src/constants
 
@@ -206,7 +189,7 @@ Current examples:
 
 ```text
 src/types/navigation.ts
-src/types/snippets.ts
+src/types/snippet.ts
 ```
 
 ### prisma

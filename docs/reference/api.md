@@ -8,26 +8,26 @@ The current codebase includes:
 
 - Prisma schema and generated client configuration
 - Shared Prisma client setup in `src/lib/prisma.ts`
-- Zod validation schema for snippets in `src/types/snippets.ts`
+- Zod validation schema for snippets in `src/types/snippet.ts`
 - No dedicated API route contract yet
 
 ## Data Access Layer
 
 Database access should be centralized through server-side modules. Prisma should not be used directly inside generic UI components.
 
-Recommended future structure:
+The current Snippet data-access modules are organized under:
 
 ```text
-src/features/snippets/
-├─ actions/
-├─ queries/
-├─ schemas/
-└─ types/
+src/app/snippets/
+├─ _actions/
+├─ _components/
+├─ [id]/
+└─ new/
 ```
 
 ## Snippet Input Shape
-The current form schema is defined with Zod.
 
+The current form schema is defined with Zod.
 
 `snippetFormSchema`
 
@@ -37,7 +37,6 @@ Fields include:
 - description
 - language
 - framework
-- category
 - tags
 - favorite
 - priority
@@ -46,14 +45,16 @@ Fields include:
 
 ## Recommended Server Actions
 
-Future snippet workflows may include server actions such as:
+Snippet server actions currently include:
 
 - createSnippet
 - updateSnippet
 - deleteSnippet
-- toggleFavoriteSnippet
-- listSnippets
-- getSnippetById
+- toggleFavorite
+
+Snippet listing and detail reads are implemented through the route-level
+server components and shared query helpers rather than documented API
+endpoints.
 
 ## Validation Boundary
 

@@ -6,8 +6,8 @@ This roadmap describes the planned direction for Dev Vault.
 
 Snippet CRUD, search, filtering, sorting, and pagination are complete.
 The Collection concept, metadata, and lifecycle rules are defined.
-The current phase focuses on completing the Collection data model and UI
-design before implementation.
+The Collection data model and migrations are complete.
+The current phase focuses on implementing the Collection UI and CRUD flows.
 
 ## Completed Foundations
 
@@ -28,16 +28,16 @@ design before implementation.
 - Responsive layout and final UI/UX refinement
 - Snippet usage, architecture, project structure, components, and database documentation
 - Collection purpose, metadata, Snippet references, and lifecycle rules
+- Collection Prisma model and relational `CollectionSnippet` join model
 
 ## Near-Term Goals
 
 ### Collection Definition
 
-- Define the Prisma Collection model
-- Define the final JSON structure for `Collection.snippets`
-- Decide between JSON references and a dedicated relation
-- Define Collection to Snippet relationship and delete behavior
-- Define Collection CRUD requirements
+- Collection metadata and lifecycle rules are defined.
+- `Collection.snippets` uses the relational `CollectionSnippet` join model.
+- Collection to Snippet relationship and delete behavior are defined.
+- Collection CRUD requirements are defined.
 
 ### Collection UI
 
@@ -46,7 +46,7 @@ design before implementation.
 - Design manual Snippet selection from Search / Filter results
 - Add a `New Snippet` action to the Collection workflow
 - Define Collection Snippet cards and removal UI
-- Add filename and directory inputs
+- Add a collection-specific path input
 - Add Interest and Practicality controls
 
 ### Collection Implementation

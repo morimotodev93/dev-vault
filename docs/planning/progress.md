@@ -161,10 +161,9 @@
 
 - [x] Reuse existing Snippets
 - [x] Avoid duplicating complete Snippet data in Collection
-- [x] Define Collection-specific `filename`
-- [x] Define Collection-specific `directory`
+- [x] Define Collection-specific `path`
 - [x] Define `snippetId` as the reference to an existing Snippet
-- [x] Define the final JSON structure for `Collection.snippets`
+- [x] Define the relational structure for `Collection.snippets`
 
 #### Collection Snippet Reference
 
@@ -201,8 +200,7 @@ type CollectionSnippetReference = {
 - [ ] Define manual Snippet selection UI
 - [ ] Add "New Snippet" action from Collection workflow
 - [ ] Define Snippet removal UI
-- [ ] Define filename input
-- [ ] Define directory input
+- [ ] Define path input
 - [ ] Define Interest UI
 - [ ] Define Practicality UI
 
@@ -217,7 +215,7 @@ type CollectionSnippetReference = {
 
 - [x] Define Prisma Collection model
 - [x] Define `Collection.snippets`
-- [x] Decide JSON vs relational model
+- [x] Choose the relational model
 - [x] Define Collection → Snippet relationship
 - [x] Define delete behavior for referenced Snippets
 - [x] Define update behavior for referenced Snippets
@@ -261,27 +259,27 @@ model CollectionSnippet {
 ```ts
 type CollectionSnippetReference = {
   snippetId: string;
-  filename?: string;
-  directory?: string;
+  path?: string;
+  position: number;
 };
 ```
 
 - Collection stores references to existing Snippets.
 - Snippet data is not duplicated in Collection.
-- filename and directory describe the intended usage of the Snippet within the Collection.
-- Both filename and directory are optional.
+- path describes the intended file location or naming context of the Snippet within the Collection.
+- path is optional.
 - Snippet information is retrieved from the existing Snippet record.
 - The Collection Snippet card provides:
   - Code preview / copy interaction
-  - Filename / directory information when available
+  - Path information when available
   - Link to the original Snippet page
 
 ## Current Phase
 
 Snippet CRUD, Search, Filtering, Sorting, and Pagination are complete.
 
-The current phase focuses on defining the Collection concept and
-data model before implementation.
+The Collection concept and data model are defined. The current phase
+focuses on implementing the Collection UI and CRUD flows.
 
 ### Next Steps
 
