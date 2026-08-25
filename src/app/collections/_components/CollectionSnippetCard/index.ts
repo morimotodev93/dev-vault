@@ -1,0 +1,1 @@
+export { CollectionSnippetCard } from "./CollectionSnippetCard";
