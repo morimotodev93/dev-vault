@@ -12,6 +12,8 @@ export default function Home() {
         {/* dev用の移動ボタン */}
         <Link href="/snippets">Snippets</Link>
         <Spacer />
+        <Link href="/collections">Collections</Link>
+        <Spacer />
       </Stack>
     </main>
   );
