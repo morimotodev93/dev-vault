@@ -8,9 +8,49 @@ import {
   Text,
 } from "@/components/primitives";
 
-import styles from "./collection.module.css";
+import { CollectionCard } from "@/app/collections/_components";
+import { EmptyState, Pagination } from "@/components/common";
+import { prisma } from "@/lib/prisma";
+import type { CollectionSearchParams } from "@/types/collection";
+import { redirect } from "next/navigation";
 
-export default function Collection() {
+import styles from "./Collection.module.css";
+
+export default async function Collection({
+  searchParams,
+}: {
+  searchParams: Promise<CollectionSearchParams & { page?: string }>;
+}) {
+  const params = await searchParams;
+  const pageSize = 10;
+  const requestedPage = Number(params.page ?? "1");
+  const currentPage =
+    Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+
+  const totalCount = await prisma.collection.count();
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  if (currentPage > totalPages && totalPages > 0) {
+    redirect("/collections");
+  }
+
+  const collections = await prisma.collection.findMany({
+    orderBy: { updatedAt: "desc" },
+    skip: (currentPage - 1) * pageSize,
+    take: pageSize,
+  });
+
+  const collectionItems = collections.map((collection) => ({
+    ...collection,
+    description: collection.description ?? undefined,
+    language: collection.language ?? undefined,
+    frameworks: Array.isArray(collection.frameworks)
+      ? collection.frameworks.filter(
+          (framework): framework is string => typeof framework === "string",
+        )
+      : [],
+  }));
+
   return (
     <>
       <main className={styles.main}>
@@ -24,15 +64,38 @@ export default function Collection() {
           </Stack>
           <Spacer mobile={32} desktop={48} />
           {/* Collection Menu */}
-          {/* totalCount === 0 ? () */}
-          {/* Temporary Button */}
-          <Link appearance="content" href="/collections/new">
-            <Surface radius="md" bordered>
-              <Stack justify="center" align="center">
-                <Text size="sm">New Snippet</Text>
-              </Stack>
-            </Surface>
-          </Link>
+          {totalCount === 0 ? (
+            <EmptyState
+              title="No collections yet"
+              description="Create your first collection to start organizing your knowledge base."
+            />
+          ) : (
+            <>
+              <div className="l-auto-grid">
+                {collectionItems.map((collection) => (
+                  <CollectionCard key={collection.id} {...collection} />
+                ))}
+              </div>
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  basePath="/collections"
+                />
+              )}
+            </>
+          )}
+
+          <Stack direction="row" align="center" justify="end">
+            {/* New Collection Button */}
+            <Link appearance="content" href="/collections/new">
+              <Surface radius="md" bordered>
+                <Stack justify="center" align="center">
+                  <Text size="sm">New Collection</Text>
+                </Stack>
+              </Surface>
+            </Link>
+          </Stack>
           <Spacer mobile={48} desktop={80} />
         </Container>
       </main>

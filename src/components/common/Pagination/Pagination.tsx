@@ -49,6 +49,7 @@ export function Pagination({
   currentPage,
   totalPages,
   searchParams,
+  basePath = "/snippets",
   siblingCount = 1,
   size = "md",
   showLabels = false,
@@ -67,7 +68,7 @@ export function Pagination({
 
     params.set("page", String(page));
 
-    return `/snippets?${params.toString()}`;
+    return `${basePath}?${params.toString()}`;
   };
 
   return (

@@ -1,2 +1,20 @@
 .collectionCard {
+  min-height: fit-content;
+}
+
+.collectionCard__inner {
+  height: stretch;
+  text-wrap: balance;
+}
+
+.collectionCard__link {
+  justify-content: unset;
+  align-items: unset;
+  padding: unset;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.collectionCard__text {
+  text-wrap: balance;
 }

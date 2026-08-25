@@ -9,6 +9,9 @@ export type PaginationProps = HTMLAttributes<HTMLElement> & {
   /** 現在のQuery Parameter */
   searchParams?: string;
 
+  /** ページング先のパス */
+  basePath?: string;
+
   /** 左右に表示する隣接ページ数 */
   siblingCount?: number;
   /** サイズ */
