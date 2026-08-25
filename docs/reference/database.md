@@ -37,23 +37,54 @@ The shared Prisma client is defined in:
 
 ## Data Model
 
-The core data model is `Snippet`.
+The current Prisma schema includes `Snippet`, `Collection`, and the join model `CollectionSnippet`.
 
 ```prisma
 model Snippet {
   id          String   @id @default(cuid())
   title       String
   description String?
-  language    String
+  language    String?
   framework   String?
-  category    String?
-  tags        String[]
+  tags        String
   favorite    Boolean  @default(false)
   priority    Int      @default(0)
   code        String
   memo        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  collections CollectionSnippet[]
+}
+
+model Collection {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  category     String
+  language     String?
+  frameworks   Json
+  favorite     Boolean  @default(false)
+  priority     Int      @default(0)
+  interest     Int
+  practicality Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  snippets CollectionSnippet[]
+}
+
+model CollectionSnippet {
+  id           String  @id @default(cuid())
+  collectionId String
+  snippetId    String
+  path         String?
+  position     Int
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  snippet    Snippet    @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, snippetId])
 }
 ```
 
@@ -64,10 +95,9 @@ model Snippet {
 | `id`          | `String`   | Yes      | Unique snippet identifier generated with `cuid()`         |
 | `title`       | `String`   | Yes      | Human-readable snippet title                              |
 | `description` | `String?`  | No       | Optional summary or explanation                           |
-| `language`    | `String`   | Yes      | Programming language or syntax category                   |
+| `language`    | `String?`  | No       | Optional programming language or syntax category          |
 | `framework`   | `String?`  | No       | Optional framework name such as React, Next.js, or Prisma |
-| `category`    | `String?`  | No       | Optional high-level grouping                              |
-| `tags`        | `String[]` | Yes      | Multiple tags associated with the snippet                 |
+| `tags`        | `String`   | Yes      | Serialized tag list stored as a single string in Prisma   |
 | `favorite`    | `Boolean`  | Yes      | Whether the snippet is marked as a favorite               |
 | `priority`    | `Int`      | Yes      | Priority score, defaulting to `0`                         |
 | `code`        | `String`   | Yes      | Main code content                                         |
@@ -75,52 +105,73 @@ model Snippet {
 | `createdAt`   | `DateTime` | Yes      | Creation timestamp                                        |
 | `updatedAt`   | `DateTime` | Yes      | Last update timestamp                                     |
 
-                                 |
+## Collection Fields
+
+| Field          | Type       | Required | Description                                          |
+| -------------- | ---------- | -------- | ---------------------------------------------------- |
+| `id`           | `String`   | Yes      | Unique collection identifier generated with `cuid()` |
+| `title`        | `String`   | Yes      | Human-readable collection title                      |
+| `description`  | `String?`  | No       | Optional collection summary                          |
+| `category`     | `String`   | Yes      | Collection purpose or genre                          |
+| `language`     | `String?`  | No       | Main language used by the collection                 |
+| `frameworks`   | `Json`     | Yes      | JSON array of framework names for metadata display   |
+| `favorite`     | `Boolean`  | Yes      | Whether the collection is marked as a favorite       |
+| `priority`     | `Int`      | Yes      | Priority score, defaulting to `0`                    |
+| `interest`     | `Int`      | Yes      | Interest rating for the collection                   |
+| `practicality` | `Int`      | Yes      | Practicality rating for the collection               |
+| `createdAt`    | `DateTime` | Yes      | Creation timestamp                                   |
+| `updatedAt`    | `DateTime` | Yes      | Last update timestamp                                |
+
+## Collection Snippet Links
+
+The `CollectionSnippet` model stores the relationship between a `Collection` and a `Snippet`.
+
+| Field          | Type      | Required | Description                                     |
+| -------------- | --------- | -------- | ----------------------------------------------- |
+| `id`           | `String`  | Yes      | Unique link identifier generated with `cuid()`  |
+| `collectionId` | `String`  | Yes      | Reference to the parent collection              |
+| `snippetId`    | `String`  | Yes      | Reference to the linked snippet                 |
+| `path`         | `String?` | No       | Optional snippet-specific path or file location |
+| `position`     | `Int`     | Yes      | Ordering inside the collection                  |
+
+The relation is enforced with a unique composite key on `(collectionId, snippetId)` and cascade deletes on both sides.
 
 ## Validation
 
 Form-level validation is defined with Zod in:
 
-`src/types/snippets.ts`
+`src/types/snippet.ts`
 
 The current validation schema includes:
 
 - Required title
 - Optional description
-- Required language
-- Optional framework
-- Optional category
+- Optional language or framework
 - Tag array input
 - Favorite flag
-- Priority range from `0` to `5`
+- Priority values from the shared snippet priority constants
 - Required code
 - Optional memo
 
+`language` and `framework` are intentionally treated as optional in combination, and the schema enforces that at least one of them is present.
+
 ## Tags
 
-Tags are represented as an array of strings throughout the application.
+The application currently stores a snippet's tags as a serialized string in Prisma, while the form layer still accepts an array of strings before conversion.
 
-The form layer uses:
-
-```ts
-string[]
-```
-
-and the Prisma model also stores:
+Prisma model:
 
 ```prisma
-tags String[]
+tags String
 ```
 
-This allows a snippet to have multiple tags without requiring serialization or deserialization between the form and database layers.
-
-For example:
+Form layer:
 
 ```ts
 ["typescript", "react", "nextjs"];
 ```
 
-A snippet can therefore contain multiple tags, and each tag can be displayed independently in the UI.
+At persistence time, the UI serializes the array into a single string value. The data layer does not currently use a dedicated `Tag` table or `String[]` column.
 
 ## Tag Operations
 
@@ -131,14 +182,12 @@ The tag input supports:
 - Removing a tag
 - Displaying multiple tags
 
-The current implementation keeps tag management directly on the Snippet model.
-
-A future version may normalize tags into a dedicated Tag model if tag management becomes more complex, such as:
+Tag management remains part of the `Snippet` model for now. Future normalization into a dedicated tag table is possible if the application needs:
 
 - Shared tag metadata
-- Tag-based statistics
-- Tag management pages
-- Tag relationships across snippets
+- Tag statistics
+- Tag administration pages
+- Cross-snippet tag relationships
 - Advanced tag filtering
 
 ## Database Migrations
@@ -161,7 +210,6 @@ Potential future models include:
 
 - `User`
 - `Tag`
-- `Category`
-- `Collection`
 - `SnippetRevision`
 - `Favorite`
+- `CollectionTemplate`

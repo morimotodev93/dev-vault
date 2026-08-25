@@ -164,29 +164,33 @@
 - [x] Define Collection-specific `filename`
 - [x] Define Collection-specific `directory`
 - [x] Define `snippetId` as the reference to an existing Snippet
-- [ ] Define the final JSON structure for `Collection.snippets`
+- [x] Define the final JSON structure for `Collection.snippets`
 
 #### Collection Snippet Reference
 
 ```ts
 type CollectionSnippetReference = {
+  id?: string;
   snippetId: string;
-  filename: string;
-  directory: string;
+  path?: string;
+  position: number;
 };
 ```
 
 > Snippet information such as title, description, language, framework,
-> tags, code, and updatedAt should continue to come from the existing
-> Snippet data rather than being duplicated inside the Collection.
+> tags, code, and updatedAt continue to come from the existing Snippet
+> record. The collection stores the relationship metadata in the
+> `CollectionSnippet` join model instead of duplicating the Snippet data.
 
 ### Snippet Lifecycle
 
 - [x] Define removing a Snippet from a Collection separately from deleting a Snippet
 - [x] Keep the original Snippet when removed from a Collection
 - [x] Reflect Snippet updates in Collections that reference the Snippet
-- [ ] Define automatic cleanup when a referenced Snippet is deleted
-- [ ] Decide whether Collection references should be stored as JSON or a dedicated relation
+- [x] Use a dedicated relational join model for Collection ⇄ Snippet references
+- [x] Define `CollectionSnippet.path` for snippet-specific path metadata
+- [x] Define `CollectionSnippet.position` for collection ordering
+- [x] Set cascade delete behavior for CollectionSnippet relationships
 
 ### Collection UI
 
@@ -211,12 +215,46 @@ type CollectionSnippetReference = {
 
 ### Collection Data Model
 
-- [ ] Define Prisma Collection model
-- [ ] Define `Collection.snippets`
-- [ ] Decide JSON vs relational model
-- [ ] Define Collection → Snippet relationship
-- [ ] Define delete behavior for referenced Snippets
-- [ ] Define update behavior for referenced Snippets
+- [x] Define Prisma Collection model
+- [x] Define `Collection.snippets`
+- [x] Decide JSON vs relational model
+- [x] Define Collection → Snippet relationship
+- [x] Define delete behavior for referenced Snippets
+- [x] Define update behavior for referenced Snippets
+
+### Current Prisma Model
+
+```prisma
+model Collection {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  category     String
+  language     String?
+  frameworks   Json
+  favorite     Boolean  @default(false)
+  priority     Int      @default(0)
+  interest     Int
+  practicality Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  snippets CollectionSnippet[]
+}
+
+model CollectionSnippet {
+  id           String  @id @default(cuid())
+  collectionId String
+  snippetId    String
+  path         String?
+  position     Int
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  snippet    Snippet    @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, snippetId])
+}
+```
 
 ### Collection Snippet References
 
@@ -247,6 +285,4 @@ data model before implementation.
 
 ### Next Steps
 
-1. Define the Prisma Collection model.
-2. Define Collection CRUD requirements.
-3. Design the Collection UI and manual Snippet selection workflow.
+1. Design the Collection UI and manual Snippet selection workflow.
