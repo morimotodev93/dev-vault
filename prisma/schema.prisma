@@ -11,9 +11,8 @@ model Snippet {
   id          String   @id @default(cuid())
   title       String
   description String?
-  language    String
+  language    String?
   framework   String?
-  category    String?
   tags        String
   favorite    Boolean  @default(false)
   priority    Int      @default(0)
@@ -21,4 +20,36 @@ model Snippet {
   memo        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  collections CollectionSnippet[]
+}
+
+model Collection {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  category     String
+  language     String?
+  frameworks   Json
+  favorite     Boolean  @default(false)
+  priority     Int      @default(0)
+  interest     Int
+  practicality Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  snippets CollectionSnippet[]
+}
+
+model CollectionSnippet {
+  id           String  @id @default(cuid())
+  collectionId String
+  snippetId    String
+  path         String?
+  position     Int
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  snippet    Snippet    @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, snippetId])
 }
