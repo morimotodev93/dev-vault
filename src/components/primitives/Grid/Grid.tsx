@@ -1,9 +1,45 @@
 import clsx from "clsx";
 import styles from "./Grid.module.css";
-import type { GridProps } from "./Grid.types";
+import type { GridBreakpoint, GridProps } from "./Grid.types";
 
-const gapToVar = (value?: number) =>
-  value === undefined ? undefined : `var(--space-${value})`;
+const breakpoints: GridBreakpoint[] = [
+  "mobile",
+  "tablet",
+  "laptop",
+  "desktop",
+  "wide",
+];
+
+const valueToVar = (value: number | undefined, useSpaceScale = false) =>
+  value === undefined
+    ? undefined
+    : useSpaceScale
+      ? `var(--space-${value})`
+      : value;
+
+function getResponsiveStyle(
+  name: "grid-cols" | "grid-gap" | "grid-row-gap" | "grid-column-gap",
+  value: GridProps["col"] | GridProps["gap"],
+  useSpaceScale = false,
+) {
+  if (value === undefined) return {};
+
+  if (typeof value === "number") {
+    return { [`--${name}`]: valueToVar(value, useSpaceScale) };
+  }
+
+  let currentValue: number | undefined;
+
+  return Object.fromEntries(
+    breakpoints.map((breakpoint) => {
+      currentValue = value[breakpoint] ?? currentValue;
+      return [
+        `--${name}-${breakpoint}`,
+        valueToVar(currentValue, useSpaceScale),
+      ];
+    }),
+  );
+}
 
 export function Grid({
   col = 1,
@@ -28,10 +64,11 @@ export function Grid({
       )}
       style={
         {
-          "--grid-cols": col,
-          "--grid-gap": gapToVar(gap),
-          ...(hasRowGap && { "--grid-row-gap": gapToVar(rowGap) }),
-          ...(hasColumnGap && { "--grid-column-gap": gapToVar(columnGap) }),
+          ...getResponsiveStyle("grid-cols", col),
+          ...getResponsiveStyle("grid-gap", gap, true),
+          ...(hasRowGap && getResponsiveStyle("grid-row-gap", rowGap, true)),
+          ...(hasColumnGap &&
+            getResponsiveStyle("grid-column-gap", columnGap, true)),
           ...style,
         } as React.CSSProperties
       }
