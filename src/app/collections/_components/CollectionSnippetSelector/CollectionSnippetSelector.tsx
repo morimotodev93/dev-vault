@@ -1,5 +1,5 @@
 import { addCollectionSnippets } from "@/app/collections/_actions";
-import { Grid } from "@/components/primitives";
+import { Button, Grid, Spacer } from "@/components/primitives";
 import { Checkbox } from "@/components/ui";
 import { prisma } from "@/lib/prisma";
 
@@ -39,8 +39,8 @@ export async function CollectionSnippetSelector({
           />
         ))}
       </Grid>
-
-      <button type="submit">Add Selected</button>
+      <Spacer mobile={24} desktop={40} />
+      <Button type="submit">Add Selected</Button>
     </form>
   );
 }

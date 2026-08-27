@@ -1,4 +1,4 @@
-import { Container, Spacer, Stack } from "@/components/primitives";
+import { Container, Grid, Spacer, Stack } from "@/components/primitives";
 
 import {
   CollectionDetailActions,
@@ -46,16 +46,22 @@ export default async function CollectionDetail({
           {collection.snippets.length === 0 ? (
             <CollectionSnippetSelector collectionId={collection.id} />
           ) : (
-            collection.snippets.map((item) => (
-              <CollectionSnippetCard
-                key={item.id}
-                id={item.id}
-                collectionId={id}
-                snippet={item.snippet}
-                path={item.path}
-                position={item.position}
-              />
-            ))
+            <Grid
+              col={{ mobile: 1, tablet: 2, laptop: 3 }}
+              rowGap={{ mobile: 3, tablet: 4 }}
+              columnGap={{ mobile: 2, tablet: 5 }}
+            >
+              {collection.snippets.map((item) => (
+                <CollectionSnippetCard
+                  key={item.id}
+                  id={item.id}
+                  collectionId={id}
+                  snippet={item.snippet}
+                  path={item.path}
+                  position={item.position}
+                />
+              ))}
+            </Grid>
           )}
           <CollectionDetailActions id={collection.id} />
         </Stack>

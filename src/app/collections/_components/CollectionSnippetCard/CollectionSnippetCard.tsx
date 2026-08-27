@@ -1,5 +1,6 @@
+// _components/CollectionSnippetCard/CollectionSnippetCard.tsx
 import { RemoveCollectionSnippetButton } from "@/app/collections/_components";
-import { Stack } from "@/components/primitives";
+import { Heading, Stack, Text } from "@/components/primitives";
 
 type CollectionSnippetCardProps = {
   id: string;
@@ -25,14 +26,14 @@ export function CollectionSnippetCard({
   id,
 }: CollectionSnippetCardProps) {
   return (
-    <Stack>
-      <p>#{position + 1}</p>
+    <Stack justify="between">
+      <Text size="sm">#{position + 1}</Text>
 
-      <h3>{snippet.title}</h3>
+      <Heading as={"h3"}>{snippet.title}</Heading>
 
-      {snippet.description && <p>{snippet.description}</p>}
+      {snippet.description && <Text size="sm">{snippet.description}</Text>}
 
-      {path && <p>{path}</p>}
+      {path && <Text size="sm">{path}</Text>}
 
       <RemoveCollectionSnippetButton
         collectionId={collectionId}

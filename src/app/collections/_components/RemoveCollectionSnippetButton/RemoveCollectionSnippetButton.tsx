@@ -25,7 +25,12 @@ export function RemoveCollectionSnippetButton({
   };
 
   return (
-    <Button variant="danger" size="sm" onClick={handleRemove}>
+    <Button
+      variant="danger"
+      size="sm"
+      onClick={handleRemove}
+      className="u-self-end"
+    >
       Remove
     </Button>
   );
