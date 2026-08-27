@@ -1,227 +1,94 @@
 .grid {
+  --grid-cols-current: var(--grid-cols, 1);
+  --grid-gap-current: var(--grid-gap, var(--space-4));
+  --grid-row-gap-current: var(--grid-row-gap, var(--grid-gap-current));
+  --grid-column-gap-current: var(--grid-column-gap, var(--grid-gap-current));
+
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(var(--grid-cols, 1), minmax(0, 1fr));
-  gap: var(--grid-gap, var(--space-4));
+  grid-template-columns: repeat(var(--grid-cols-current), minmax(0, 1fr));
+  gap: var(--grid-gap-current);
 }
 
 .hasRowGap {
-  row-gap: var(--grid-row-gap, var(--grid-gap, var(--space-4)));
+  row-gap: var(--grid-row-gap-current);
 }
 
 .hasColumnGap {
-  column-gap: var(--grid-column-gap, var(--grid-gap, var(--space-4)));
+  column-gap: var(--grid-column-gap-current);
 }
 
 @media (min-width: 425px) {
   .grid {
-    grid-template-columns: repeat(
-      var(--grid-cols-mobile, var(--grid-cols, 1)),
-      minmax(0, 1fr)
-    );
-    gap: var(--grid-gap-mobile, var(--grid-gap, var(--space-4)));
-  }
-
-  .hasRowGap {
-    row-gap: var(
+    --grid-cols-current: var(--grid-cols-mobile, var(--grid-cols-current));
+    --grid-gap-current: var(--grid-gap-mobile, var(--grid-gap-current));
+    --grid-row-gap-current: var(
       --grid-row-gap-mobile,
-      var(
-        --grid-row-gap,
-        var(--grid-gap-mobile, var(--grid-gap, var(--space-4)))
-      )
+      var(--grid-row-gap-current)
     );
-  }
-
-  .hasColumnGap {
-    column-gap: var(
+    --grid-column-gap-current: var(
       --grid-column-gap-mobile,
-      var(
-        --grid-column-gap,
-        var(--grid-gap-mobile, var(--grid-gap, var(--space-4)))
-      )
+      var(--grid-column-gap-current)
     );
   }
 }
 
 @media (min-width: 768px) {
   .grid {
-    grid-template-columns: repeat(
-      var(--grid-cols-tablet, var(--grid-cols-mobile, var(--grid-cols, 1))),
-      minmax(0, 1fr)
-    );
-    gap: var(
-      --grid-gap-tablet,
-      var(--grid-gap-mobile, var(--grid-gap, var(--space-4)))
-    );
-  }
-
-  .hasRowGap {
-    row-gap: var(
+    --grid-cols-current: var(--grid-cols-tablet, var(--grid-cols-current));
+    --grid-gap-current: var(--grid-gap-tablet, var(--grid-gap-current));
+    --grid-row-gap-current: var(
       --grid-row-gap-tablet,
-      var(--grid-row-gap-mobile, var(--grid-row-gap))
+      var(--grid-row-gap-current)
     );
-  }
-
-  .hasColumnGap {
-    column-gap: var(
+    --grid-column-gap-current: var(
       --grid-column-gap-tablet,
-      var(--grid-column-gap-mobile, var(--grid-column-gap))
+      var(--grid-column-gap-current)
     );
   }
 }
 
 @media (min-width: 992px) {
   .grid {
-    grid-template-columns: repeat(
-      var(
-        --grid-cols-laptop,
-        var(--grid-cols-tablet, var(--grid-cols-mobile, var(--grid-cols, 1)))
-      ),
-      minmax(0, 1fr)
-    );
-    gap: var(
-      --grid-gap-laptop,
-      var(
-        --grid-gap-tablet,
-        var(--grid-gap-mobile, var(--grid-gap, var(--space-4)))
-      )
-    );
-  }
-
-  .hasRowGap {
-    row-gap: var(
+    --grid-cols-current: var(--grid-cols-laptop, var(--grid-cols-current));
+    --grid-gap-current: var(--grid-gap-laptop, var(--grid-gap-current));
+    --grid-row-gap-current: var(
       --grid-row-gap-laptop,
-      var(
-        --grid-row-gap-tablet,
-        var(--grid-row-gap-mobile, var(--grid-row-gap))
-      )
+      var(--grid-row-gap-current)
     );
-  }
-
-  .hasColumnGap {
-    column-gap: var(
+    --grid-column-gap-current: var(
       --grid-column-gap-laptop,
-      var(
-        --grid-column-gap-tablet,
-        var(--grid-column-gap-mobile, var(--grid-column-gap))
-      )
+      var(--grid-column-gap-current)
     );
   }
 }
 
 @media (min-width: 1200px) {
   .grid {
-    grid-template-columns: repeat(
-      var(
-        --grid-cols-desktop,
-        var(
-          --grid-cols-laptop,
-          var(--grid-cols-tablet, var(--grid-cols-mobile, var(--grid-cols, 1)))
-        )
-      ),
-      minmax(0, 1fr)
-    );
-    gap: var(
-      --grid-gap-desktop,
-      var(
-        --grid-gap-laptop,
-        var(
-          --grid-gap-tablet,
-          var(--grid-gap-mobile, var(--grid-gap, var(--space-4)))
-        )
-      )
-    );
-  }
-
-  .hasRowGap {
-    row-gap: var(
+    --grid-cols-current: var(--grid-cols-desktop, var(--grid-cols-current));
+    --grid-gap-current: var(--grid-gap-desktop, var(--grid-gap-current));
+    --grid-row-gap-current: var(
       --grid-row-gap-desktop,
-      var(
-        --grid-row-gap-laptop,
-        var(
-          --grid-row-gap-tablet,
-          var(--grid-row-gap-mobile, var(--grid-row-gap))
-        )
-      )
+      var(--grid-row-gap-current)
     );
-  }
-
-  .hasColumnGap {
-    column-gap: var(
+    --grid-column-gap-current: var(
       --grid-column-gap-desktop,
-      var(
-        --grid-column-gap-laptop,
-        var(
-          --grid-column-gap-tablet,
-          var(--grid-column-gap-mobile, var(--grid-column-gap))
-        )
-      )
+      var(--grid-column-gap-current)
     );
   }
 }
 
 @media (min-width: 1440px) {
   .grid {
-    grid-template-columns: repeat(
-      var(
-        --grid-cols-wide,
-        var(
-          --grid-cols-desktop,
-          var(
-            --grid-cols-laptop,
-            var(
-              --grid-cols-tablet,
-              var(--grid-cols-mobile, var(--grid-cols, 1))
-            )
-          )
-        )
-      ),
-      minmax(0, 1fr)
-    );
-    gap: var(
-      --grid-gap-wide,
-      var(
-        --grid-gap-desktop,
-        var(
-          --grid-gap-laptop,
-          var(
-            --grid-gap-tablet,
-            var(--grid-gap-mobile, var(--grid-gap, var(--space-4)))
-          )
-        )
-      )
-    );
-  }
-
-  .hasRowGap {
-    row-gap: var(
+    --grid-cols-current: var(--grid-cols-wide, var(--grid-cols-current));
+    --grid-gap-current: var(--grid-gap-wide, var(--grid-gap-current));
+    --grid-row-gap-current: var(
       --grid-row-gap-wide,
-      var(
-        --grid-row-gap-desktop,
-        var(
-          --grid-row-gap-laptop,
-          var(
-            --grid-row-gap-tablet,
-            var(--grid-row-gap-mobile, var(--grid-row-gap))
-          )
-        )
-      )
+      var(--grid-row-gap-current)
     );
-  }
-
-  .hasColumnGap {
-    column-gap: var(
+    --grid-column-gap-current: var(
       --grid-column-gap-wide,
-      var(
-        --grid-column-gap-desktop,
-        var(
-          --grid-column-gap-laptop,
-          var(
-            --grid-column-gap-tablet,
-            var(--grid-column-gap-mobile, var(--grid-column-gap))
-          )
-        )
-      )
+      var(--grid-column-gap-current)
     );
   }
 }

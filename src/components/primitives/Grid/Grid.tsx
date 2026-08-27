@@ -1,44 +1,49 @@
 import clsx from "clsx";
 import styles from "./Grid.module.css";
-import type { GridBreakpoint, GridProps } from "./Grid.types";
+import type { GridProps } from "./Grid.types";
 
-const breakpoints: GridBreakpoint[] = [
-  "mobile",
-  "tablet",
-  "laptop",
-  "desktop",
-  "wide",
-];
+const BREAKPOINTS = ["mobile", "tablet", "laptop", "desktop", "wide"] as const;
 
-const valueToVar = (value: number | undefined, useSpaceScale = false) =>
-  value === undefined
-    ? undefined
-    : useSpaceScale
-      ? `var(--space-${value})`
-      : value;
+function toCssValue(value: number, useSpaceScale: boolean) {
+  return useSpaceScale ? `var(--space-${value})` : value;
+}
+
+function getBaseValue(
+  value: GridProps["col"] | GridProps["gap"],
+  fallback: number,
+) {
+  return typeof value === "number" ? value : (value?.mobile ?? fallback);
+}
 
 function getResponsiveStyle(
   name: "grid-cols" | "grid-gap" | "grid-row-gap" | "grid-column-gap",
   value: GridProps["col"] | GridProps["gap"],
-  useSpaceScale = false,
+  useSpaceScale: boolean,
+  fallback: number,
 ) {
   if (value === undefined) return {};
 
+  const baseValue = getBaseValue(value, fallback);
+
   if (typeof value === "number") {
-    return { [`--${name}`]: valueToVar(value, useSpaceScale) };
+    return {
+      [`--${name}`]: toCssValue(value, useSpaceScale),
+    };
   }
 
-  let currentValue: number | undefined;
+  let currentValue = baseValue;
 
-  return Object.fromEntries(
-    breakpoints.map((breakpoint) => {
-      currentValue = value[breakpoint] ?? currentValue;
-      return [
-        `--${name}-${breakpoint}`,
-        valueToVar(currentValue, useSpaceScale),
-      ];
-    }),
-  );
+  const styles: Record<string, string | number> = {
+    [`--${name}`]: toCssValue(baseValue, useSpaceScale),
+  };
+
+  for (const breakpoint of BREAKPOINTS) {
+    currentValue = value[breakpoint] ?? currentValue;
+
+    styles[`--${name}-${breakpoint}`] = toCssValue(currentValue, useSpaceScale);
+  }
+
+  return styles;
 }
 
 export function Grid({
@@ -64,11 +69,22 @@ export function Grid({
       )}
       style={
         {
-          ...getResponsiveStyle("grid-cols", col),
-          ...getResponsiveStyle("grid-gap", gap, true),
-          ...(hasRowGap && getResponsiveStyle("grid-row-gap", rowGap, true)),
+          ...getResponsiveStyle("grid-cols", col, false, 1),
+          ...getResponsiveStyle("grid-gap", gap, true, 4),
+          ...(hasRowGap &&
+            getResponsiveStyle(
+              "grid-row-gap",
+              rowGap,
+              true,
+              getBaseValue(gap, 4),
+            )),
           ...(hasColumnGap &&
-            getResponsiveStyle("grid-column-gap", columnGap, true)),
+            getResponsiveStyle(
+              "grid-column-gap",
+              columnGap,
+              true,
+              getBaseValue(gap, 4),
+            )),
           ...style,
         } as React.CSSProperties
       }
