@@ -6,3 +6,4 @@ export * from "./CollectionList";
 export * from "./CollectionSnippetCard";
 export * from "./CollectionSnippetSelector";
 export * from "./DeleteButton";
+export * from "./RemoveCollectionSnippetButton";

@@ -3,6 +3,8 @@ import { Container, Spacer, Stack } from "@/components/primitives";
 import {
   CollectionDetailActions,
   CollectionDetailMetadata,
+  CollectionSnippetCard,
+  CollectionSnippetSelector,
 } from "@/app/collections/_components";
 
 import { prisma } from "@/lib/prisma";
@@ -19,6 +21,16 @@ export default async function CollectionDetail({
     where: {
       id,
     },
+    include: {
+      snippets: {
+        include: {
+          snippet: true,
+        },
+        orderBy: {
+          position: "asc",
+        },
+      },
+    },
   });
 
   if (!collection) {
@@ -30,7 +42,21 @@ export default async function CollectionDetail({
       <Container>
         <Stack gap={8}>
           <CollectionDetailMetadata {...collection} />
-          {/* CollectionSnippetCardを置く予定 */}
+          {/* CollectionSnippetSection */}
+          {collection.snippets.length === 0 ? (
+            <CollectionSnippetSelector collectionId={collection.id} />
+          ) : (
+            collection.snippets.map((item) => (
+              <CollectionSnippetCard
+                key={item.id}
+                id={item.id}
+                collectionId={id}
+                snippet={item.snippet}
+                path={item.path}
+                position={item.position}
+              />
+            ))
+          )}
           <CollectionDetailActions id={collection.id} />
         </Stack>
         <Spacer mobile={32} desktop={48} />
