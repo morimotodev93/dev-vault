@@ -7,6 +7,7 @@ import {
   COLLECTION_PRACTICALITY_VALUES,
   COLLECTION_PRIORITY_VALUES,
 } from "@/constants";
+import type { Prisma } from "@/generated/prisma/client";
 import { z } from "zod";
 
 export const collectionFormSchema = z.object({
@@ -86,6 +87,18 @@ export interface CollectionCardItem {
   interest: number;
   practicality: number;
   updatedAt: Date;
+}
+
+export interface CollectionDetailMetadataItem {
+  title: string;
+  description: string | null;
+  category: string;
+  language: string | null;
+  frameworks: Prisma.JsonValue;
+  favorite: boolean;
+  priority: number;
+  interest: number;
+  practicality: number;
 }
 
 export interface CollectionSearchParams {

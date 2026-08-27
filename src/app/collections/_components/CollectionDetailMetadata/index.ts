@@ -1,0 +1,1 @@
+export { CollectionDetailMetadata } from "./CollectionDetailMetadata";

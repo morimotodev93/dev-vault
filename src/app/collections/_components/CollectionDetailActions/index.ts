@@ -1,0 +1,1 @@
+export { CollectionDetailActions } from "./CollectionDetailActions";

@@ -1,4 +1,6 @@
 export * from "./CollectionCard";
+export * from "./CollectionDetailActions";
+export * from "./CollectionDetailMetadata";
 export * from "./CollectionForm";
 export * from "./CollectionList";
 export * from "./CollectionSnippetCard";
