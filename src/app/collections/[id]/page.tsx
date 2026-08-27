@@ -15,6 +15,13 @@ import { Tag } from "@/components/common";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
+import {
+  COLLECTION_CATEGORY_OPTIONS,
+  COLLECTION_LANGUAGE_OPTIONS,
+} from "@/constants/collection";
+
+import styles from "./CollectionDetail.module.css";
+
 export default async function CollectionDetail({
   params,
 }: {
@@ -31,6 +38,17 @@ export default async function CollectionDetail({
   if (!collection) {
     notFound();
   }
+
+  const categoryLabel =
+    COLLECTION_CATEGORY_OPTIONS.find(
+      (option) => option.value === collection.category,
+    )?.label ?? collection.category;
+
+  const languageLabel = collection.language
+    ? COLLECTION_LANGUAGE_OPTIONS.find(
+        (option) => option.value === collection.language,
+      )?.label
+    : null;
 
   const frameworks = Array.isArray(collection.frameworks)
     ? collection.frameworks.filter(
@@ -58,12 +76,11 @@ export default async function CollectionDetail({
             <Text>{collection.description}</Text>
 
             {/* Category */}
-            <Text>{collection.category}</Text>
+            <Text>{categoryLabel}</Text>
 
             {/* Language */}
 
-            {collection.language && <Text>{collection.language}</Text>}
-
+            {languageLabel && <Text>{languageLabel}</Text>}
             {/* Frameworks */}
             {frameworks.length > 0 && (
               <Stack direction="row" gap={2}>
@@ -96,13 +113,22 @@ export default async function CollectionDetail({
             <Link
               href={`/collections/${collection.id}/edit`}
               appearance="content"
+              className={styles.linkButton}
             >
               Edit
             </Link>
-            <Link href="/collections/new" appearance="content">
+            <Link
+              href="/collections/new"
+              appearance="content"
+              className={styles.linkButton}
+            >
               New Collection
             </Link>
-            <Link href="/collections" appearance="content">
+            <Link
+              href="/collections"
+              appearance="content"
+              className={styles.linkButton}
+            >
               Collection List
             </Link>
           </Stack>

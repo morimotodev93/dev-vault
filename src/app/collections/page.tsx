@@ -85,7 +85,7 @@ export default async function Collection({
               )}
             </>
           )}
-
+          <Spacer mobile={32} desktop={48} />
           <Stack direction="row" align="center" justify="end">
             {/* New Collection Button */}
             <Link appearance="content" href="/collections/new">

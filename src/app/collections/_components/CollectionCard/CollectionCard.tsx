@@ -1,5 +1,9 @@
 import { Tag } from "@/components/common";
 import { Heading, Link, Stack, Surface, Text } from "@/components/primitives";
+import {
+  COLLECTION_CATEGORY_OPTIONS,
+  COLLECTION_LANGUAGE_OPTIONS,
+} from "@/constants/collection";
 import type { CollectionCardItem } from "@/types/collection";
 import clsx from "clsx";
 
@@ -20,6 +24,13 @@ function getRatingConfig(value: number) {
   }
 }
 
+function getOptionLabel(
+  options: readonly { value: string; label: string }[],
+  value: string,
+) {
+  return options.find((option) => option.value === value)?.label ?? value;
+}
+
 export function CollectionCard({
   id,
   title,
@@ -33,6 +44,11 @@ export function CollectionCard({
   practicality,
   updatedAt,
 }: CollectionCardProps) {
+  const categoryLabel = getOptionLabel(COLLECTION_CATEGORY_OPTIONS, category);
+  const languageLabel = language
+    ? getOptionLabel(COLLECTION_LANGUAGE_OPTIONS, language)
+    : null;
+
   const ratings = [
     ["Priority", priority],
     ["Interest", interest],
@@ -71,11 +87,11 @@ export function CollectionCard({
 
           <Stack direction="row" wrap gap={2}>
             <Tag color="accent" size="sm">
-              {category}
+              {categoryLabel}
             </Tag>
-            {language && (
+            {languageLabel && (
               <Tag color="success" size="sm">
-                {language}
+                {languageLabel}
               </Tag>
             )}
             {frameworks.map((framework) => (
