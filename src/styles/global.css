@@ -23,6 +23,7 @@
 /* =========================================
    Utility
    ========================================= */
+@import "./utility/align.css";
 @import "./utility/background.css";
 @import "./utility/border.css";
 @import "./utility/display.css";
@@ -40,7 +41,7 @@
 
 /* モーダル表示時のスクロールロック */
 body.is-fixed {
-	overflow: hidden;
-	/* スクロールバー分のガタつき防止（任意） */
-	/* padding-right: var(--scrollbar-width, 0px); */
+  overflow: hidden;
+  /* スクロールバー分のガタつき防止（任意） */
+  /* padding-right: var(--scrollbar-width, 0px); */
 }

@@ -1,0 +1,23 @@
+.u-align-start {
+  align-items: flex-start;
+}
+
+.u-align-center {
+  align-items: center;
+}
+
+.u-align-end {
+  align-items: flex-end;
+}
+
+.u-self-start {
+  align-self: flex-start;
+}
+
+.u-self-center {
+  align-self: center;
+}
+
+.u-self-end {
+  align-self: flex-end;
+}

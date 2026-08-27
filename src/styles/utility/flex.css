@@ -1,13 +1,15 @@
-.l-flex--column {
-	display: flex;
-	flex-direction: column;
+.u-flex {
+  display: flex;
 }
 
-.l-flex--row {
-	display: flex;
-	flex-direction: row;
+.u-flex-row {
+  flex-direction: row;
 }
 
-.l-flex--wrap {
-	flex-wrap: wrap;
+.u-flex-column {
+  flex-direction: column;
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap;
 }
