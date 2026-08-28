@@ -1,0 +1,139 @@
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: fit-content;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+/* =====================
+   Variant
+   ===================== */
+
+.default,
+.button {
+  background-color: var(--secondary);
+  color: var(--secondary-fg);
+  border: 1px solid var(--secondary-border);
+}
+
+.default:hover,
+.button:hover {
+  background-color: var(--secondary-hover);
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--primary-fg);
+  border: 1px solid transparent;
+}
+
+.primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.muted {
+  background-color: var(--bg-muted);
+  color: var(--fg-muted);
+  border: 1px solid transparent;
+}
+
+.muted:hover {
+  background-color: var(--secondary-hover);
+  color: var(--fg);
+}
+
+.subtle {
+  background-color: transparent;
+  color: var(--fg-muted);
+  border: 1px solid transparent;
+}
+
+.subtle:hover {
+  background-color: var(--ghost-hover);
+  color: var(--fg);
+}
+
+/* =====================
+   Size
+   ===================== */
+
+.sm {
+  min-height: 32px;
+  padding-inline: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.base {
+  min-height: 40px;
+  padding-inline: var(--space-4);
+  font-size: var(--font-size-base);
+}
+
+.lg {
+  min-height: 48px;
+  padding-inline: var(--space-6);
+  font-size: var(--font-size-base);
+}
+
+/* =====================
+   Weight
+   ===================== */
+
+.normal {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+/* =====================
+   Radius
+   ===================== */
+
+.radius-none {
+  border-radius: 0;
+}
+
+.radius-sm {
+  border-radius: 0.25rem;
+}
+
+.radius-md {
+  border-radius: var(--radius-md);
+}
+
+.radius-lg {
+  border-radius: 0.75rem;
+}
+
+.radius-full {
+  border-radius: 9999px;
+}
+
+/* =====================
+   Interaction
+   ===================== */
+
+.linkButton:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.linkButton:active {
+  transform: translateY(1px);
+}
