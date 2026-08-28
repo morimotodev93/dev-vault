@@ -39,6 +39,10 @@
    Global Overrides / Helpers
    ========================================= */
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* モーダル表示時のスクロールロック */
 body.is-fixed {
   overflow: hidden;
