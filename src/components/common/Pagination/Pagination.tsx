@@ -1,5 +1,5 @@
+import { Link } from "@/components/primitives";
 import clsx from "clsx";
-import Link from "next/link";
 
 import styles from "./Pagination.module.css";
 import type { PaginationProps } from "./Pagination.types";
@@ -84,6 +84,7 @@ export function Pagination({
             href={createPageHref(currentPage - 1)}
             className={clsx(styles.item, styles.navButton)}
             aria-label="Previous page"
+            appearance="content"
           >
             <span aria-hidden="true">←</span>
             {showLabels && <span className={styles.label}>Prev</span>}
@@ -144,6 +145,7 @@ export function Pagination({
             href={createPageHref(currentPage + 1)}
             className={clsx(styles.item, styles.navButton)}
             aria-label="Next page"
+            appearance="content"
           >
             {showLabels && <span className={styles.label}>Next</span>}
             <span aria-hidden="true">→</span>

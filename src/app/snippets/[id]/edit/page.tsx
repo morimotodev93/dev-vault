@@ -1,12 +1,6 @@
-import {
-  Container,
-  Heading,
-  Link,
-  Spacer,
-  Stack,
-  Surface,
-  Text,
-} from "@/components/primitives";
+import { Container, Heading, Spacer, Stack } from "@/components/primitives";
+
+import { LinkButton } from "@/components/ui";
 
 import { SnippetForm } from "@/app/snippets/_components";
 import { prisma } from "@/lib/prisma";
@@ -42,31 +36,13 @@ export default async function SnippetEdit({
             {/* Edit Form */}
             <SnippetForm mode="edit" snippet={snippet} />
 
-            <Stack wrap gap={2} align="center" justify="end" direction="row">
-              {/* Detail Return */}
-              <Link href={`/snippets/${snippet.id}`} appearance="content">
-                <Surface radius="md" bordered>
-                  <Stack justify="center" align="center">
-                    <Text>Return</Text>
-                  </Stack>
-                </Surface>
-              </Link>
+            <Stack wrap gap={2} align="center" direction="row">
               {/* New Snippets */}
-              <Link href="/snippets/new" appearance="content">
-                <Surface radius="md" bordered>
-                  <Stack justify="center" align="center">
-                    <Text>New Snippet</Text>
-                  </Stack>
-                </Surface>
-              </Link>
+              <LinkButton variant="subtle" href="/snippets/new">
+                New Snippet
+              </LinkButton>
               {/*  Snippets List */}
-              <Link href="/snippets" appearance="content">
-                <Surface radius="md" bordered>
-                  <Stack justify="center" align="center">
-                    <Text> Snippet List</Text>
-                  </Stack>
-                </Surface>
-              </Link>
+              <LinkButton href="/snippets">Snippet List</LinkButton>
             </Stack>
           </Stack>
           <Spacer mobile={40} desktop={60} />

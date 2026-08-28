@@ -1,14 +1,13 @@
 import {
   Container,
   Heading,
-  Link,
   Spacer,
   Stack,
-  Surface,
   Text,
 } from "@/components/primitives";
 
 import { Tag } from "@/components/common";
+import { LinkButton } from "@/components/ui";
 
 import {
   CodeBlock,
@@ -47,13 +46,23 @@ export default async function SnippetDetail({
 
             <Text>{snippet.description}</Text>
 
-            {/* Language */}
+            <Stack gap={2} direction="row">
+              {/* Language */}
 
-            {snippet.language && <Text>{snippet.language}</Text>}
+              {snippet.language && (
+                <Tag color="accent" size="sm">
+                  {snippet.language}
+                </Tag>
+              )}
 
-            {/* Framework */}
+              {/* Framework */}
 
-            {snippet.framework && <Text>{snippet.framework}</Text>}
+              {snippet.framework && (
+                <Tag color="success" size="sm">
+                  {snippet.framework}
+                </Tag>
+              )}
+            </Stack>
 
             {/* Tag */}
 
@@ -83,29 +92,15 @@ export default async function SnippetDetail({
               {/* Delete Snippets */}
               <DeleteButton id={snippet.id} />
               {/* Edit Snippets */}
-              <Link href={`/snippets/${snippet.id}/edit`} appearance="content">
-                <Surface radius="sm" padding="sm" bordered>
-                  <Stack justify="center" align="center">
-                    <Text>Edit</Text>
-                  </Stack>
-                </Surface>
-              </Link>
+              <LinkButton href={`/snippets/${snippet.id}/edit`}>
+                Edit
+              </LinkButton>
               {/* New Snippets */}
-              <Link href="/snippets/new" appearance="content">
-                <Surface radius="sm" padding="sm" bordered>
-                  <Stack justify="center" align="center">
-                    <Text>New Snippet</Text>
-                  </Stack>
-                </Surface>
-              </Link>
+              <LinkButton variant="primary" href="/snippets/new">
+                New Snippet
+              </LinkButton>
               {/*  Snippets List */}
-              <Link href="/snippets" appearance="content">
-                <Surface radius="sm" padding="sm" bordered>
-                  <Stack justify="center" align="center">
-                    <Text> Snippet List</Text>
-                  </Stack>
-                </Surface>
-              </Link>
+              <LinkButton href="/snippets">Snippet List</LinkButton>
             </Stack>
           </Stack>
           <Spacer />

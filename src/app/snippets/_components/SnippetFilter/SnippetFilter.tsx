@@ -6,12 +6,14 @@ import {
   SNIPPET_LANGUAGE_OPTIONS,
   SNIPPET_PRIORITY_OPTIONS,
 } from "@/constants";
+import { useBreakpoint } from "@/hooks";
 import { updateSearchParam } from "@/lib/navigation/updateSearchParam";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function SnippetFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { isTablet } = useBreakpoint();
 
   const handleClear = () => {
     const params = new URLSearchParams(searchParams);
@@ -77,6 +79,7 @@ export function SnippetFilter() {
         {/* Tags */}
         <Input
           label="Tags Search"
+          size="sm"
           value={searchParams.get("tags") ?? ""}
           onChange={(event) =>
             updateSearchParam(router, searchParams, "tags", event.target.value)
@@ -88,6 +91,7 @@ export function SnippetFilter() {
           label="Tag Match"
           size="sm"
           showChevron={false}
+          fullWidth={isTablet}
           value={searchParams.get("tagsMode") ?? "and"}
           options={[
             { value: "and", label: "AND" },
@@ -120,7 +124,7 @@ export function SnippetFilter() {
         />
 
         {/* Clear Button */}
-        <Button variant="ghost" onClick={handleClear}>
+        <Button size="sm" onClick={handleClear}>
           Filter Clear
         </Button>
       </Stack>

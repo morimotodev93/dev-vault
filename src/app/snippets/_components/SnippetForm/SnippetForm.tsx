@@ -84,8 +84,18 @@ export function SnippetForm({ mode = "create", snippet }: SnippetFormProps) {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (
+      event.key === "Enter" &&
+      event.target instanceof HTMLInputElement &&
+      !event.nativeEvent.isComposing
+    ) {
+      event.preventDefault();
+    }
+  };
+
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} onKeyDown={handleKeyDown}>
       <Stack>
         <Input
           label="Title"

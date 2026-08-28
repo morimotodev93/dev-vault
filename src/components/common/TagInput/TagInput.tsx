@@ -44,6 +44,16 @@ export function TagInput({
     onChange(value.filter((tag) => tag !== tagToRemove));
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter" || event.nativeEvent.isComposing) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
+    handleAdd();
+  };
+
   return (
     <Stack>
       {label && <label>{label}</label>}
@@ -53,6 +63,7 @@ export function TagInput({
           type="text"
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Add a tag..."
           error={error}
           errorMessage={errorMessage}

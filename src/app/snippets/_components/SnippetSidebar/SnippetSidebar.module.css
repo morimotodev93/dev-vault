@@ -37,6 +37,9 @@
   right: 0;
   z-index: var(--z-sidebar-toggle);
   color: var(--accent);
+
+  background: transparent;
+  border: 0;
 }
 
 .sidebarToggle.open {

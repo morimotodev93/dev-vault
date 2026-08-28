@@ -38,7 +38,7 @@ export function DeleteButton({ id }: DeleteButtonProps) {
   };
 
   return (
-    <Button variant="danger" size="lg" onClick={handleDelete}>
+    <Button variant="danger" size="md" onClick={handleDelete}>
       <Stack justify="center" align="center">
         Delete
       </Stack>
