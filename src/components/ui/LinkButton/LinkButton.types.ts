@@ -3,7 +3,7 @@ import type { AnchorHTMLAttributes, ReactNode } from "react";
 export type LinkButtonVariant =
   "default" | "muted" | "subtle" | "primary" | "button";
 
-export type LinkButtonSize = "sm" | "base" | "lg";
+export type LinkButtonSize = "sm" | "md" | "lg";
 
 export type LinkButtonWeight = "normal" | "medium" | "semibold";
 
@@ -16,4 +16,5 @@ export type LinkButtonProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   size?: LinkButtonSize;
   weight?: LinkButtonWeight;
   radius?: LinkButtonRadius;
+  external?: boolean;
 };

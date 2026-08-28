@@ -2,49 +2,53 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
 
-  min-width: fit-content;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.25;
 
   text-decoration: none;
   white-space: nowrap;
+  user-select: none;
 
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease,
-    box-shadow 150ms ease;
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
-/* =====================
-   Variant
-   ===================== */
+/* =========================
+   Variants
+   ========================= */
 
-.default,
-.button {
+.default {
   background-color: var(--secondary);
   color: var(--secondary-fg);
-  border: 1px solid var(--secondary-border);
+  border-color: var(--secondary-border);
 }
 
-.default:hover,
-.button:hover {
+.default:hover {
   background-color: var(--secondary-hover);
 }
 
 .primary {
   background-color: var(--primary);
   color: var(--primary-fg);
-  border: 1px solid transparent;
+  border-color: var(--primary);
 }
 
 .primary:hover {
   background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .muted {
   background-color: var(--bg-muted);
   color: var(--fg-muted);
-  border: 1px solid transparent;
+  border-color: transparent;
 }
 
 .muted:hover {
@@ -55,7 +59,7 @@
 .subtle {
   background-color: transparent;
   color: var(--fg-muted);
-  border: 1px solid transparent;
+  border-color: transparent;
 }
 
 .subtle:hover {
@@ -63,31 +67,31 @@
   color: var(--fg);
 }
 
-/* =====================
-   Size
-   ===================== */
+/* =========================
+   Sizes
+   ========================= */
 
 .sm {
-  min-height: 32px;
+  height: 32px;
   padding-inline: var(--space-3);
   font-size: var(--font-size-sm);
 }
 
-.base {
-  min-height: 40px;
+.md {
+  height: 40px;
   padding-inline: var(--space-4);
-  font-size: var(--font-size-base);
+  font-size: 0.9375rem;
 }
 
 .lg {
-  min-height: 48px;
+  height: 48px;
   padding-inline: var(--space-6);
   font-size: var(--font-size-base);
 }
 
-/* =====================
+/* =========================
    Weight
-   ===================== */
+   ========================= */
 
 .normal {
   font-weight: 400;
@@ -101,9 +105,9 @@
   font-weight: 600;
 }
 
-/* =====================
+/* =========================
    Radius
-   ===================== */
+   ========================= */
 
 .radius-none {
   border-radius: 0;
@@ -125,9 +129,9 @@
   border-radius: 9999px;
 }
 
-/* =====================
+/* =========================
    Interaction
-   ===================== */
+   ========================= */
 
 .linkButton:focus-visible {
   outline: 2px solid var(--ring);
