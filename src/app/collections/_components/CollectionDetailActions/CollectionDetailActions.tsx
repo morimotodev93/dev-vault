@@ -1,5 +1,6 @@
 import { DeleteButton } from "@/app/collections/_components";
 import { Link, Stack } from "@/components/primitives";
+import { LinkButton } from "@/components/ui";
 
 import styles from "./CollectionDetailActions.module.css";
 
@@ -11,13 +12,9 @@ export function CollectionDetailActions({ id }: DetailActionsProps) {
   return (
     <Stack gap={2} wrap align="center" justify="end" direction="row">
       <DeleteButton id={id} />
-      <Link
-        href={`/collections/${id}/edit`}
-        appearance="content"
-        className={styles.linkButton}
-      >
+      <LinkButton size="sm" weight="medium" href={`/collections/${id}/edit`}>
         Edit
-      </Link>
+      </LinkButton>
       <Link
         href="/collections/new"
         appearance="content"

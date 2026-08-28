@@ -44,12 +44,14 @@ export default async function CollectionDetail({
           <CollectionDetailMetadata {...collection} />
           {/* CollectionSnippetSection */}
           {collection.snippets.length === 0 ? (
-            <CollectionSnippetSelector collectionId={collection.id} />
+            <Stack gap={6}>
+              <CollectionSnippetSelector collectionId={collection.id} />
+            </Stack>
           ) : (
             <Grid
               col={{ mobile: 1, tablet: 2, laptop: 3 }}
               rowGap={{ mobile: 3, tablet: 4 }}
-              columnGap={{ mobile: 2, tablet: 5 }}
+              columnGap={{ mobile: 3, tablet: 5 }}
             >
               {collection.snippets.map((item) => (
                 <CollectionSnippetCard
