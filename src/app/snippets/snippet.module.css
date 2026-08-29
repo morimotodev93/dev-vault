@@ -1,4 +1,4 @@
-.main {
+.snippets {
   position: relative;
 }
 
@@ -8,7 +8,7 @@
   min-height: 100%;
 }
 
-.main .mobileSnippetControls {
+.snippets .mobileSnippetControls {
   display: none;
 }
 

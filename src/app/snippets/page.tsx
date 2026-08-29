@@ -2,7 +2,6 @@ import {
   Container,
   Heading,
   Link,
-  Spacer,
   Stack,
   Surface,
   Text,
@@ -128,71 +127,68 @@ export default async function Snippet({
 
   return (
     <>
-      <main className={styles.main}>
-        <Container>
-          <Stack gap={6}>
-            <Heading as="h2" size="lg">
-              Snippets List
-            </Heading>
-            {/* Snippet Controls */}
-            {/* mobile */}
-            <Stack className={styles.mobileSnippetControls}>
-              {/* Search Input */}
-              <SnippetSearch />
-              {/* Snippet Filter */}
-              <SnippetFilter />
-              {/* Snippet Sort */}
-              <SnippetSort />
-            </Stack>
-
-            {/* Snippets Menu */}
-            {totalCount === 0 ? (
-              <Stack
-                justify="center"
-                align="center"
-                className={styles.snippetsZero}
-              >
-                <EmptyState
-                  title="No snippets yet"
-                  description="Create your first snippet to start building your knowledge base."
-                />
-              </Stack>
-            ) : (
-              <>
-                <div className={clsx(styles.snippetsList, "l-auto-grid")}>
-                  {snippets.map((snippet) => (
-                    <SnippetCard key={snippet.id} {...snippet} />
-                  ))}
-                </div>
-
-                {totalPages > 1 && (
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    searchParams={paginationParams.toString()}
-                  />
-                )}
-              </>
-            )}
-
-            <Stack gap={2} align="center" justify="end" direction="row">
-              {/* New Snippets */}
-              <Link href="/snippets/new">
-                <Surface radius="md" bordered>
-                  <Stack justify="center" align="center">
-                    <Text>New Snippet</Text>
-                  </Stack>
-                </Surface>
-              </Link>
-            </Stack>
+      <Container className={styles.snippets}>
+        <Stack gap={6}>
+          <Heading as="h2" size="lg">
+            Snippets List
+          </Heading>
+          {/* Snippet Controls */}
+          {/* mobile */}
+          <Stack className={styles.mobileSnippetControls}>
+            {/* Search Input */}
+            <SnippetSearch />
+            {/* Snippet Filter */}
+            <SnippetFilter />
+            {/* Snippet Sort */}
+            <SnippetSort />
           </Stack>
-          <Spacer />
-        </Container>
-        {/* Sidebar */}
-        <aside className={styles.aside}>
-          <SnippetSidebar />
-        </aside>
-      </main>
+
+          {/* Snippets Menu */}
+          {totalCount === 0 ? (
+            <Stack
+              justify="center"
+              align="center"
+              className={styles.snippetsZero}
+            >
+              <EmptyState
+                title="No snippets yet"
+                description="Create your first snippet to start building your knowledge base."
+              />
+            </Stack>
+          ) : (
+            <>
+              <div className={clsx(styles.snippetsList, "l-auto-grid")}>
+                {snippets.map((snippet) => (
+                  <SnippetCard key={snippet.id} {...snippet} />
+                ))}
+              </div>
+
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  searchParams={paginationParams.toString()}
+                />
+              )}
+            </>
+          )}
+
+          <Stack gap={2} align="center" justify="end" direction="row">
+            {/* New Snippets */}
+            <Link href="/snippets/new">
+              <Surface radius="md" bordered>
+                <Stack justify="center" align="center">
+                  <Text>New Snippet</Text>
+                </Stack>
+              </Surface>
+            </Link>
+          </Stack>
+        </Stack>
+      </Container>
+      {/* Sidebar */}
+      <aside className={styles.aside}>
+        <SnippetSidebar />
+      </aside>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Header } from "@/components/Header";
 import { jakarta, jetbrains } from "@/lib/fonts";
 import {
   notoSansJP,
@@ -32,7 +33,12 @@ export default function RootLayout({
         notoSansTC.variable,
       )}
     >
-      <body>{children}</body>
+      <body>
+        {/* Header */}
+        <Header />
+        <main>{children}</main>
+        {/* Footer */}
+      </body>
     </html>
   );
 }

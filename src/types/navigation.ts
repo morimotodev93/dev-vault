@@ -1,16 +1,7 @@
 /**
  * アイコン識別子（Lucide React などのアイコンライブラリのアイコン名文字列）
  */
-export type IconName =
-  | "home"
-  | "code"
-  | "folder"
-  | "star"
-  | "alert-circle"
-  | "plus"
-  | "settings"
-  | "help-circle"
-  | "github";
+export type NavigationIcon = "code" | "folder" | "plus" | "settings";
 
 /**
  * 個々のナビゲーションリンク項目のインターフェース
@@ -23,7 +14,7 @@ export interface NavItem {
   /** 遷移先パス */
   href: string;
   /** アイコン名 (任意) */
-  icon?: IconName;
+  icon?: NavigationIcon;
   /** バッジ表示（例: お気に入りの数 "12" や "NEW" など） (任意) */
   badge?: string | number;
   /** 外部リンクかどうか (任意) */
@@ -54,5 +45,5 @@ export interface AppNavigation {
   /** ハンバーガーメニュー用のグループ化されたメニュー */
   hamburgerNav: NavGroup[];
   /** プライマリ操作ボタン（例: "+ New Snippet"） */
-  actionButton: NavItem;
+  actionButton: NavItem[];
 }

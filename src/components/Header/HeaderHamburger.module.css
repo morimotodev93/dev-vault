@@ -1,0 +1,23 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  padding: 0;
+
+  color: var(--header-fg);
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .button {
+    display: none;
+  }
+}

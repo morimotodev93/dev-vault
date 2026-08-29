@@ -5,19 +5,19 @@
 
 /* 1. Layout Design Tokens (Variables) */
 :root {
-	/* Container Padding (Mobile: 16px each side = 32px total) */
-	--gutter-mobile: 1rem;
-	--gutter-desktop: 1.5rem;
+  /* Container Padding (Mobile: 16px each side = 32px total) */
+  --gutter-mobile: 1rem;
+  --gutter-desktop: 1.5rem;
 
-	/* Max Width Breakpoints */
-	--container-sm: 425px;
-	/* Small: Mobile focus */
-	--container-md: 768px;
-	/* Medium: Tablet / Single column detail */
-	--container-lg: 1024px;
-	/* Large: Small desktop / Cards grid */
-	--container-xl: 1280px;
-	/* Extra Large: Dashboard with Sidebar */
+  /* Max Width Breakpoints */
+  --container-sm: 425px;
+  /* Small: Mobile focus */
+  --container-md: 768px;
+  /* Medium: Tablet / Single column detail */
+  --container-lg: 992px;
+  /* Large: Small desktop / Cards grid */
+  --container-xl: 1200px;
+  /* Extra Large: Dashboard with Sidebar */
 }
 
 /* 2. Container Utilities */
@@ -25,73 +25,72 @@
 .l-container-md,
 .l-container-lg,
 .l-container-xl {
-	/* 左右余白を確保しつつ中央寄せ */
-	inline-size: calc(100% - (var(--gutter-mobile) * 2));
-	margin-inline: auto;
+  /* 左右余白を確保しつつ中央寄せ */
+  inline-size: calc(100% - (var(--gutter-mobile) * 2));
+  margin-inline: auto;
 }
 
 @media (min-width: 768px) {
-
-	.l-container-sm,
-	.l-container-md,
-	.l-container-lg,
-	.l-container-xl {
-		inline-size: calc(100% - (var(--gutter-desktop) * 2));
-	}
+  .l-container-sm,
+  .l-container-md,
+  .l-container-lg,
+  .l-container-xl {
+    inline-size: calc(100% - (var(--gutter-desktop) * 2));
+  }
 }
 
 .l-container-sm {
-	max-inline-size: var(--container-sm);
+  max-inline-size: var(--container-sm);
 }
 
 .l-container-md {
-	max-inline-size: var(--container-md);
+  max-inline-size: var(--container-md);
 }
 
 .l-container-lg {
-	max-inline-size: var(--container-lg);
+  max-inline-size: var(--container-lg);
 }
 
 .l-container-xl {
-	max-inline-size: var(--container-xl);
+  max-inline-size: var(--container-xl);
 }
 
 /* 3. Dashboard Grid Utility (For Snippet/Component Cards) */
 /* モバイルでは1列、画面幅に応じて自動でカードが並ぶレスポンシブグリッド */
 .l-grid-auto-cards {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-	gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.25rem;
 }
 
 /* 4. App Layout Structure (Sidebar + Main Content) */
 /* パソコン画面では左サイドバー＋右メインコンテンツのダッシュボード構成 */
 .l-dashboard-layout {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
-@media (min-width: 1024px) {
-	.l-dashboard-layout {
-		grid-template-columns: 260px 1fr;
-		/* Sidebar: 260px, Main: Remaining */
-		align-items: start;
-	}
+@media (min-width: 992px) {
+  .l-dashboard-layout {
+    grid-template-columns: 260px 1fr;
+    /* Sidebar: 260px, Main: Remaining */
+    align-items: start;
+  }
 }
 
 /* 5. Flex Utilities for Top Bars / Controls */
 .l-flex-between {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
-	flex-wrap: wrap;
-	/* モバイルで溢れた際に自動改行 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  /* モバイルで溢れた際に自動改行 */
 }
 
 .l-flex-gap-sm {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

@@ -16,6 +16,11 @@
   --fg-muted: var(--color-gray-600);
   --fg-subtle: var(--color-gray-500);
 
+  /* Header */
+  --header-bg: var(--color-blue-700);
+  --header-fg: var(--color-white);
+  --header-hover: var(--color-blue-100);
+
   /* Sidebar */
   --sidebar-bg: var(--color-gray-100);
   --sidebar-fg: var(--color-gray-900);
@@ -88,6 +93,17 @@
   --fg-muted: var(--color-gray-400);
   --fg-subtle: var(--color-gray-500);
 
+  /* Header */
+  --header-bg: var(--color-gray-800);
+  --header-fg: var(--color-gray-50);
+  --header-hover: var(--color-blue-300);
+
+  /* Sidebar */
+  --sidebar-bg: var(--color-gray-800);
+  --sidebar-fg: var(--color-gray-50);
+  --sidebar-fg-muted: var(--color-gray-300);
+  --sidebar-border: var(--color-gray-700);
+
   /* Primary (Brand) */
   --primary: var(--color-green-300);
   --primary-hover: var(--color-green-100);
@@ -98,12 +114,6 @@
   --secondary-hover: var(--color-gray-700);
   --secondary-fg: var(--color-gray-50);
   --secondary-border: var(--color-gray-700);
-
-  /* Sidebar */
-  --sidebar-bg: var(--color-gray-800);
-  --sidebar-fg: var(--color-gray-50);
-  --sidebar-fg-muted: var(--color-gray-300);
-  --sidebar-border: var(--color-gray-700);
 
   /* Ghost */
   --ghost-hover: var(--color-gray-800);

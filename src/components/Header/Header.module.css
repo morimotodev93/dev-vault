@@ -1,0 +1,46 @@
+.header {
+  --header-height: var(--header-height-sm);
+
+  position: sticky;
+  top: 0;
+  transition: transform 200ms ease;
+  width: 100%;
+  z-index: var(--z-header);
+
+  height: var(--header-height);
+  padding-block: var(--space-2);
+  background: var(--header-bg);
+  box-shadow: var(--shadow-float);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+/* Logo */
+.logoLink {
+  text-decoration: unset;
+  width: fit-content;
+}
+
+.logoText {
+  color: var(--header-fg);
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    --header-height: var(--header-height-md);
+  }
+
+  .hidden {
+    transform: translateY(-100%);
+  }
+}
+
+@media (min-width: 992px) {
+  .header {
+    --header-height: var(--header-height-lg);
+  }
+}
