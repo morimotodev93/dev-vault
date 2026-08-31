@@ -2,8 +2,7 @@
 
 All notable changes to Dev Vault are documented in this file.
 
-The changelog records feature-level and project-level changes.
-Minor implementation details are intentionally omitted when they are already covered by Git history.
+The changelog records feature-level and project-level changes, and keeps the project history aligned with the current implementation rather than a purely conceptual version of the app.
 
 ## 0.1.0 — Foundation
 
@@ -15,7 +14,7 @@ Minor implementation details are intentionally omitted when they are already cov
 - Hero component for the home page.
 - Global CSS entry point.
 - CSS reset, design tokens, layout utilities, and utility styles.
-- Font configuration including Latin and CJK font support.
+- Font configuration for Latin and CJK support.
 - Navigation configuration for header and hamburger menu use cases.
 - Icon components for navigation, utility, and circular icon groups.
 - Primitive component structure including:
@@ -58,7 +57,7 @@ Minor implementation details are intentionally omitted when they are already cov
 - Snippet deletion flow.
 - Reusable `SnippetForm` component.
 - Empty state for an empty snippet list.
-- Navigation between snippet list, detail, create, and edit views.
+- Navigation across snippet list, detail, create, and edit views.
 
 ### Changed
 
@@ -87,24 +86,7 @@ Minor implementation details are intentionally omitted when they are already cov
 - Snippet queries now retrieve only the records required for the current page.
 - Search and pagination are handled through URL search parameters.
 
-## 0.4.0 — Documentation
-
-### Added
-
-- Snippet usage documentation.
-- Database reference documentation.
-- Project progress documentation.
-- Updated project roadmap.
-- Updated changelog structure.
-- Documentation navigation through `docs/README.md`.
-
-### Changed
-
-- Updated project documentation to reflect the current application architecture.
-- Documented the Snippet data model and database responsibilities.
-- Documented Snippet CRUD, search, and pagination workflows.
-
-## 0.5.0 — Snippet Organization and Collection Planning
+## 0.4.0 — Snippet Organization
 
 ### Added
 
@@ -113,41 +95,91 @@ Minor implementation details are intentionally omitted when they are already cov
 - Language, priority, favorite, framework, and tag filtering.
 - Newest, oldest, priority, and updated sorting.
 - Combined search, filtering, sorting, and pagination.
-- Responsive layout, sidebar controls, code copy interaction, and final UI/UX refinement.
-- Collection planning for purpose, metadata, Snippet references, and lifecycle rules.
+- Responsive layout, sidebar controls, code copy interaction, and UI refinements.
 
 ### Changed
 
 - Search and structured filtering responsibilities are now defined separately.
-- Tag matching behavior, including `Any` / `All` and exact matching, is documented.
+- Tag matching behavior is documented and kept scoped to the current implementation.
 - Snippet category was removed from the current scope.
-- Tag normalization was deferred until the current serialized storage proves insufficient.
-- Collection planning now treats Collections as manually curated groups of existing Snippets.
+- Tag normalization remains deferred until the serialized storage proves insufficient.
+
+## 0.5.0 — Collection Workflow
+
+### Added
+
+- Collection list page.
+- Collection detail page.
+- Collection creation flow.
+- Collection update flow.
+- Collection deletion flow.
+- Collection card and collection metadata UI.
+- Manual snippet selection inside a collection.
+- Collection relationship model using `CollectionSnippet`.
+- `position` metadata for ordering snippets inside a collection.
+- `path` metadata for collection-specific context.
+- Collection snippet removal and relationship cleanup.
+
+### Changed
+
+- The app now treats a collection as a curated grouping of existing snippets rather than a duplicated snippet store.
+- Snippet content stays canonical in the `Snippet` model, while collection membership is tracked in `CollectionSnippet`.
+- Collection UI and data rules are aligned with the actual Prisma schema and app behavior.
+
+## 0.6.0 — Documentation and Structure Alignment
+
+### Added
+
+- Documentation index and navigation updates.
+- Usage guides for snippets and collections.
+- Setup guide for local development and Windows-specific tooling.
+- Deployment and troubleshooting sections.
+- API and database reference documentation.
+- Project status and planning docs aligned with the actual implementation.
+
+### Changed
+
+- Docs were rewritten to match the current Next.js, Prisma, and App Router architecture.
+- README files and documentation sections were normalized for consistency.
+- Project documentation now reflects the implemented snippet and collection workflows rather than older conceptual plans.
 
 ## Current Status
 
-The Snippet management workflow is implemented, including browsing,
-organization, and combined query controls.
+The app currently includes a working snippet workflow and a collection workflow that follows the actual persisted data model.
 
-Current functionality includes:
+### Implemented
 
 - Create snippets
 - Read snippets
 - Update snippets
 - Delete snippets
 - Search snippets
+- Filter snippets
+- Sort snippets
 - Paginate snippets
-- Empty states
-- Loading states
-- Reusable UI primitives
-- Form validation
-- Prisma-based persistence
-- Favorites
-- Tags
-- Filtering
-- Sorting
-- Responsive snippet browsing and code copy
+- Favorite snippets
+- Manage tags
+- Create collections
+- Read collections
+- Update collections
+- Delete collections
+- Add snippets to collections
+- Reorder collection membership by position
+- Maintain collection-related metadata
+- Prisma-backed persistence with SQLite for local development
 
-Collection implementation is the next development focus. Future work includes
-the Collection data model, CRUD operations, UI, manual Snippet selection, and
-cleanup behavior for deleted referenced Snippets.
+### Documentation status
+
+The documentation set is now aligned with the current application structure, including:
+
+- project overview
+- architecture and structure
+- setup instructions
+- usage guides
+- deployment and troubleshooting
+- API and database references
+- roadmap and changelog
+
+### Remaining focus
+
+The project continues to evolve around the collection workflow, particularly around refinement of collection-specific metadata and any future normalization work for tag storage if the current serialized approach becomes limiting.

@@ -1,8 +1,8 @@
-# Documentation
+# Documentation Index
 
-This directory contains the project documentation for Dev Vault.
+This is the main documentation entry point for Dev Vault.
 
-Use this guide as the starting point when you need to understand the project structure, development conventions, setup steps, or operational guidance.
+Use this page as a starting point when you want to understand the project structure, development conventions, setup flow, or current app usage.
 
 - [Roadmap](planning/roadmap.md)
 - [Development Progress](planning/progress.md)
@@ -15,30 +15,32 @@ docs/
 ├─ overview/        # project overview and structure
 ├─ development/     # development standards, components, scaffolding
 ├─ setup/           # local setup instructions
+├─ usage/           # current workflows for snippets and collections
 ├─ operations/      # deployment and troubleshooting
 ├─ reference/       # API and database references
-└─ planning/        # roadmap and changelog
+├─ planning/        # roadmap and changelog
+└─ README.md        # documentation entry point
 ```
 
 ## Start Here
 
-If you are new to the project, begin with:
+If you are new to the project, start with:
 
 1. [overview/project-structure.md](overview/project-structure.md) for the overall architecture
-2. [development/development-standards.md](development/development-standards.md) for coding rules
-3. [setup/README.md](setup/README.md) for local setup
+2. [development/development-standards.md](development/development-standards.md) for the coding rules
+3. [setup/README.md](setup/README.md) for the local setup flow
 
 ## Sections
 
 ### Overview
 
-High-level documents for understanding the product and codebase.
+High-level guides for understanding the app and codebase.
 
 - [overview/project-structure.md](overview/project-structure.md)
 
 ### Development
 
-Guidelines for implementation, component design, and contributor workflow.
+Guides for implementation, component structure, and contributor workflow.
 
 - [development/development-standards.md](development/development-standards.md)
 - [development/components.md](development/components.md)
@@ -47,10 +49,17 @@ Guidelines for implementation, component design, and contributor workflow.
 
 ### Setup
 
-Instructions for installing and running the project locally.
+Instructions for getting the project running locally.
 
 - [setup/README.md](setup/README.md)
 - [setup/windows.md](setup/windows.md)
+
+### Usage
+
+Examples of how the main features work in the current app.
+
+- [usage/snippets.md](usage/snippets.md)
+- [usage/collections.md](usage/collections.md)
 
 ### Operations
 
@@ -77,8 +86,9 @@ Project direction, roadmap, and change history.
 ## When to Use Which Section
 
 - Use Overview when you want to understand the project as a whole.
-- Use Development when you are implementing features or following team conventions.
+- Use Development when you are implementing features or following the team conventions.
 - Use Setup when you are preparing a local environment.
+- Use Usage when you need to understand the current workflows in the app.
 - Use Operations when you need to deploy or troubleshoot.
 - Use Reference when you need technical details.
 - Use Planning when you want to review project direction or history.

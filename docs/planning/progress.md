@@ -1,228 +1,83 @@
 # Development Progress
 
+## Overall Status
+
+The project is in a stable implementation phase.
+The snippet workflow is complete, and the collection workflow is now part of the active app structure and data model.
+The remaining work is primarily refinement and incremental quality improvements rather than large new feature construction.
+
+## Core Feature Status
+
+| Area                                        | Status                |
+| ------------------------------------------- | --------------------- |
+| Snippet CRUD                                | Done                  |
+| Snippet Search                              | Done                  |
+| Snippet Filtering                           | Done                  |
+| Snippet Sorting                             | Done                  |
+| Snippet Pagination                          | Done                  |
+| Snippet Favorites                           | Done                  |
+| Snippet Tags                                | Done                  |
+| Collection CRUD                             | Done                  |
+| Collection Snippet Linking                  | Done                  |
+| Collection Detail UI                        | Done                  |
+| Collection Metadata UI                      | Done                  |
+| Collection Path Metadata                    | Partially implemented |
+| Direct New Snippet Shortcut from Collection | Planned               |
+| Collection Search / Filter / Sort           | Planned               |
+| Documentation Alignment                     | Done                  |
+
 ## Snippet Management
 
-| Feature    | Status |
-| ---------- | ------ |
-| Create     | Done   |
-| Read       | Done   |
-| Update     | Done   |
-| Delete     | Done   |
-| Search     | Done   |
-| Pagination | Done   |
-| Favorite   | Done   |
-| Tags       | Done   |
-| Filtering  | Done   |
-| Sorting    | Done   |
+- [x] Create snippet
+- [x] Read snippet
+- [x] Update snippet
+- [x] Delete snippet
+- [x] Search by title and metadata
+- [x] Pagination
+- [x] Favorite toggle
+- [x] Tag storage and display
+- [x] Language filter
+- [x] Priority filter
+- [x] Framework filter
+- [x] Favorite filter
+- [x] Tag filter
+- [x] Newest / oldest / priority / updated sort
 
-## Documentation
+## Snippet Metadata Rules
 
-| Area              | Status |
-| ----------------- | ------ |
-| Architecture      | Done   |
-| Project Structure | Done   |
-| Components        | Done   |
-| Database          | Done   |
-| Snippet Usage     | Done   |
+- [x] Language is optional.
+- [x] Framework is optional.
+- [x] Tags remain user-defined labels.
+- [x] Category is not part of the current snippet scope.
+- [x] Snippet metadata remains intentionally lightweight and focused on actual usage.
 
-## Snippet Metadata
+## Search and Query Behavior
 
-- [x] Language
-- [x] Framework
-- [x] Tags
-- [x] Favorite
-- [x] Priority
-- [x] Category removed from Snippet
+- [x] Search and filter can be combined
+- [x] Sort and pagination work with active filters
+- [x] Empty-state handling is supported
+- [x] Query parameter behavior is normalized for browsing flow
+- [x] Tag behavior is kept simple and aligned with current storage patterns
 
-### Metadata Rules
+> Tag normalization remains intentionally deferred until the current serialized model becomes insufficient for real usage.
 
-- Language is optional.
-- Framework is optional.
-- At least one of Language or Framework is required.
-- Language uses the shared language options.
-- Framework is free-form.
-- Tags remain user-defined labels.
-- Category is outside the current Snippet scope.
+## Collection Workflow
 
-## Search
+### Implemented
 
-- [x] Search by title
-- [x] Search by language
-- [x] Search by tags
-- [x] Confirm single-tag search with current tag storage
-- [x] Confirm free-text search remains separate from structured AND / OR conditions
+- [x] Create collection
+- [x] Read collection
+- [x] Update collection
+- [x] Delete collection
+- [x] Add snippets to a collection
+- [x] Remove snippets from a collection
+- [x] Maintain collection ordering with `position`
+- [x] Store collection-specific `path` on the relationship
+- [x] Use a dedicated join model for collection ↔ snippet references
+- [x] Preserve original Snippet records instead of duplicating them
+- [x] Display collection-linked snippet metadata and preview
 
-### Search Direction
-
-- [x] Keep free-text search separate from structured filtering
-- [x] Define the responsibility of `SnippetSearch`
-- [x] Define the responsibility of `SnippetFilter`
-
-## Filter
-
-- [x] Language
-- [x] Priority
-- [x] Favorite
-- [x] Framework
-- [x] Tags
-- [x] Define Tag matching behavior
-- [x] Evaluate Tag `Any` / `All` conditions
-
-> Category filtering was removed from the current scope.
-> Category will not be reintroduced into Snippet unless future requirements justify it.
-
-## Sort
-
-- [x] Newest
-- [x] Oldest
-- [x] Priority
-- [x] Updated
-
-### Default Sort
-
-- [x] Confirm `Newest` as the default collection and snippet browsing order
-- [x] Define whether `Newest` refers to `createdAt` or another timestamp
-
-## Combined Query
-
-- [x] Combine Search and Filter
-- [x] Combine Filter and Sort
-- [x] Combine Search, Filter, Sort, and Pagination
-- [x] Validate query parameter behavior
-- [x] Validate empty-result behavior
-- [x] Validate multiple filter conditions
-
-## Tags
-
-- [x] Store tags as serialized values
-- [x] Search by a single tag
-- [x] Confirm free-text search limitations
-- [x] Design Tag filtering
-- [x] Evaluate `Any` / `All` matching
-- [x] Evaluate exact Tag matching
-- [x] Evaluate whether tag normalization is necessary
-
-> Tag normalization is deferred until actual filtering requirements
-> demonstrate that the current serialized storage is insufficient.
-
-## UI / UX
-
-- [x] SnippetCard refinement
-- [x] Tag display
-- [x] Favorite button
-- [x] Responsive layout
-- [x] Sidebar controls
-- [x] Code copy
-- [x] Final UI/UX refinement
-- [x] Refine filtering UI
-- [x] Evaluate Tag filter UI
-- [x] Validate combined control behavior
-
-## Collection Planning
-
-### Purpose
-
-- [x] Define Collection as a manually curated group of Snippets
-- [x] Select existing Snippets from Search / Filter results
-- [x] Allow adding new Snippets from Collection workflow
-- [x] Reuse existing Snippet data instead of duplicating it
-
-### Collection Metadata
-
-- [x] Define `title`
-- [x] Define `description`
-- [x] Define `category`
-- [x] Define `language`
-- [x] Define `frameworks`
-- [x] Define `favorite`
-- [x] Define `priority`
-- [x] Define `interest`
-- [x] Define `practicality`
-
-### Metadata Rules
-
-- Category represents the purpose or genre of the Collection.
-- Category is not intended to represent technical areas such as Frontend or Backend.
-- Language represents the main language of the Collection.
-- Frameworks represent libraries and frameworks used by the Collection.
-- Multiple frameworks are allowed.
-- Frameworks are metadata for display and are not currently used as search criteria.
-- `priority` uses the existing Snippet priority values.
-- `interest` uses three levels:
-  - `curious`
-  - `interested`
-  - `excited`
-- `practicality` uses three levels:
-  - `optional`
-  - `useful`
-  - `essential`
-
-### Snippet References
-
-- [x] Reuse existing Snippets
-- [x] Avoid duplicating complete Snippet data in Collection
-- [x] Define Collection-specific `path`
-- [x] Define `snippetId` as the reference to an existing Snippet
-- [x] Define the relational structure for `Collection.snippets`
-
-#### Collection Snippet Reference
-
-```ts
-type CollectionSnippetReference = {
-  id?: string;
-  snippetId: string;
-  path?: string;
-  position: number;
-};
-```
-
-> Snippet information such as title, description, language, framework,
-> tags, code, and updatedAt continue to come from the existing Snippet
-> record. The collection stores the relationship metadata in the
-> `CollectionSnippet` join model instead of duplicating the Snippet data.
-
-### Snippet Lifecycle
-
-- [x] Define removing a Snippet from a Collection separately from deleting a Snippet
-- [x] Keep the original Snippet when removed from a Collection
-- [x] Reflect Snippet updates in Collections that reference the Snippet
-- [x] Use a dedicated relational join model for Collection ⇄ Snippet references
-- [x] Define `CollectionSnippet.path` for snippet-specific path metadata
-- [x] Define `CollectionSnippet.position` for collection ordering
-- [x] Set cascade delete behavior for CollectionSnippet relationships
-
-### Collection UI
-
-- [x] Define Collection list page
-- [x] Define Collection detail page
-- [x] Define Collection form
-- [x] Define Collection card
-- [x] Add Collection pagination
-- [ ] Define Collection Snippet card
-- [ ] Define manual Snippet selection UI
-- [ ] Add "New Snippet" action from Collection workflow
-- [ ] Define Snippet removal UI
-- [ ] Define path input
-- [ ] Define Interest UI
-- [ ] Define Practicality UI
-
-### Collection CRUD
-
-- [x] Create Collection
-- [x] Read Collection
-- [x] Update Collection
-- [x] Delete Collection
-
-### Collection Data Model
-
-- [x] Define Prisma Collection model
-- [x] Define `Collection.snippets`
-- [x] Choose the relational model
-- [x] Define Collection → Snippet relationship
-- [x] Define delete behavior for referenced Snippets
-- [x] Define update behavior for referenced Snippets
-
-### Current Prisma Model
+### Current Collection Model
 
 ```prisma
 model Collection {
@@ -256,35 +111,46 @@ model CollectionSnippet {
 }
 ```
 
-### Collection Snippet References
+### Collection Metadata
 
-```ts
-type CollectionSnippetReference = {
-  snippetId: string;
-  path?: string;
-  position: number;
-};
-```
+- [x] Title
+- [x] Description
+- [x] Category
+- [x] Language
+- [x] Frameworks
+- [x] Favorite
+- [x] Priority
+- [x] Interest
+- [x] Practicality
 
-- Collection stores references to existing Snippets.
-- Snippet data is not duplicated in Collection.
-- path describes the intended file location or naming context of the Snippet within the Collection.
-- path is optional.
-- Snippet information is retrieved from the existing Snippet record.
-- The Collection Snippet card provides:
-  - Code preview / copy interaction
-  - Path information when available
-  - Link to the original Snippet page
+### Collection Rules
 
-## Current Phase
+- [x] Collection references existing snippets rather than duplicating them.
+- [x] `path` is optional and meant for collection-specific context.
+- [x] `position` orders the collection members.
+- [x] Relationship records cascade with the parent collection.
+- [x] Snippet deletion is allowed to cascade through the join model when the snippet is removed.
 
-Snippet CRUD, Search, Filtering, Sorting, and Pagination are complete.
+## Current Refinement Items
 
-The Collection concept and data model are defined. The current phase
-focuses on implementing the Collection UI and CRUD flows.
+- [ ] Add a more explicit path input for collection snippet entries
+- [ ] Add a direct New Snippet shortcut from the collection workflow
+- [ ] Review collection detail usability and ordering clarity
+- [ ] Evaluate collection-level search, filter, and sorting requirements
+- [ ] Add further polish for mobile and edge-case UX flows
 
-### Next Steps
+## Documentation Status
 
-1. Implement the Collection Snippet card and manual Snippet selection workflow.
-2. Add path input and Snippet removal from a Collection.
-3. Add Collection search, filtering, and sorting when requirements are defined.
+- [x] Project overview
+- [x] Architecture and project structure
+- [x] Setup and Windows guidance
+- [x] Snippet usage guide
+- [x] Collection usage guide
+- [x] Deployment and troubleshooting docs
+- [x] API and database references
+- [x] Progress and roadmap documentation alignment
+
+## Current Phase Summary
+
+The project is now focused on finishing the collection experience and product polish, while keeping the core snippet workflow stable and well-documented.
+Large-scale architectural changes are not the immediate priority; incremental improvements to the collection workflow and surrounding UX are the primary next steps.

@@ -1,117 +1,110 @@
 # Roadmap
 
-This roadmap describes the planned direction for Dev Vault.
+This roadmap reflects the current state of Dev Vault as an implementation-focused project rather than a purely conceptual product plan.
 
 ## Current Phase
 
-Snippet CRUD, search, filtering, sorting, and pagination are complete.
-The Collection concept, metadata, and lifecycle rules are defined.
-The Collection data model and migrations are complete.
-The current phase focuses on completing the Collection Snippet workflow.
+The core snippet workflow is complete, and the collection workflow is implemented and active.
+The project is now in a refinement phase focused on the remaining collection experience details, usability polish, and incremental feature improvements.
 
-## Completed Foundations
+## Completed
+
+### Foundation
 
 - Next.js App Router setup
-- Root layout and metadata
-- Global styles, CSS tokens, and reusable UI primitives
-- Prisma schema and database integration
-- Zod validation
-- Snippet CRUD and detail pages
-- Empty and loading states
-- Search across title, description, language, tags, and code
-- Pagination with search and query parameter handling
-- Language, priority, favorite, framework, and tag filtering
+- Prisma integration with SQLite for local development
+- Shared client setup and database schema model
+- Global styling, utility classes, and reusable primitives
+- App layout and navigation structure
+- Zod-based validation for snippet input flows
+
+### Snippet Management
+
+- Snippet create / read / update / delete flows
+- Snippet detail view and edit workflow
+- Search by title and metadata-driven query input
+- Pagination and query parameter handling
+- Favorite handling and persistence
+- Tag input, display, and filtering
+- Language, framework, priority, and favorite filtering
 - Newest, oldest, priority, and updated sorting
-- Combined search, filtering, sorting, and pagination
-- Favorite toggle and database persistence
-- Multiple tag input and display
-- Responsive layout and final UI/UX refinement
-- Snippet usage, architecture, project structure, components, and database documentation
-- Collection purpose, metadata, Snippet references, and lifecycle rules
-- Collection Prisma model and relational `CollectionSnippet` join model
-- Collection create, read, update, and delete flows
-- Collection list and detail pages
-- Collection form with Priority, Interest, and Practicality controls
-- Collection cards and collection pagination
+- Combined search, filter, sort, and pagination behavior
+- Responsive snippet browsing and supporting UI states
 
-## Near-Term Goals
+### Collection Workflow
 
-### Collection Definition
+- Collection create / read / update / delete flows
+- Collection detail and list views
+- Collection metadata fields for title, description, category, language, framework, priority, interest, and practicality
+- `CollectionSnippet` join model with `path` and `position`
+- Manual snippet selection into a collection
+- Collection snippet removal with confirmation
+- Collection metadata and list ordering logic
+- Collection-specific card presentation and detail flow
 
-- Collection metadata and lifecycle rules are defined.
-- `Collection.snippets` uses the relational `CollectionSnippet` join model.
-- Collection to Snippet relationship and delete behavior are defined.
-- Collection CRUD requirements are defined.
+### Documentation
 
-### Collection UI
+- Project overview and architecture documentation
+- Setup and Windows-specific guidance
+- Usage guides for snippets and collections
+- Deployment and troubleshooting notes
+- API and database references
+- Planning docs aligned with the current implementation
 
-- Design manual Snippet selection from Search / Filter results
-- Add a `New Snippet` action to the Collection workflow
-- Define Collection Snippet cards and removal UI
-- Add a collection-specific path input
-- Add Interest and Practicality controls
+## Near-Term Focus
 
-### Collection Implementation
+### Collection Experience Refinement
 
-- Preserve existing Snippets when they are removed from a Collection
-- Reflect Snippet updates in Collections that reference them
-- Define automatic cleanup when a referenced Snippet is deleted
+- Add a collection-specific path input for linked snippets
+- Add a direct New Snippet shortcut from the collection workflow
+- Refine ordering and contextual display within collection detail views
+- Keep manual snippet selection and removal as the primary workflow
 
-### Current Focus
+### Product Polish
 
-- Implement Collection Snippet cards
-- Implement manual Snippet selection and ordering
-- Add path input and Snippet removal
-- Add Collection search, filtering, and sorting when requirements are defined
+- Tighten mobile and responsive usability where needed
+- Improve empty-state, confirmation, and helper text clarity
+- Review collection naming and path semantics for long-term consistency
 
-## Deferred Decisions
+## Deferred or Intentionally Scoped
 
-- Tag normalization remains deferred until the current serialized storage proves insufficient.
-- Snippet category is outside the current scope and should not be reintroduced without new requirements.
-- Collection frameworks are display metadata and are not currently search criteria.
+- Tag normalization remains deferred until the current serialized tag storage clearly becomes limiting.
+- Snippet category is intentionally outside the current scope.
+- Framework metadata on collections remains display-oriented and is not currently used as a search dimension.
 
-## Mid-Term Goals
+## Mid-Term Opportunities
 
 ### Search and Organization
 
-- Expand search across memo and additional Snippet metadata
-- Add search result highlighting
-- Revisit tag normalization if Collection requirements require it
+- Expand metadata search where it adds real value
+- Improve result hierarchy and readability
+- Revisit tag normalization if requirements become more complex
 
-### User Experience
+### UX Improvements
 
-- Add confirmation dialogs where appropriate
-- Improve mobile navigation
-- Improve accessibility
+- Add more explicit confirmation flows for destructive actions
+- Improve task flow clarity around collection editing and snippet linking
+- Continue refining accessible interactions and layout behavior
 
-## Long-Term Goals
+## Long-Term Direction
 
-### Authentication
+### Authentication and Ownership
 
-- Add user accounts
-- Associate snippets and collections with users
-- Support private and shared snippets
+- Add user accounts and per-user data ownership
+- Support private and shared snippets and collections
 
 ### Collaboration
 
-- Share snippets and collections with other users
-- Add team or workspace support
-- Add role-based permissions
-
-### Internationalization
-
-- Add locale-based routing
-- Separate translation files from business logic
-- Support English and Japanese initially
-- Use locale-aware date, number, and time formatting
+- Add sharing workflows and team-based organization
+- Introduce permissions and workspace-level collaboration
 
 ### Production Readiness
 
-- Migrate from SQLite to a production-grade database
-- Add observability and error monitoring
-- Add database backups
-- Add CI checks for linting, type checking, and builds
+- Move beyond SQLite for production workloads
+- Add monitoring, logging, and deployment checks
+- Add automated validation for linting, type checking, and build health
 
 ## Guiding Principle
 
-The project should remain simple while making it easy to add features incrementally.
+Keep the project simple and maintainable while growing the feature set incrementally.
+The current emphasis is on a stable snippet system, a useful collection workflow, and clear documentation that reflects what is actually implemented.
