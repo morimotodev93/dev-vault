@@ -1,4 +1,4 @@
-// src/lib/snippets/query.ts
+// src/lib/snippets/createSnippetWhere.ts
 
 import { createSnippetFilterConditions } from "./createSnippetFilterConditions";
 import { createSnippetSearchCondition } from "./createSnippetSearchCondition";

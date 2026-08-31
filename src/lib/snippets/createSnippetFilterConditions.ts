@@ -1,4 +1,4 @@
-// src/lib/snippets/filter.ts
+// src/lib/snippets/createSnippetFilterConditions.ts
 
 import { SNIPPET_PRIORITY_VALUES } from "@/constants";
 

@@ -8,11 +8,17 @@ import {
   Text,
 } from "@/components/primitives";
 
-import { CollectionCard } from "@/app/collections/_components";
+import {
+  CollectionCard,
+  CollectionSearch,
+  CollectionSidebar,
+} from "@/app/collections/_components";
 import { EmptyState, Pagination } from "@/components/common";
 import { prisma } from "@/lib/prisma";
 import type { CollectionSearchParams } from "@/types/collection";
 import { redirect } from "next/navigation";
+
+import { createCollectionWhere } from "@/lib/collections";
 
 import styles from "./Collection.module.css";
 
@@ -22,12 +28,28 @@ export default async function Collection({
   searchParams: Promise<CollectionSearchParams & { page?: string }>;
 }) {
   const params = await searchParams;
+
   const pageSize = 10;
+
   const requestedPage = Number(params.page ?? "1");
   const currentPage =
     Number.isInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1;
 
-  const totalCount = await prisma.collection.count();
+  const where = createCollectionWhere({
+    query: params.query ?? "",
+    category: "",
+    language: "",
+    framework: "",
+    priority: "",
+    interest: "",
+    practicality: "",
+    favorite: "",
+  });
+
+  const totalCount = await prisma.collection.count({
+    where,
+  });
+
   const totalPages = Math.ceil(totalCount / pageSize);
 
   if (currentPage > totalPages && totalPages > 0) {
@@ -35,7 +57,10 @@ export default async function Collection({
   }
 
   const collections = await prisma.collection.findMany({
-    orderBy: { updatedAt: "desc" },
+    where,
+    orderBy: {
+      updatedAt: "desc",
+    },
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
   });
@@ -61,6 +86,10 @@ export default async function Collection({
             </Heading>
             {/* mobile (Base) */}
             {/* Search, Filter, Sort */}
+            <Stack className={styles.mobileCollectionControls}>
+              {/* Collection Input */}
+              <CollectionSearch />
+            </Stack>
           </Stack>
           <Spacer mobile={32} desktop={48} />
           {/* Collection Menu */}
@@ -98,6 +127,10 @@ export default async function Collection({
           </Stack>
           <Spacer mobile={48} desktop={80} />
         </Container>
+        {/* Sidebar */}
+        <aside className={styles.aside}>
+          <CollectionSidebar />
+        </aside>
       </main>
     </>
   );

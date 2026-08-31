@@ -9,7 +9,7 @@
 }
 
 .snippets .mobileSnippetControls {
-  display: none;
+  display: flex;
 }
 
 .snippetsZero {
@@ -23,10 +23,8 @@
     flex-direction: column;
     justify-content: center;
   }
-}
 
-@media (max-width: 767px) {
-  .main .mobileSnippetControls {
-    display: flex;
+  .snippets .mobileSnippetControls {
+    display: none;
   }
 }

@@ -1,4 +1,4 @@
-// src/lib/snippets/search.ts
+// src/lib/snippets/createSnippetSearchCondition.ts
 
 export function createSnippetSearchCondition(query: string) {
   if (!query) {

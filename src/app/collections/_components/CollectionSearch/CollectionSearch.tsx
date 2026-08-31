@@ -4,7 +4,7 @@ import { SearchInput } from "@/components/common";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
-export function SnippetSearch() {
+export function CollectionSearch() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -28,7 +28,7 @@ export function SnippetSearch() {
 
     const queryString = params.toString();
 
-    router.push(queryString ? `/snippets?${queryString}` : "/snippets");
+    router.push(queryString ? `/collections?${queryString}` : "/collections");
   };
 
   const handleClear = () => {
@@ -41,7 +41,7 @@ export function SnippetSearch() {
 
     const queryString = params.toString();
 
-    router.push(queryString ? `/snippets?${queryString}` : "/snippets");
+    router.push(queryString ? `/collections?${queryString}` : "/collections");
   };
 
   return (
@@ -50,7 +50,7 @@ export function SnippetSearch() {
         name="query"
         value={value}
         onChange={(event) => setValue(event.target.value)}
-        placeholder="Search snippets..."
+        placeholder="Search collections..."
         clearable
         onClear={handleClear}
         fullWidth
