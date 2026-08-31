@@ -43,6 +43,12 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* モーダル表示時のスクロールロック */
 body.is-fixed {
   overflow: hidden;
@@ -53,6 +59,7 @@ body.is-fixed {
 main {
   position: relative;
   padding-block: var(--space-4);
+  flex: 1;
 }
 
 @media (min-width: 768px) {
