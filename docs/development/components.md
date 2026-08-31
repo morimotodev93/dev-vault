@@ -10,7 +10,11 @@ The component structure is designed to keep low-level building blocks separate f
 src/components/
 ├─ primitives/    # Low-level layout and visual building blocks
 ├─ ui/            # Reusable form and interface controls
-└─ common/        # Shared UI patterns used across features
+├─ common/        # Shared UI patterns used across features
+├─ Header/        # Application header and navigation shell
+├─ Footer/        # Application footer shell
+├─ icon/          # Reusable icon set for app and navigation UI
+└─ index.ts       # Optional shared entry exports
 ```
 
 ## primitives
@@ -24,7 +28,7 @@ These components should:
 - Avoid business logic.
 - Focus on structure, presentation, and composition.
 
-Examples:
+Examples currently used in the app:
 
 - `Button`
 - `Container`
@@ -35,6 +39,8 @@ Examples:
 - `Stack`
 - `Surface`
 - `Text`
+
+This layer is the foundation for most shared UI usage throughout the app.
 
 ### Example
 
@@ -51,11 +57,25 @@ Use `ui` for reusable interface controls that provide a complete interaction or 
 
 These components are more specialized than primitives but should still remain independent from application-specific business logic.
 
-Examples:
+Examples currently used in the app:
 
 - `Input`
 - `Select`
 - `Textarea`
+- `Checkbox`
+- `Switch`
+- `LinkButton`
+
+These components may handle concerns such as:
+
+- Labels
+- Validation states
+- Error messages
+- Accessibility attributes
+- Input-specific styling
+- Generated IDs
+
+They should not contain Snippet-specific logic.
 
 These components may handle concerns such as:
 
@@ -76,17 +96,43 @@ Use `common` for reusable UI patterns that are shared across multiple screens or
 
 These components usually represent a meaningful interface pattern rather than a single low-level control.
 
-Examples:
+Examples currently used in the app:
 
 - `EmptyState`
 - `Loading`
 - `Pagination`
 - `SearchInput`
 - `Tag`
+- `TagInput`
 
 Common components may combine primitives or UI controls to provide a reusable experience.
 
-For example, `SearchInput` can combine an `Input` with search and clear interactions.
+For example, `SearchInput` combines an input field with a common search interaction pattern, and `TagInput` packages tag entry logic for forms.
+
+## Header / Footer / icon
+
+The app also includes a few shared shell and utility directories that are not feature-specific but are not part of the same abstraction levels as `primitives` or `ui`.
+
+### Header / Footer
+
+These are app-shell components used at the page layout level.
+
+- `Header` manages the global navigation shell and mobile navigation state.
+- `Footer` provides the app-wide footer content.
+
+They are shared across the app, but they are structurally tied to the site shell rather than a specific business feature.
+
+### icon
+
+The `icon` directory contains reusable icon primitives used across app shell, navigation, and UI patterns.
+
+It is organized by usage area, such as:
+
+- `navigation/`
+- `circle/`
+- `util/`
+
+These icons are shared assets rather than page-level components.
 
 ## Feature-Specific Components
 

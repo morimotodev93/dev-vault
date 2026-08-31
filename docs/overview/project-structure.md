@@ -1,17 +1,24 @@
 # Project Structure
 
-This project is organized as a Next.js App Router application with a component-oriented frontend and Prisma-based persistence.
+This project is organized as a Next.js App Router application with route-local feature folders, shared UI components, and Prisma-based persistence.
 
 ## Root-Level Structure
 
 ```text
 .
 ├─ docs/              # Project documentation
-├─ prisma/            # Prisma schema and migrations
+├─ prisma/            # Prisma schema and database migrations
 ├─ public/            # Static assets
+├─ scripts/           # PowerShell utilities and scaffolding scripts
 ├─ src/               # Application source code
 ├─ package.json       # Scripts and dependencies
-└─ tsconfig.json      # TypeScript configuration
+├─ pnpm-lock.yaml     # Dependency lockfile
+├─ pnpm-workspace.yaml
+├─ prisma.config.ts   # Prisma config
+├─ tsconfig.json      # TypeScript configuration
+├─ next.config.ts     # Next.js configuration
+├─ eslint.config.mjs  # ESLint config
+└─ README.md          # Project overview
 ```
 
 ## Source Directory
@@ -24,93 +31,64 @@ src/
 ├─ hooks/
 ├─ lib/
 ├─ styles/
-└─ types/
+├─ types/
+├─ generated/
+└─ ...
 ```
 
 ### src/app
 
-The app directory contains Next.js App Router files.
+The app directory contains the App Router pages and route-local feature code.
 
-Current responsibilities:
+Current responsibilities include:
 
-- Root layout
-- Global metadata
-- Page-level routing
-- Home page composition
+- home page composition
+- snippet pages and forms
+- collection pages and forms
+- route-level logic and related feature folders
 
-Current examples:
+Examples:
 
 ```text
-src/app/layout.tsx
 src/app/page.tsx
-src/app/home/Hero/Hero.tsx
-src/app/home/QuickStats/QuickStats.tsx
-src/app/home/RecentSnippets/RecentSnippets.tsx
+src/app/layout.tsx
 src/app/snippets/page.tsx
+src/app/snippets/new/page.tsx
+src/app/collections/page.tsx
+src/app/collections/[id]/page.tsx
 ```
+
+Feature folders also include route-local subdirectories such as:
+
+```text
+src/app/snippets/_actions/
+src/app/snippets/_components/
+src/app/collections/_actions/
+src/app/collections/_components/
+```
+
+These folders keep server actions, UI, and route concerns close to the feature they serve.
 
 ### src/components
 
-The components directory contains reusable UI pieces.
-
-For guidance on how to organize components by abstraction level, see [development/components.md](development/components.md).
+The component directory contains shared UI building blocks and app-shell components.
 
 Current structure:
 
 ```text
 src/components/
+├─ common/
+├─ Footer/
+├─ Header/
 ├─ icon/
 ├─ primitives/
 ├─ ui/
-└─ common/
+└─ index.ts
 ```
 
-### Icons
+#### common
 
-Icon components are grouped by purpose:
-
-```text
-src/components/icon/
-├─ circle/
-├─ navigation/
-└─ util/
-```
-
-### Primitives
-
-Primitive components are small reusable UI elements. The current implementation includes:
-
-```text
-src/components/primitives/
-├─ Button/
-├─ Container/
-├─ Grid/
-├─ Spacer/
-├─ Stack/
-├─ Text/
-├─ Heading/
-├─ Surface/
-├─ Link/
-└── index.ts
-```
-
-### UI
-
-UI components are grouped by purpose. The current implementation includes:
-
-```text
-src/components/ui/
-├─ Input/
-├─ Textarea/
-├─ Select/
-└── index.ts
-```
-
-Additional UI controls include `Checkbox` and `Switch`.
-
-### Common
-
-Common components are shared, general-purpose UI elements used across the application. The current implementation includes:
+Reusable UI patterns shared across multiple screens:
 
 ```text
 src/components/common/
@@ -119,27 +97,74 @@ src/components/common/
 ├─ Pagination/
 ├─ SearchInput/
 ├─ Tag/
-└── index.ts
+├─ TagInput/
+└─ index.ts
 ```
 
-`TagInput` is also available for editing multiple tags.
+#### primitives
+
+Low-level structural building blocks used throughout the app:
+
+```text
+src/components/primitives/
+├─ Button/
+├─ Container/
+├─ Grid/
+├─ Heading/
+├─ Link/
+├─ Spacer/
+├─ Stack/
+├─ Surface/
+├─ Text/
+└─ index.ts
+```
+
+#### ui
+
+Reusable interface controls and higher-level inputs:
+
+```text
+src/components/ui/
+├─ Checkbox/
+├─ Input/
+├─ LinkButton/
+├─ Select/
+├─ Switch/
+├─ Textarea/
+└─ index.ts
+```
+
+#### Header / Footer / icon
+
+These are app-shell and utility assets rather than feature-specific components:
+
+```text
+src/components/Header/
+src/components/Footer/
+src/components/icon/
+```
+
+The icon folder is further grouped by usage, such as navigation, circle, and utility icons.
 
 ### src/constants
 
-Shared constants live in this directory.
+Shared constants and option sets live here.
 
-Current examples:
+Examples:
 
 ```text
 src/constants/breakpoints.ts
+src/constants/collection.ts
+src/constants/snippet.ts
+src/constants/Headernavigation.ts
 src/constants/index.ts
 ```
 
 ### src/hooks
 
-Reusable React hooks live in this directory.
+Reusable React hooks live in this folder.
 
-Current examples:
+Examples:
 
 ```text
 src/hooks/useBreakPoint.ts
@@ -148,29 +173,27 @@ src/hooks/useMediaQuery.ts
 
 ### src/lib
 
-Shared utilities and app-level configuration live in lib.
+Application-level utilities and config live here.
 
-Current examples:
+Examples:
 
 ```text
+src/lib/prisma.ts
 src/lib/fonts.ts
 src/lib/fonts.cjk.ts
-src/lib/navigation.ts
-src/lib/prisma.ts
+src/lib/navigation/
 ```
 
 Responsibilities include:
 
-- Font configuration
-- Navigation configuration
 - Prisma client setup
-- Shared helpers
+- font configuration
+- navigation configuration
+- shared helper logic
 
 ### src/styles
 
-Global CSS, design tokens, layout utilities, and reusable utility classes live in styles.
-
-Current structure:
+Global styling rules and shared design foundations live here.
 
 ```text
 src/styles/
@@ -178,52 +201,42 @@ src/styles/
 ├─ layout/
 ├─ utility/
 ├─ global.css
-└─ reset.css
+├─ reset.css
+└─ ...
 ```
 
 ### src/types
 
-Shared TypeScript types and validation schemas live in types.
+Shared TypeScript types and validation schemas live in this folder.
 
-Current examples:
+Examples:
 
 ```text
-src/types/navigation.ts
 src/types/snippet.ts
+src/types/collection.ts
+src/types/navigation.ts
 ```
+
+### src/generated
+
+This directory contains Prisma-generated TypeScript client artifacts and should generally be treated as generated code.
 
 ### prisma
 
-The prisma directory contains database configuration.
+The database schema and migrations are stored here.
 
 ```text
 prisma/
 ├─ schema.prisma
-└─ migrations/
+├─ migrations/
+└─ migration_lock.toml
 ```
 
-### Suggested Future Feature Structure
+## Practical Rule
 
-As the application grows, feature-specific logic can be placed under src/features.
+The project keeps two key patterns:
 
-```text
-src/features/
-├─ snippets/
-├─ tags/
-├─ favorites/
-└─ search/
-```
+1. Feature-specific logic stays close to the relevant route or feature directory.
+2. Shared UI stays in the global component directories when it is reusable beyond a single feature.
 
-Each feature can contain:
-
-```text
-feature-name/
-├─ components/
-├─ actions/
-├─ queries/
-├─ schemas/
-├─ types/
-└─ utils/
-```
-
-This keeps domain logic separate from generic UI components and shared utilities.
+This keeps the app easy to understand without over-abstracting the structure.

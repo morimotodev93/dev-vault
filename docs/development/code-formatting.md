@@ -1,18 +1,17 @@
 # Code Formatting
 
-DevVault uses Prettier for consistent code formatting.
+Dev Vault uses Prettier to keep the codebase consistent and readable.
 
-## Configuration
+## 1. Configuration
 
 The project configuration is defined in:
 
 - `.prettierrc.json`
 - `.prettierignore`
 
-Formatting rules are shared through the repository rather than
-individual editor settings.
+Formatting rules are shared through the repository rather than through individual editor settings.
 
-## Commands
+## 2. Commands
 
 Format the project:
 
@@ -26,10 +25,8 @@ Check formatting without modifying files:
 pnpm format:check
 ```
 
-## Editor
+## 3. Editor setup
 
-VS Code is configured to format files on save using the project's
-Prettier configuration.
+VS Code is configured to format files on save using the project's Prettier configuration.
 
-Developers may use another editor, but should ensure that the
-project's Prettier configuration is respected.
+Developers may use another editor, but they should still respect the repository's formatting rules.

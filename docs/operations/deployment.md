@@ -1,35 +1,38 @@
-# Deployment
+# Deployment Guide
 
-Dev Vault is a Next.js application and can be deployed to standard Node.js-compatible hosting environments.
+This guide explains the current deployment assumptions for Dev Vault.
 
-## Current Runtime Assumptions
+## 1. Runtime assumptions
 
-The current project uses:
+The project currently uses:
 
 - Next.js 16
 - React 19
-- Prisma ORM
+- Prisma 7
 - SQLite for local development
 - `@prisma/adapter-better-sqlite3`
 
-## Local Development Database
+The runtime configuration is defined in:
 
-SQLite is suitable for local development and early prototyping. The application reads `DATABASE_URL` from the environment and falls back to:
+- `package.json`
+- `prisma/schema.prisma`
+- `src/lib/prisma.ts`
 
-```text
-file:./dev.db
+## 2. Required environment variables
+
+The app expects a `DATABASE_URL` value for Prisma.
+
+For local development, this is typically:
+
+```bash
+DATABASE_URL="file:./dev.db"
 ```
 
-## Environment Variables
+For deployment, replace it with the target environment's production database connection string.
 
-Recommended environment variable:
+## 3. Local development flow
 
-`DATABASE_URL=file:./dev.db`
-For production deployments, this should be replaced with the production database connection string.
-
-## Build Process
-
-The project defines the following scripts:
+The current project uses the following scripts:
 
 ```json
 {
@@ -40,45 +43,67 @@ The project defines the following scripts:
 }
 ```
 
-Typical deployment flow:
+A typical local flow looks like this:
 
-```shell
+```bash
+pnpm install
+pnpm prisma generate
+pnpm dev
+```
+
+For a production-style local verification:
+
+```bash
 pnpm install
 pnpm prisma generate
 pnpm build
 pnpm start
 ```
 
-## Production Database Considerations
+## 4. Database and migration notes
 
-SQLite is convenient for development, but production deployments may require a more scalable database such as PostgreSQL.
+SQLite is suitable for local development and early iteration, but it is not always the best fit for production scale.
 
-When moving to production:
+When deploying to a managed environment, consider:
 
-- Use a managed database provider.
-- Store connection strings in environment variables.
-- Run migrations as part of the deployment process.
-- Avoid committing local database files.
-- Confirm Prisma adapter requirements for the selected database.
+- using a production-grade database provider
+- setting `DATABASE_URL` in the deployment environment
+- running Prisma migrations during deployment
+- avoiding committed local database files
+- checking adapter compatibility for the selected database provider
 
-## Hosting
+## 5. Hosting options
 
-The application can be hosted on platforms that support Next.js and Node.js, such as:
+Because this is a standard Next.js app, it can be deployed to Node.js-compatible hosting environments such as:
 
 - Vercel
-- Node.js servers
-- Container-based platforms
+- container-based platforms
+- managed Node.js hosts
+- self-hosted Linux or Windows server environments
 
-Other serverless or hybrid hosting providers compatible with Next.js
+The app is not tied to a specific hosting provider and should work on any platform that supports the Next.js runtime and Prisma database access.
 
-## Deployment Checklist
+## 6. Deployment checklist
 
-Before production deployment:
+Before shipping:
 
-- Configure DATABASE_URL.
-- Generate Prisma Client.
-- Run database migrations.
-- Build the Next.js app.
-- Verify environment-specific settings.
-- Confirm that sensitive values are not committed to the repository.
-- Review database backup and migration strategy.
+- confirm `DATABASE_URL` is set correctly
+- run `pnpm prisma generate`
+- run migrations if the schema changed
+- run `pnpm build`
+- verify the app starts with `pnpm start`
+- confirm no local SQLite file is accidentally committed
+- keep secret values out of the repository
+
+## 7. Operational guidance
+
+The app is currently structured around:
+
+- App Router pages and route-level feature folders
+- server actions for writes
+- Prisma for persistence
+- shared UI under `src/components`
+
+This means deployment success depends on the runtime environment being able to install native dependencies and run Prisma correctly.
+
+If deployment fails during install or build, check the troubleshooting docs for native dependency issues and platform-specific setup problems.

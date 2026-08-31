@@ -1,105 +1,102 @@
-# Collections
+# Collection Usage
 
-## Overview
+This page explains how collections work in the app as it exists today.
 
-Collections are curated groups of existing snippets. The current model treats a Collection as a top-level record and keeps each snippet relationship in a dedicated join table.
+## 1. Open the collection list
 
-This keeps the canonical snippet content in `Snippet` while storing collection-specific metadata and ordering in `CollectionSnippet`.
+Visit `/collections` to open the main collection index.
 
-## Current Model
+The current page includes:
 
-```prisma
-model Collection {
-  id           String   @id @default(cuid())
-  title        String
-  description  String?
-  category     String
-  language     String?
-  frameworks   Json
-  favorite     Boolean  @default(false)
-  priority     Int      @default(0)
-  interest     Int
-  practicality Int
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+- collection search
+- collection cards
+- pagination
+- a `New Collection` action
+- a sidebar with extra context and navigation
 
-  snippets CollectionSnippet[]
-}
+This is the main entry point for collection management.
 
-model CollectionSnippet {
-  id           String  @id @default(cuid())
-  collectionId String
-  snippetId    String
-  path         String?
-  position     Int
+## 2. Create a collection
 
-  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-  snippet    Snippet    @relation(fields: [snippetId], references: [id], onDelete: Cascade)
+1. Open `/collections`.
+2. Click `New Collection`.
+3. Enter the collection metadata.
+4. Save the collection.
 
-  @@unique([collectionId, snippetId])
-}
-```
+A collection stores its own metadata, including:
 
-## Design Principles
+- title
+- description
+- category
+- language
+- frameworks
+- favorite state
+- priority
+- interest
+- practicality
 
-- Keep the source of truth for snippet content in `Snippet`.
-- Store collection membership and ordering in `CollectionSnippet`.
-- Treat `CollectionSnippet.path` as collection-specific metadata, not as a duplicate of snippet content.
-- Preserve the original snippet when it is removed from a collection.
-- Use cascade delete rules so the relationship is cleaned up with the owning collection or snippet.
+These fields are separate from the actual snippet content.
 
-## Metadata Semantics
+## 3. View a collection
 
-A Collection is not just a folder. It carries its own metadata:
+Open a collection from the list to go to the detail screen.
 
-- `title`: collection title
-- `description`: human-readable summary
-- `category`: purpose or genre of the collection
-- `language`: primary language of the collection
-- `frameworks`: JSON array of framework names for display and filtering metadata
-- `favorite`: personal bookmark state
-- `priority`: collection priority
-- `interest`: interest level
-- `practicality`: practical value level
+The detail page currently shows:
 
-`frameworks` are metadata for display and are not currently treated as first-class search criteria.
+- collection metadata
+- linked snippets
+- snippet cards inside the collection
+- collection actions
 
-## Snippet References
+If the collection has no snippets yet, the app shows a selector flow so you can add existing snippets to it.
 
-A snippet in a collection should be referenced through `CollectionSnippet`, not copied into the collection record.
+## 4. Add snippets to a collection
 
-The relationship stores:
+The current collection detail UI lets you choose snippets to add to the collection.
 
-- `snippetId`: a reference to the existing snippet
-- `path`: optional collection-specific path or filename context
-- `position`: ordering inside the collection
+This is handled through a relationship model:
 
-This allows snippet updates to flow through the canonical snippet model while the collection keeps its own arrangement and placement metadata.
+- the collection stores its own metadata
+- the `CollectionSnippet` table stores the link between a collection and a snippet
+- `path` and `position` are kept as collection-specific metadata
 
-## Recommended Usage
+This makes it possible to reuse the same snippet in multiple collections without duplicating the source snippet itself.
 
-1. Create a collection with a clear title and category.
-2. Add snippets from existing snippet search or selection flows.
-3. Use `position` to define the ordering in the collection UI.
-4. Keep `path` for collection-specific naming or directory hints when needed.
-5. Avoid duplicating title, code, tags, or memo into the collection record.
+## 5. Collection relationship model
 
-## Risks and Constraints
+The current data model keeps the content canonical in `Snippet` and the collection membership logic in `CollectionSnippet`.
 
-- Tag semantics are still serialized on `Snippet`, so collection-level tag filtering should be treated carefully.
-- `language` and `framework` are not fully normalized across all historical data yet.
-- Collection metadata should remain distinct from snippet metadata unless there is a strong reuse case.
-- Saved collection views should keep explicit, validated fields instead of opaque query strings.
+A few important points:
 
-## Pending Work
+- the source snippet remains the single source of truth
+- `CollectionSnippet.position` controls the order inside the collection
+- `CollectionSnippet.path` is optional metadata for the collection context
+- the relationship is unique for each `(collectionId, snippetId)` pair
 
-The implementation focus is still on:
+This means updates to a snippet still flow through the snippet record, while the collection keeps its own organization metadata.
 
-- Collection list page
-- Collection detail page
-- Collection form
-- Manual snippet selection UI
-- Collection snippet card rendering
-- CRUD flows for create, read, update, and delete
+## 6. Search and pagination
 
-Once the Collection UI is in place, the next step is to validate the relationship model against real usage and refine metadata defaults if needed.
+The collection list supports:
+
+- query search
+- pagination
+- collection browsing through the current data access layer
+
+If the requested page is out of range, the app redirects back to the start of the list to keep navigation consistent.
+
+## 7. Edit and delete a collection
+
+From the collection detail area, the app exposes actions to update or remove the collection. These operations follow the project's server-action pattern and are backed by Prisma.
+
+## 8. Typical workflow
+
+A common usage pattern is:
+
+1. Create a collection around a clear goal or theme.
+2. Add relevant snippets from the existing library.
+3. Review the collection detail page.
+4. Adjust ordering or metadata as needed.
+5. Keep the original snippet data in place while organizing it by collection.
+
+This matches the current app behavior and is the right mental model for working with collections in Dev Vault.

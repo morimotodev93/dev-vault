@@ -1,12 +1,12 @@
-# Database
+# Database Reference
 
-Dev Vault uses Prisma ORM for database access.
+Dev Vault uses Prisma ORM and SQLite for local development.
 
-SQLite is currently used for local development, with `better-sqlite3` as the runtime SQLite driver.
+This document describes the current database model and the data patterns the application actually uses today.
 
-## Database Configuration
+## 1. Database configuration
 
-The Prisma datasource is configured to use SQLite.
+The Prisma datasource is configured in `prisma/schema.prisma`:
 
 ```prisma
 datasource db {
@@ -14,15 +14,17 @@ datasource db {
 }
 ```
 
-The runtime Prisma client uses `@prisma/adapter-better-sqlite3` and reads the database URL from `DATABASE_URL`.
+The runtime Prisma client is created in `src/lib/prisma.ts` using `@prisma/adapter-better-sqlite3`.
 
-If `DATABASE_URL` is not set, the application falls back to:
+The app expects a `DATABASE_URL` environment variable, and defaults to:
 
-`file:./dev.db`
+```bash
+file:./dev.db
+```
 
-## Prisma Client
+## 2. Prisma client output
 
-The generated Prisma Client output is configured as:
+The Prisma client output is configured as:
 
 ```prisma
 generator client {
@@ -31,13 +33,11 @@ generator client {
 }
 ```
 
-The shared Prisma client is defined in:
+The generated client is intentionally kept under `src/generated/prisma` and should not be edited by hand.
 
-`src/lib/prisma.ts`
+## 3. Current data model
 
-## Data Model
-
-The current Prisma schema includes `Snippet`, `Collection`, and the join model `CollectionSnippet`.
+The current schema includes `Snippet`, `Collection`, and the join model `CollectionSnippet`.
 
 ```prisma
 model Snippet {
@@ -88,128 +88,90 @@ model CollectionSnippet {
 }
 ```
 
-## Snippet Fields
+## 4. Snippet fields
 
-| Field         | Type       | Required | Description                                               |
-| ------------- | ---------- | -------- | --------------------------------------------------------- |
-| `id`          | `String`   | Yes      | Unique snippet identifier generated with `cuid()`         |
-| `title`       | `String`   | Yes      | Human-readable snippet title                              |
-| `description` | `String?`  | No       | Optional summary or explanation                           |
-| `language`    | `String?`  | No       | Optional programming language or syntax category          |
-| `framework`   | `String?`  | No       | Optional framework name such as React, Next.js, or Prisma |
-| `tags`        | `String`   | Yes      | Serialized tag list stored as a single string in Prisma   |
-| `favorite`    | `Boolean`  | Yes      | Whether the snippet is marked as a favorite               |
-| `priority`    | `Int`      | Yes      | Priority score, defaulting to `0`                         |
-| `code`        | `String`   | Yes      | Main code content                                         |
-| `memo`        | `String?`  | No       | Additional notes                                          |
-| `createdAt`   | `DateTime` | Yes      | Creation timestamp                                        |
-| `updatedAt`   | `DateTime` | Yes      | Last update timestamp                                     |
+| Field         | Type       | Required | Notes                |
+| ------------- | ---------- | -------- | -------------------- |
+| `id`          | `String`   | Yes      | CUID identifier      |
+| `title`       | `String`   | Yes      | Title of the snippet |
+| `description` | `String?`  | No       | Optional description |
+| `language`    | `String?`  | No       | Optional language    |
+| `framework`   | `String?`  | No       | Optional framework   |
+| `tags`        | `String`   | Yes      | Serialized tag list  |
+| `favorite`    | `Boolean`  | Yes      | Default `false`      |
+| `priority`    | `Int`      | Yes      | Default `0`          |
+| `code`        | `String`   | Yes      | Main code content    |
+| `memo`        | `String?`  | No       | Additional notes     |
+| `createdAt`   | `DateTime` | Yes      | Created timestamp    |
+| `updatedAt`   | `DateTime` | Yes      | Updated timestamp    |
 
-## Collection Fields
+## 5. Collection fields
 
-| Field          | Type       | Required | Description                                          |
-| -------------- | ---------- | -------- | ---------------------------------------------------- |
-| `id`           | `String`   | Yes      | Unique collection identifier generated with `cuid()` |
-| `title`        | `String`   | Yes      | Human-readable collection title                      |
-| `description`  | `String?`  | No       | Optional collection summary                          |
-| `category`     | `String`   | Yes      | Collection purpose or genre                          |
-| `language`     | `String?`  | No       | Main language used by the collection                 |
-| `frameworks`   | `Json`     | Yes      | JSON array of framework names for metadata display   |
-| `favorite`     | `Boolean`  | Yes      | Whether the collection is marked as a favorite       |
-| `priority`     | `Int`      | Yes      | Priority score, defaulting to `0`                    |
-| `interest`     | `Int`      | Yes      | Interest rating for the collection                   |
-| `practicality` | `Int`      | Yes      | Practicality rating for the collection               |
-| `createdAt`    | `DateTime` | Yes      | Creation timestamp                                   |
-| `updatedAt`    | `DateTime` | Yes      | Last update timestamp                                |
+| Field          | Type       | Required | Notes               |
+| -------------- | ---------- | -------- | ------------------- |
+| `id`           | `String`   | Yes      | CUID identifier     |
+| `title`        | `String`   | Yes      | Collection title    |
+| `description`  | `String?`  | No       | Optional summary    |
+| `category`     | `String`   | Yes      | Purpose or grouping |
+| `language`     | `String?`  | No       | Collection language |
+| `frameworks`   | `Json`     | Yes      | Framework metadata  |
+| `favorite`     | `Boolean`  | Yes      | Default `false`     |
+| `priority`     | `Int`      | Yes      | Default `0`         |
+| `interest`     | `Int`      | Yes      | Interest rating     |
+| `practicality` | `Int`      | Yes      | Practicality rating |
+| `createdAt`    | `DateTime` | Yes      | Created timestamp   |
+| `updatedAt`    | `DateTime` | Yes      | Updated timestamp   |
 
-## Collection Snippet Links
+## 6. Collection snippet relation
 
-The `CollectionSnippet` model stores the relationship between a `Collection` and a `Snippet`.
+`CollectionSnippet` stores the relationship between a `Collection` and a `Snippet`.
 
-| Field          | Type      | Required | Description                                     |
-| -------------- | --------- | -------- | ----------------------------------------------- |
-| `id`           | `String`  | Yes      | Unique link identifier generated with `cuid()`  |
-| `collectionId` | `String`  | Yes      | Reference to the parent collection              |
-| `snippetId`    | `String`  | Yes      | Reference to the linked snippet                 |
-| `path`         | `String?` | No       | Optional snippet-specific path or file location |
-| `position`     | `Int`     | Yes      | Ordering inside the collection                  |
+| Field          | Type      | Required | Notes                                |
+| -------------- | --------- | -------- | ------------------------------------ |
+| `id`           | `String`  | Yes      | Identifier                           |
+| `collectionId` | `String`  | Yes      | Parent collection ID                 |
+| `snippetId`    | `String`  | Yes      | Linked snippet ID                    |
+| `path`         | `String?` | No       | Optional path metadata               |
+| `position`     | `Int`     | Yes      | Ordering value inside the collection |
 
-The relation is enforced with a unique composite key on `(collectionId, snippetId)` and cascade deletes on both sides.
+The model also has a unique compound key on `(collectionId, snippetId)` and cascade deletes on both sides.
 
-## Validation
+## 7. Tag behavior
 
-Form-level validation is defined with Zod in:
+The current app still serializes tag values as a single string in Prisma.
 
-`src/types/snippet.ts`
-
-The current validation schema includes:
-
-- Required title
-- Optional description
-- Optional language or framework
-- Tag array input
-- Favorite flag
-- Priority values from the shared snippet priority constants
-- Required code
-- Optional memo
-
-`language` and `framework` are intentionally treated as optional in combination, and the schema enforces that at least one of them is present.
-
-## Tags
-
-The application currently stores a snippet's tags as a serialized string in Prisma, while the form layer still accepts an array of strings before conversion.
-
-Prisma model:
-
-```prisma
-tags String
-```
-
-Form layer:
+Example:
 
 ```ts
 ["typescript", "react", "nextjs"];
 ```
 
-At persistence time, the UI serializes the array into a single string value. The data layer does not currently use a dedicated `Tag` table or `String[]` column.
+is stored as:
 
-## Tag Operations
+```ts
+"typescript,react,nextjs";
+```
 
-The tag input supports:
+This is a deliberate current implementation choice, not a normalized tag table.
 
-- Adding a tag
-- Preventing duplicate tags
-- Removing a tag
-- Displaying multiple tags
+## 8. Migrations
 
-Tag management remains part of the `Snippet` model for now. Future normalization into a dedicated tag table is possible if the application needs:
+Prisma migrations are stored in:
 
-- Shared tag metadata
-- Tag statistics
-- Tag administration pages
-- Cross-snippet tag relationships
-- Advanced tag filtering
+```text
+prisma/migrations/
+```
 
-## Database Migrations
+When the schema changes, create and apply migrations with Prisma CLI commands.
 
-Prisma Migrate is used to manage database schema changes.
+## 9. Future direction
 
-Migration files are stored in:
+SQLite is sufficient for the current local development workflow, but this project may later move to a production-grade database while keeping Prisma as the access layer.
 
-`prisma/migrations/`
-
-When the Prisma schema is changed, create and apply a migration during development.
-
-## Future Database Direction
-
-SQLite is suitable for local development and early prototyping.
-
-For production, the application may migrate to PostgreSQL or another production-oriented database while keeping Prisma as the primary data access layer.
-
-Potential future models include:
+Potential future extensions include:
 
 - `User`
-- `Tag`
-- `SnippetRevision`
-- `Favorite`
-- `CollectionTemplate`
+- `Tag` as a dedicated model
+- revision history
+- more structured collection metadata
+- richer access control

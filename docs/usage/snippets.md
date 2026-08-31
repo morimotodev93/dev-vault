@@ -1,111 +1,114 @@
-# Snippets
+# Snippet Usage
 
-## Create a Snippet
+This page covers how snippets work in the app as it exists today.
+
+## 1. Open the snippet list
+
+Visit `/snippets` to open the main snippet index.
+
+The page includes:
+
+- a search box
+- a filter panel
+- a sort selector
+- pagination controls
+- a `New Snippet` action
+
+The list view renders snippet cards from the current Prisma query, and it resets to page 1 when the search or filter state changes.
+
+## 2. Create a snippet
 
 1. Open `/snippets`.
-2. Select `New Snippet`.
-3. Enter the snippet information.
-4. Add tags if needed.
-5. Select `Save Snippet`.
+2. Click `New Snippet`.
+3. Fill in the form fields.
+4. Add or remove tags as needed.
+5. Save the snippet.
 
-A snippet can include multiple tags.
+The app stores the main snippet details such as title, description, language, framework, tags, code, memo, and favorite state.
 
-## Read Snippets
+## 3. Read a snippet
 
-1. Open `/snippets`.
-2. Select a snippet card.
-3. View the snippet details.
+1. Select a snippet card from the list.
+2. Open the detail page for that record.
 
-From the snippet detail page, you can perform other CRUD operations.
+The detail page shows:
 
-## Update a Snippet
+- title
+- description
+- language and framework badges
+- tag list
+- code block
+- favorite toggle
+- edit and delete actions
+- a shortcut back to the snippet list
 
-1. Select a snippet card.
-2. Select `Update`.
-3. Edit the snippet information.
-4. Select `Update Snippet`.
+## 4. Edit and delete
 
-## Delete a Snippet
+From the snippet detail page, you can:
 
-1. Select a snippet card.
-2. Select `Delete`.
-3. The snippet is deleted immediately.
-4. Check the toast notification for the result.
+- click `Edit` to update the snippet
+- click `Delete` to remove it
+- toggle the favorite state directly from the page
 
-## Search Snippets
+The current implementation uses server actions backed by Prisma rather than a standalone HTTP API.
 
-Snippets can be searched by:
+## 5. Search, filter, and sort
 
-- Title
-- Description
-- Language
-- Tags
-- Code
+The snippet page supports:
 
-### Search
-
-1. Select the search field.
-2. Enter a keyword.
-3. Press `Enter`.
-4. View the search results.
-
-Example:
-
-`/snippets?query=typescript`
-
-To clear the search, select the `Clear` button.
-
-## Filter Snippets
-
-Available filters:
-
-- Language
-- Priority
-- Favorite
-- Framework
-- Tags
-
-Filters can be combined with search and other filters.
+- query search
+- language filter
+- framework filter
+- priority filter
+- favorite filter
+- tag filtering
+- tag mode (`and` / `or`)
+- sort selection
 
 Examples:
 
-`/snippets?language=typescript`
+- `/snippets?query=nextjs`
+- `/snippets?language=typescript`
+- `/snippets?favorite=true`
+- `/snippets?tags=react,next&tagsMode=and`
 
-`/snippets?priority=5`
+When the URL parameters are normalized, the app redirects to the canonical query string so the filter state stays consistent.
 
-`/snippets?favorite=true`
+## 6. Favorite behavior
 
-Changing a filter resets the current page to the first page.
+Favorites are saved to the database and can be toggled from either the snippet card or the detail page.
 
-## Favorite
+This is useful when you want to:
 
-Favorites can be toggled directly from a snippet card.
+- highlight important snippets
+- filter to only favorite items
+- build a shortlist of useful references
 
-1. Select the Favorite button on a snippet card.
-2. The favorite state is updated.
-3. The Favorite filter can be used to display only favorite snippets.
+## 7. Tag behavior
 
-Favorite state is persisted in the database.
+Each snippet can have multiple tags, although the stored value is still a serialized string in Prisma.
 
-## Tags
+In the UI:
 
-Multiple tags can be assigned to a snippet.
+- tags are entered as a list
+- each tag is displayed individually
+- duplicate tags can be prevented by the form logic
+- removing a tag updates the snippet immediately
 
-1. Enter a tag in the Tags field.
-2. Select `Add`.
-3. Repeat to add additional tags.
-4. Select the remove control to remove a tag.
+## 8. Pagination
 
-Tags are displayed individually on snippet cards.
+The list view paginates when there are more snippets than the page size.
 
-## Pagination
+Pagination respects the current search and filter state, and changing those values resets the page to the first valid page.
 
-Pagination is displayed when the number of snippets exceeds the page size.
+## 9. Typical workflow
 
-1. Check the pagination controls below the snippet list.
-2. Select a page number.
-3. Navigate to the selected page.
+A common usage flow is:
 
-Use the `Previous` and `Next` buttons to move between pages.
+1. Search or filter the list.
+2. Open a matching snippet.
+3. Review the code and notes.
+4. Edit it if needed.
+5. Use favorites and tags to build a personal knowledge base.
 
-Pagination works together with search and filters. Changing a search query or filter resets the current page.
+This reflects the current intended usage of the app rather than a hypothetical API contract.
