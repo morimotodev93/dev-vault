@@ -29,6 +29,13 @@
   font-size: 2rem;
 }
 
+.overlay {
+  position: fixed;
+  inset: var(--header-height-sm) 0 0 0;
+  background: rgb(0 0 0 / 40%);
+  z-index: var(--z-overlay);
+}
+
 @media (min-width: 768px) {
   .header {
     --header-height: var(--header-height-md);

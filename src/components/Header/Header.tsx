@@ -2,18 +2,40 @@
 
 import { Container, Stack } from "@/components/primitives";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import clsx from "clsx";
 import styles from "./Header.module.css";
-import { HeaderHamburger } from "./HeaderHamburger";
-import { HeaderMobileMenu } from "./HeaderMobileMenu";
-import { HeaderNavigation } from "./HeaderNavigation";
+import {
+  HeaderHamburger,
+  HeaderMobileMenu,
+  HeaderNavigation,
+  useHeaderScrollController,
+} from "./index";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { hidden } = useHeaderScrollController();
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
-    <header className={styles.header}>
+    <header
+      className={clsx(styles.header, {
+        [styles.hidden]: hidden,
+      })}
+    >
       <Container className="h-full">
         <Stack
           className="h-full"
@@ -40,7 +62,19 @@ export function Header() {
       </Container>
 
       {/* Mobile Menu */}
-      {isMenuOpen && <HeaderMobileMenu />}
+      {isMenuOpen && (
+        <>
+          {/* Overlay */}
+          <button
+            type="button"
+            className={styles.overlay}
+            aria-label="Close menu"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          {/* Mobile Menu */}
+          <HeaderMobileMenu />
+        </>
+      )}
     </header>
   );
 }

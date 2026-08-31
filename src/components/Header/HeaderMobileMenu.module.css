@@ -1,16 +1,17 @@
 .menu {
-  display: block;
-
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: fixed;
+  top: var(--header-height-sm);
+  right: 0;
 
   width: 100%;
+  max-height: calc(100dvh - var(--header-height-sm));
 
-  padding: var(--space-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
   background: var(--header-bg);
-  box-shadow: var(--shadow-float);
+
+  z-index: calc(var(--z-overlay) + 1);
 }
 
 .list {
