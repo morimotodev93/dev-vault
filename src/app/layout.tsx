@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { jakarta, jetbrains } from "@/lib/fonts";
 import {
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         {/* Footer */}
+        <Footer />
       </body>
     </html>
   );

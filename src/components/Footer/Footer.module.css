@@ -1,2 +1,11 @@
 .footer {
+  background: var(--bg-subtle);
+}
+
+.icon {
+  color: var(--fg-subtle);
+}
+
+.slash {
+  color: var(--fg-muted);
 }
