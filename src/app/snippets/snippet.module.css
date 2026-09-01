@@ -2,12 +2,6 @@
   position: relative;
 }
 
-.aside {
-  position: relative;
-  display: none;
-  min-height: 100%;
-}
-
 .snippets .mobileSnippetControls {
   display: flex;
 }
@@ -18,12 +12,6 @@
 }
 
 @media (min-width: 768px) {
-  .aside {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   .snippets .mobileSnippetControls {
     display: none;
   }

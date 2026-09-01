@@ -1,6 +1,10 @@
+/* =========================================
+   Snippet Sidebar
+   ========================================= */
+
+/* Design Tokens */
 :root {
   --snippet-sidebar-width: 14rem;
-  --snippet-sidebar-button-left: -16rem;
 }
 
 @media (min-width: 992px) {
@@ -15,37 +19,82 @@
   }
 }
 
+/* =========================================
+   Sidebar
+   ========================================= */
+
+.aside {
+  position: relative;
+  display: none;
+}
+
+/* =========================================
+   Sidebar Content
+   ========================================= */
+
 .snippetContent {
   position: fixed;
-  top: 50%;
-  right: 0;
+  inset: 0 0 0 auto;
 
   width: 100%;
   max-width: var(--snippet-sidebar-width);
 
-  transform: translate(100%, -50%);
+  padding-top: var(--header-height-sm);
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  background: var(--sidebar-bg);
+  z-index: var(--z-sticky);
+
+  transform: translateX(100%);
   transition: transform 0.2s ease;
 }
 
 .snippetContent.open {
-  transform: translate(0, -50%);
+  transform: translateX(0);
 }
+
+@media (min-width: 768px) {
+  .aside {
+    display: flex;
+  }
+
+  .snippetContent {
+    padding-top: var(--header-height-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .snippetContent {
+    padding-top: var(--header-height-lg);
+  }
+}
+
+/* =========================================
+   Sidebar Toggle
+   ========================================= */
 
 .sidebarToggle {
   position: fixed;
   top: 50%;
   right: 0;
+
   z-index: var(--z-sidebar-toggle);
+
   color: var(--accent);
 
   background: transparent;
   border: 0;
+
+  transition: transform 0.2s ease;
 }
 
 .sidebarToggle.open {
-  transform: translate(calc(var(--snippet-sidebar-width) * -1), 0);
+  transform: translateX(calc(var(--snippet-sidebar-width) * -1));
 }
 
+/* Toggle Icon */
 .sidebarToggleCircle {
   box-shadow: var(--shadow-dropdown);
 }
@@ -54,25 +103,11 @@
   color: var(--accent);
 }
 
+/* =========================================
+   Sidebar Controls
+   ========================================= */
+
 .snippetControl {
-  position: relative;
   width: 100%;
-  /* terminal treatment */
-  padding-block: 10rem;
-
-  padding-inline: 1rem;
-  background: var(--sidebar-bg);
-  z-index: var(--z-sidebar);
-}
-
-@media (min-width: 992px) {
-  .snippetContent {
-    max-width: 16rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .snippetContent {
-    max-width: 18rem;
-  }
+  padding: var(--space-3) var(--space-4);
 }

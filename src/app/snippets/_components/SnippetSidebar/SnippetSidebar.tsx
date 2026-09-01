@@ -16,33 +16,30 @@ export function SnippetSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
+    <aside className={styles.aside}>
+      {/* Sidebar Toggle */}
       <button
         type="button"
         aria-expanded={isOpen}
         aria-controls="snippet-sidebar"
+        aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
         onClick={() => setIsOpen((prev) => !prev)}
         className={clsx(styles.sidebarToggle, isOpen && styles.open)}
       >
-        {isOpen ? (
-          <Surface
-            padding="sm"
-            radius="full"
-            className={styles.sidebarToggleCircle}
-          >
+        <Surface
+          padding="sm"
+          radius="full"
+          className={styles.sidebarToggleCircle}
+        >
+          {isOpen ? (
             <ChevronsRightIcon className={styles.sidebarToggleIcon} />
-          </Surface>
-        ) : (
-          <Surface
-            padding="sm"
-            radius="full"
-            className={styles.sidebarToggleCircle}
-          >
+          ) : (
             <ChevronsLeftIcon className={styles.sidebarToggleIcon} />
-          </Surface>
-        )}
+          )}
+        </Surface>
       </button>
 
+      {/* Sidebar Content */}
       <div
         id="snippet-sidebar"
         className={clsx(styles.snippetContent, isOpen && styles.open)}
@@ -53,6 +50,6 @@ export function SnippetSidebar() {
           <SnippetSort />
         </Stack>
       </div>
-    </>
+    </aside>
   );
 }

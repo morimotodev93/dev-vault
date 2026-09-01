@@ -1,5 +1,6 @@
 .wrapper {
   width: 100%;
+  max-width: fit-content;
 }
 
 .label {
@@ -48,6 +49,10 @@
   transition:
     transform 0.15s,
     background-color 0.15s;
+}
+
+.labelText {
+  font-size: var(--font-size-sm);
 }
 
 /* Focus */

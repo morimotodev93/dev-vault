@@ -1,34 +1,19 @@
 "use client";
 
+type HeaderProps = {
+  hidden: boolean;
+};
+
 import { Container, Stack } from "@/components/primitives";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import clsx from "clsx";
 import styles from "./Header.module.css";
-import {
-  HeaderHamburger,
-  HeaderMobileMenu,
-  HeaderNavigation,
-  useHeaderScrollController,
-} from "./index";
+import { HeaderHamburger, HeaderMobileMenu, HeaderNavigation } from "./index";
 
-export function Header() {
+export function Header({ hidden }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { hidden } = useHeaderScrollController();
-
-  useEffect(() => {
-    if (!isMenuOpen) {
-      document.body.style.overflow = "";
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
 
   return (
     <header

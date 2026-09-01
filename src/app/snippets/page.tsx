@@ -186,9 +186,7 @@ export default async function Snippet({
         </Stack>
       </Container>
       {/* Sidebar */}
-      <aside className={styles.aside}>
-        <SnippetSidebar />
-      </aside>
+      <SnippetSidebar />
     </>
   );
 }

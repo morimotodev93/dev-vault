@@ -32,7 +32,7 @@ export function SnippetFilter() {
   };
 
   return (
-    <Stack gap={6}>
+    <Stack>
       {/* Language */}
       <Select
         value={searchParams.get("language") ?? ""}
@@ -108,7 +108,7 @@ export function SnippetFilter() {
         />
       </Stack>
 
-      <Stack direction="row" justify="between" align="center">
+      <Stack direction="row" wrap justify="between" align="center">
         {/* Favorite */}
         <Switch
           label="Favorite"
