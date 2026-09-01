@@ -1,0 +1,27 @@
+.layout {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout main {
+  position: relative;
+  padding-block: var(--space-4);
+  flex: 1;
+
+  transition: padding-top 200ms ease;
+}
+
+.layout.headerHidden main {
+  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .layout main {
+    padding-block: var(--space-6);
+  }
+
+  .layout.headerHidden main {
+    padding-top: 0;
+  }
+}

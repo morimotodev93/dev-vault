@@ -43,27 +43,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
 /* モーダル表示時のスクロールロック */
 body.is-fixed {
   overflow: hidden;
-  /* スクロールバー分のガタつき防止（任意） */
-  /* padding-right: var(--scrollbar-width, 0px); */
-}
-
-main {
-  position: relative;
-  padding-block: var(--space-4);
-  flex: 1;
-}
-
-@media (min-width: 768px) {
-  main {
-    padding-block: var(--space-6);
-  }
 }
