@@ -1,25 +1,9 @@
-.main {
-  position: relative;
-}
-
-.main .mobileCollectionControls {
+.mobileCollectionControls {
   display: flex;
 }
 
-.aside {
-  position: relative;
-  display: none;
-  min-height: 100%;
-}
-
 @media (min-width: 768px) {
-  .aside {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .main .mobileCollectionControls {
+  .mobileCollectionControls {
     display: none;
   }
 }

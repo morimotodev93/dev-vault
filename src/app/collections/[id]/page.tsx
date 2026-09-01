@@ -4,9 +4,9 @@ import {
   CollectionDetailActions,
   CollectionDetailMetadata,
   CollectionSnippetCard,
-  CollectionSnippetSelector,
 } from "@/app/collections/_components";
 
+import { CollectionSnippetSelector } from "@/app/collections/_components/CollectionSnippetSelector";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 

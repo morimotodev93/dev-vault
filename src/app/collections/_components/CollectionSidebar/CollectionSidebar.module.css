@@ -1,2 +1,104 @@
-.collectionSidebar {
+/* =========================================
+   Collection Sidebar
+   ========================================= */
+
+/* Design Tokens */
+:root {
+  --collection-sidebar-width: 14rem;
+}
+
+@media (min-width: 992px) {
+  :root {
+    --collection-sidebar-width: 16rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --collection-sidebar-width: 18rem;
+  }
+}
+
+/* =========================================
+   Sidebar
+   ========================================= */
+
+.aside {
+  position: relative;
+  background: var(--sidebar-bg);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .aside {
+    display: flex;
+  }
+}
+
+/* =========================================
+   Sidebar Content
+   ========================================= */
+
+.collectionContent {
+  position: fixed;
+  inset: 0 0 0 auto;
+
+  width: 100%;
+  max-width: var(--collection-sidebar-width);
+
+  padding-top: var(--header-height-sm);
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  background: var(--sidebar-bg);
+  z-index: var(--z-sticky);
+
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+}
+
+.collectionContent.open {
+  transform: translateX(0);
+}
+
+/* =========================================
+   Sidebar Toggle
+   ========================================= */
+
+.sidebarToggle {
+  position: fixed;
+  top: 50%;
+  right: 0;
+
+  z-index: var(--z-sidebar-toggle);
+
+  color: var(--accent);
+
+  background: transparent;
+  border: 0;
+
+  transition: transform 0.2s ease;
+}
+
+.sidebarToggle.open {
+  transform: translateX(calc(var(--collection-sidebar-width) * -1));
+}
+
+/* Toggle Icon */
+.sidebarToggleCircle {
+  box-shadow: var(--shadow-dropdown);
+}
+
+.sidebarToggleIcon {
+  color: var(--accent);
+}
+
+/* =========================================
+   Sidebar Controls
+   ========================================= */
+
+.collectionControl {
+  width: 100%;
+  padding: 10rem 1rem;
 }
