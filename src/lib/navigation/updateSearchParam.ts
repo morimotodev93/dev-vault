@@ -3,6 +3,7 @@ import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.
 export function updateSearchParam(
   router: AppRouterInstance,
   searchParams: URLSearchParams,
+  pathname: string,
   key: string,
   value: string,
 ) {
@@ -18,5 +19,5 @@ export function updateSearchParam(
 
   const queryString = params.toString();
 
-  router.push(queryString ? `/snippets?${queryString}` : "/snippets");
+  router.push(queryString ? `${pathname}?${queryString}` : pathname);
 }

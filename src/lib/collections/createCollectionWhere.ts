@@ -7,7 +7,6 @@ interface CollectionQueryParams {
   query: string;
   category: string;
   language: string;
-  framework: string;
   priority: string;
   interest: string;
   practicality: string;
@@ -18,7 +17,7 @@ export function createCollectionWhere({
   query,
   category,
   language,
-  framework,
+
   priority,
   interest,
   practicality,
@@ -36,7 +35,6 @@ export function createCollectionWhere({
     ...createCollectionFilterConditions({
       category,
       language,
-      framework,
       priority,
       interest,
       practicality,

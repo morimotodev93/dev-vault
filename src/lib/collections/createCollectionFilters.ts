@@ -7,7 +7,6 @@ import {
 interface CollectionFilterParams {
   category: string;
   language: string;
-  framework: string;
   priority: string;
   interest: string;
   practicality: string;
@@ -18,7 +17,6 @@ interface CollectionFilterParams {
 export function createCollectionFilterConditions({
   category,
   language,
-  framework,
   priority,
   interest,
   practicality,
@@ -38,15 +36,6 @@ export function createCollectionFilterConditions({
   if (language) {
     conditions.push({
       language,
-    });
-  }
-
-  // Framework
-  if (framework) {
-    conditions.push({
-      framework: {
-        contains: framework,
-      },
     });
   }
 

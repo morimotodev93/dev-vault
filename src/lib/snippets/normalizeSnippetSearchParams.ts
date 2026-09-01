@@ -1,75 +1,64 @@
-import { SNIPPET_PRIORITY_VALUES, SNIPPET_SORT_OPTIONS } from "@/constants";
+import {
+  SNIPPET_LANGUAGE_OPTIONS,
+  SNIPPET_PRIORITY_VALUES,
+  SNIPPET_SORT_OPTIONS,
+} from "@/constants";
 
 import type { SnippetSearchParams } from "@/types/snippet";
 
 export function normalizeSnippetSearchParams(
   params: SnippetSearchParams & { page?: string },
 ) {
-  const normalized = new URLSearchParams();
+  const priority = Number(params.priority);
 
-  // query
-  if (params.query?.trim()) {
-    normalized.set("query", params.query.trim());
-  }
+  return {
+    // Search
+    query: params.query?.trim() ?? "",
 
-  // language
-  if (params.language) {
-    normalized.set("language", params.language);
-  }
-
-  // framework
-  if (params.framework?.trim()) {
-    normalized.set("framework", params.framework.trim());
-  }
-
-  // priority
-  if (params.priority) {
-    const priorityValue = Number(params.priority);
-
-    if (
-      Number.isInteger(priorityValue) &&
-      SNIPPET_PRIORITY_VALUES.includes(
-        priorityValue as (typeof SNIPPET_PRIORITY_VALUES)[number],
+    // Filter
+    language:
+      params.language &&
+      SNIPPET_LANGUAGE_OPTIONS.some(
+        (option) => option.value === params.language,
       )
-    ) {
-      normalized.set("priority", String(priorityValue));
-    }
-  }
+        ? params.language
+        : "",
 
-  // tags
-  if (params.tags?.trim()) {
-    const tags = params.tags
-      .split(",")
-      .map((tag) => tag.trim())
-      .filter(Boolean);
+    framework: params.framework?.trim() ?? "",
 
-    if (tags.length > 0) {
-      normalized.set("tags", tags.join(","));
-      normalized.set("tagsMode", params.tagsMode === "or" ? "or" : "and");
-    }
-  }
+    priority:
+      Number.isInteger(priority) &&
+      SNIPPET_PRIORITY_VALUES.includes(
+        priority as (typeof SNIPPET_PRIORITY_VALUES)[number],
+      )
+        ? String(priority)
+        : "",
 
-  // favorite
-  if (params.favorite === "true") {
-    normalized.set("favorite", "true");
-  }
+    tags: params.tags?.trim()
+      ? params.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean)
+          .join(",")
+      : "",
 
-  // sort
-  if (
-    params.sort &&
-    SNIPPET_SORT_OPTIONS.some((option) => option.value === params.sort)
-  ) {
-    normalized.set("sort", params.sort);
-  }
+    tagsMode: params.tags?.trim() && params.tagsMode === "or" ? "or" : "and",
 
-  // page
-  if (params.page) {
-    const page = Number(params.page);
+    favorite: params.favorite === "true" ? "true" : "",
 
-    if (Number.isInteger(page) && page >= 1) {
-      normalized.set("page", String(page));
-    }
-  }
+    // Sort
+    sort:
+      params.sort &&
+      SNIPPET_SORT_OPTIONS.some((option) => option.value === params.sort)
+        ? params.sort
+        : "",
 
-  return normalized;
+    // Pagination
+    page:
+      params.page &&
+      Number.isInteger(Number(params.page)) &&
+      Number(params.page) >= 1
+        ? String(Number(params.page))
+        : "1",
+  };
 }
