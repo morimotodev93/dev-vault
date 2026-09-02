@@ -1,5 +1,4 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Layout } from "@/components/Layout";
 import { jakarta, jetbrains } from "@/lib/fonts";
 import {
   notoSansJP,
@@ -35,11 +34,7 @@ export default function RootLayout({
       )}
     >
       <body>
-        {/* Header */}
-        <Header />
-        <main>{children}</main>
-        {/* Footer */}
-        <Footer />
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
