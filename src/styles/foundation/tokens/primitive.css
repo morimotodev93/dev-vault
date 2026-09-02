@@ -110,20 +110,25 @@
   --letter-spacing-wide: 0.025em;
 
   /* =====================
-       Z-index
-  ===================== */
+   Z-index
+   ===================== */
   --z-base: 0;
   --z-elevated: 10;
+
   --z-sticky: 20;
+  --z-sidebar: 25;
+
   --z-header: 30;
   --z-dropdown: 40;
-  --z-sidebar: 50;
-  --z-sidebar-toggle: 60;
+
+  --z-sidebar-toggle: 50;
   --z-overlay: 70;
+
   --z-modal: 80;
   --z-popover: 90;
   --z-toast: 100;
   --z-tooltip: 110;
+
   --z-max: 9999;
 
   /* =====================
