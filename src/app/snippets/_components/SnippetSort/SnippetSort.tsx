@@ -19,6 +19,7 @@ export function SnippetSort() {
         updateSearchParam(
           router,
           searchParams,
+          "/snippets",
           "sort",
           event.target.value === DEFAULT_SNIPPET_SORT ? "" : event.target.value,
         )

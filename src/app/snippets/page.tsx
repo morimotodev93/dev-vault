@@ -53,16 +53,27 @@ export default async function Snippet({
   const currentWithoutPage = new URLSearchParams(currentParams);
   currentWithoutPage.delete("page");
 
-  const normalizedWithoutPage = new URLSearchParams(normalizedParams);
-  normalizedWithoutPage.delete("page");
+  const normalizedWithoutPage = new URLSearchParams();
+
+  Object.entries(normalizedParams).forEach(([key, value]) => {
+    if (key !== "page" && value !== undefined && value !== "") {
+      normalizedWithoutPage.set(key, String(value));
+    }
+  });
 
   const hasChanged =
     currentWithoutPage.toString() !== normalizedWithoutPage.toString();
 
   if (hasChanged) {
-    normalizedParams.delete("page");
+    const redirectParams = new URLSearchParams();
 
-    const queryString = normalizedParams.toString();
+    Object.entries(normalizedParams).forEach(([key, value]) => {
+      if (key !== "page" && value !== undefined && value !== "") {
+        redirectParams.set(key, String(value));
+      }
+    });
+
+    const queryString = redirectParams.toString();
 
     redirect(queryString ? `/snippets?${queryString}` : "/snippets");
   }
@@ -74,12 +85,11 @@ export default async function Snippet({
   const selectedFramework = params.framework ?? "";
   const selectedPriority = params.priority ?? "";
 
-  const selectedTags = (params.tags ?? "")
-    .split(",")
-    .map((tag) => tag.trim())
-    .filter(Boolean);
+  const selectedTags = normalizedParams.tags
+    ? normalizedParams.tags.split(",")
+    : [];
 
-  const selectedTagsMode = params.tagsMode === "or" ? "or" : "and";
+  const selectedTagsMode = normalizedParams.tagsMode === "or" ? "or" : "and";
 
   const selectedFavorite = params.favorite ?? "";
 

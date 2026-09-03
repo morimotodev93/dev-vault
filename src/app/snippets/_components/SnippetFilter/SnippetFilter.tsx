@@ -41,6 +41,7 @@ export function SnippetFilter() {
           updateSearchParam(
             router,
             searchParams,
+            "/snippets",
             "language",
             event.target.value,
           )
@@ -55,6 +56,7 @@ export function SnippetFilter() {
           updateSearchParam(
             router,
             searchParams,
+            "/snippets",
             "framework",
             event.target.value,
           )
@@ -69,6 +71,7 @@ export function SnippetFilter() {
           updateSearchParam(
             router,
             searchParams,
+            "/snippets",
             "priority",
             event.target.value,
           )
@@ -82,7 +85,13 @@ export function SnippetFilter() {
           size="sm"
           value={searchParams.get("tags") ?? ""}
           onChange={(event) =>
-            updateSearchParam(router, searchParams, "tags", event.target.value)
+            updateSearchParam(
+              router,
+              searchParams,
+              "/snippets",
+              "tags",
+              event.target.value,
+            )
           }
         />
 
@@ -101,6 +110,7 @@ export function SnippetFilter() {
             updateSearchParam(
               router,
               searchParams,
+              "/snippets",
               "tagsMode",
               event.target.value,
             )
@@ -117,6 +127,7 @@ export function SnippetFilter() {
             updateSearchParam(
               router,
               searchParams,
+              "/snippets",
               "favorite",
               event.target.checked ? "true" : "",
             )

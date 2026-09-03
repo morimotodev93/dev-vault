@@ -34,15 +34,13 @@ export function normalizeSnippetSearchParams(
         ? String(priority)
         : "",
 
-    tags: params.tags?.trim()
-      ? params.tags
-          .split(",")
-          .map((tag) => tag.trim())
-          .filter(Boolean)
-          .join(",")
-      : "",
+    tags: params.tags?.trim(),
 
-    tagsMode: params.tags?.trim() && params.tagsMode === "or" ? "or" : "and",
+    tagsMode: params.tags?.trim()
+      ? params.tagsMode === "or"
+        ? "or"
+        : "and"
+      : "",
 
     favorite: params.favorite === "true" ? "true" : "",
 
