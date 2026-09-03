@@ -45,7 +45,7 @@ Current responsibilities include:
 - home page composition
 - snippet pages and forms
 - collection pages and forms
-- route-level logic and related feature folders
+- route-level logic and feature-specific behavior
 
 Examples:
 
@@ -189,7 +189,7 @@ Responsibilities include:
 - Prisma client setup
 - font configuration
 - navigation configuration
-- shared helper logic
+- shared helper and application logic
 
 ### src/styles
 

@@ -77,17 +77,6 @@ These components may handle concerns such as:
 
 They should not contain Snippet-specific logic.
 
-These components may handle concerns such as:
-
-- Labels
-- Validation states
-- Error messages
-- Accessibility attributes
-- Input-specific styling
-- Generated IDs
-
-They should not contain Snippet-specific logic.
-
 For example, `Input` can support an error state, but it should not know how Snippet validation works.
 
 ## common
@@ -142,10 +131,8 @@ For example:
 
 ```text
 src/app/snippets/
+├─ _actions/
 ├─ _components/
-│  ├─ SnippetCard/
-│  ├─ SnippetForm/
-│  └─ SnippetSearch/
 ├─ page.tsx
 ├─ new/
 └─ [id]/

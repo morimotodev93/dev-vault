@@ -1,6 +1,6 @@
 # Architecture Overview
 
-Dev Vault is a lightweight knowledge-management application for storing and organizing development snippets, notes, and reusable code examples.
+Dev Vault is a lightweight knowledge-management application for storing, organizing, and curating development snippets, notes, and reusable code examples.
 
 The app is built with Next.js App Router, Prisma persistence, and a simple feature-oriented structure that keeps route logic and shared UI separate.
 
@@ -67,8 +67,9 @@ src/app/collections/
 This keeps the following responsibilities close together:
 
 - route-level UI composition
-- feature-specific form handling
+- feature-specific UI and form handling
 - server actions for writes and updates
+- feature-related query and utility logic
 - related reusable subcomponents
 
 ## Shared UI Layer
