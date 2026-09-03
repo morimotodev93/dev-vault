@@ -107,20 +107,20 @@ model CollectionSnippet {
 
 ## 5. Collection fields
 
-| Field          | Type       | Required | Notes               |
-| -------------- | ---------- | -------- | ------------------- |
-| `id`           | `String`   | Yes      | CUID identifier     |
-| `title`        | `String`   | Yes      | Collection title    |
-| `description`  | `String?`  | No       | Optional summary    |
-| `category`     | `String`   | Yes      | Purpose or grouping |
-| `language`     | `String?`  | No       | Collection language |
-| `frameworks`   | `Json`     | Yes      | Framework metadata  |
-| `favorite`     | `Boolean`  | Yes      | Default `false`     |
-| `priority`     | `Int`      | Yes      | Default `0`         |
-| `interest`     | `Int`      | Yes      | Interest rating     |
-| `practicality` | `Int`      | Yes      | Practicality rating |
-| `createdAt`    | `DateTime` | Yes      | Created timestamp   |
-| `updatedAt`    | `DateTime` | Yes      | Updated timestamp   |
+| Field          | Type       | Required | Notes                       |
+| -------------- | ---------- | -------- | --------------------------- |
+| `id`           | `String`   | Yes      | CUID identifier             |
+| `title`        | `String`   | Yes      | Collection title            |
+| `description`  | `String?`  | No       | Optional summary            |
+| `category`     | `String`   | Yes      | Purpose or grouping         |
+| `language`     | `String?`  | No       | Collection language         |
+| `frameworks`   | `Json`     | Yes      | Stored as a framework array |
+| `favorite`     | `Boolean`  | Yes      | Default `false`             |
+| `priority`     | `Int`      | Yes      | Default `0`                 |
+| `interest`     | `Int`      | Yes      | Interest rating             |
+| `practicality` | `Int`      | Yes      | Practicality rating         |
+| `createdAt`    | `DateTime` | Yes      | Created timestamp           |
+| `updatedAt`    | `DateTime` | Yes      | Updated timestamp           |
 
 ## 6. Collection snippet relation
 
@@ -134,7 +134,8 @@ model CollectionSnippet {
 | `path`         | `String?` | No       | Optional path metadata               |
 | `position`     | `Int`     | Yes      | Ordering value inside the collection |
 
-The model also has a unique compound key on `(collectionId, snippetId)` and cascade deletes on both sides.
+The model also has a unique compound key on `(collectionId, snippetId)`.
+Both the collection and snippet relations use cascade deletes, so the relationship record is removed when either related record is deleted.
 
 ## 7. Tag behavior
 

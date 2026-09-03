@@ -40,7 +40,7 @@ High-level guides for understanding the app and codebase.
 
 ### Development
 
-Guides for implementation, component structure, and contributor workflow.
+Guides for implementation, component structure, and development conventions.
 
 - [development/development-standards.md](development/development-standards.md)
 - [development/components.md](development/components.md)

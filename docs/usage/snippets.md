@@ -93,7 +93,7 @@ In the UI:
 - tags are entered as a list
 - each tag is displayed individually
 - duplicate tags can be prevented by the form logic
-- removing a tag updates the snippet immediately
+- removing a tag updates the form state immediately
 
 ## 8. Pagination
 

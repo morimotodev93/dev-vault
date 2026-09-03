@@ -10,9 +10,11 @@ The current page includes:
 
 - collection search
 - collection cards
+- filtering
+- sorting
 - pagination
 - a `New Collection` action
-- a sidebar with extra context and navigation
+- a sidebar containing search, filter, and sort controls
 
 This is the main entry point for collection management.
 
@@ -50,17 +52,18 @@ The detail page currently shows:
 
 If the collection has no snippets yet, the app shows a selector flow so you can add existing snippets to it.
 
-## 4. Add snippets to a collection
+## 4. Manage snippets in a collection
 
-The current collection detail UI lets you choose snippets to add to the collection.
+The collection detail UI lets you manage the snippets included in the collection.
 
-This is handled through a relationship model:
+You can:
 
-- the collection stores its own metadata
-- the `CollectionSnippet` table stores the link between a collection and a snippet
-- `path` and `position` are kept as collection-specific metadata
+- select existing snippets to add
+- remove snippets from the collection
+- change their order
+- optionally provide collection-specific `path` metadata
 
-This makes it possible to reuse the same snippet in multiple collections without duplicating the source snippet itself.
+The collection does not duplicate the snippet itself. It stores the relationship between the collection and the existing snippet.
 
 ## 5. Collection relationship model
 
@@ -75,21 +78,44 @@ A few important points:
 
 This means updates to a snippet still flow through the snippet record, while the collection keeps its own organization metadata.
 
-## 6. Search and pagination
+## 6. Search, filter, sort, and pagination
 
 The collection list supports:
 
 - query search
+- category filtering
+- language filtering
+- priority filtering
+- interest filtering
+- practicality filtering
+- favorite filtering
+- sorting by supported collection fields
 - pagination
-- collection browsing through the current data access layer
+- combined search, filter, sort, and pagination
 
-If the requested page is out of range, the app redirects back to the start of the list to keep navigation consistent.
+The sidebar provides the search, filter, and sort controls used for collection browsing.
+
+Changing the search or filter state resets pagination to the first page.
+
+If the requested page is out of range, the app redirects back to the start of the collection list.
 
 ## 7. Edit and delete a collection
 
-From the collection detail area, the app exposes actions to update or remove the collection. These operations follow the project's server-action pattern and are backed by Prisma.
+From the collection detail area, the app exposes actions to update or remove the collection.
 
-## 8. Typical workflow
+These operations follow the project's server-action pattern and are backed by Prisma.
+
+Removing a collection does not require deleting the snippets contained in it. The collection relationship is removed while the original snippet records remain available.
+
+## 8. Create a new snippet from a collection
+
+The collection detail page provides a shortcut to create a new snippet.
+
+Use the `New Snippet` action when a snippet needed for the current collection does not yet exist.
+
+The shortcut opens the normal snippet creation flow. The new snippet is created through the standard snippet workflow rather than being created as a collection-specific record.
+
+## 9. Typical workflow
 
 A common usage pattern is:
 
