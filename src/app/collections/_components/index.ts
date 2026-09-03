@@ -7,5 +7,6 @@ export * from "./CollectionList";
 export * from "./CollectionSearch";
 export * from "./CollectionSidebar";
 export * from "./CollectionSnippetCard";
+export * from "./CollectionSort";
 export * from "./DeleteButton";
 export * from "./RemoveCollectionSnippetButton";

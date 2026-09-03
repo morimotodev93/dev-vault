@@ -1,18 +1,11 @@
-import {
-  Container,
-  Heading,
-  Link,
-  Spacer,
-  Stack,
-  Surface,
-  Text,
-} from "@/components/primitives";
+import { Container, Heading, Spacer, Stack } from "@/components/primitives";
 
 import {
   CollectionCard,
   CollectionFilter,
   CollectionSearch,
   CollectionSidebar,
+  CollectionSort,
 } from "@/app/collections/_components";
 import { EmptyState, Pagination } from "@/components/common";
 import { prisma } from "@/lib/prisma";
@@ -20,10 +13,14 @@ import type { CollectionSearchParams } from "@/types/collection";
 import { redirect } from "next/navigation";
 
 import {
+  createCollectionOrderBy,
+  createCollectionPaginationParams,
   createCollectionWhere,
+  getCollectionSort,
   normalizeCollectionSearchParams,
 } from "@/lib/collections";
 
+import { LinkButton } from "@/components/ui";
 import styles from "./Collection.module.css";
 
 export default async function Collection({
@@ -74,6 +71,12 @@ export default async function Collection({
 
   const where = createCollectionWhere(normalizedParams);
 
+  const selectedSort = getCollectionSort(normalizedParams.sort);
+
+  const orderBy = createCollectionOrderBy(selectedSort);
+
+  const paginationParams = createCollectionPaginationParams(params);
+
   const totalCount = await prisma.collection.count({
     where,
   });
@@ -86,9 +89,7 @@ export default async function Collection({
 
   const collections = await prisma.collection.findMany({
     where,
-    orderBy: {
-      updatedAt: "desc",
-    },
+    orderBy,
     skip: (currentPage - 1) * pageSize,
     take: pageSize,
   });
@@ -107,53 +108,54 @@ export default async function Collection({
   return (
     <>
       <Container>
-        <Stack gap={6}>
-          <Heading as={"h2"} level={2} size="lg">
-            Collection List
-          </Heading>
-          {/* mobile (Base) */}
-          {/* Search, Filter, Sort */}
-          <Stack className={styles.mobileCollectionControls}>
-            {/* Collection Input */}
-            <CollectionSearch />
-            {/* Collection Filter */}
-            <CollectionFilter />
+        <Stack gap={8}>
+          <Stack gap={6}>
+            <Heading as={"h2"} level={2} size="lg">
+              Collection List
+            </Heading>
+            {/* mobile (Base) */}
+            {/* Search, Filter, Sort */}
+            <Stack className={styles.mobileCollectionControls}>
+              {/* Collection Input */}
+              <CollectionSearch />
+              {/* Collection Filter */}
+              <CollectionFilter />
+              {/* Collection Sort */}
+              <CollectionSort />
+            </Stack>
+          </Stack>
+          {/* Collection Menu */}
+          {totalCount === 0 ? (
+            <EmptyState
+              title="No collections yet"
+              description="Create your first collection to start organizing your knowledge base."
+            />
+          ) : (
+            <>
+              <div className="l-auto-grid">
+                {collectionItems.map((collection) => (
+                  <CollectionCard key={collection.id} {...collection} />
+                ))}
+              </div>
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  basePath="/collections"
+                  searchParams={paginationParams.toString()}
+                />
+              )}
+            </>
+          )}
+          {/* Button Area */}
+          <Stack direction="row" align="center" justify="end">
+            {/* New Collection Button */}
+            <LinkButton size="lg" href="/collections/new">
+              New Collection
+            </LinkButton>
           </Stack>
         </Stack>
-        <Spacer mobile={32} desktop={48} />
-        {/* Collection Menu */}
-        {totalCount === 0 ? (
-          <EmptyState
-            title="No collections yet"
-            description="Create your first collection to start organizing your knowledge base."
-          />
-        ) : (
-          <>
-            <div className="l-auto-grid">
-              {collectionItems.map((collection) => (
-                <CollectionCard key={collection.id} {...collection} />
-              ))}
-            </div>
-            {totalPages > 1 && (
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                basePath="/collections"
-              />
-            )}
-          </>
-        )}
-        <Spacer mobile={32} desktop={48} />
-        <Stack direction="row" align="center" justify="end">
-          {/* New Collection Button */}
-          <Link appearance="content" href="/collections/new">
-            <Surface radius="md" bordered>
-              <Stack justify="center" align="center">
-                <Text size="sm">New Collection</Text>
-              </Stack>
-            </Surface>
-          </Link>
-        </Stack>
+
         <Spacer mobile={48} desktop={80} />
       </Container>
       {/* Sidebar */}

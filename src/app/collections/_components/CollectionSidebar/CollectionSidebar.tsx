@@ -1,6 +1,8 @@
 "use client";
 
+import { CollectionFilter } from "@/app/collections/_components/CollectionFilter";
 import { CollectionSearch } from "@/app/collections/_components/CollectionSearch";
+import { CollectionSort } from "@/app/collections/_components/CollectionSort";
 import { ChevronsLeftIcon, ChevronsRightIcon } from "@/components/icon";
 import { Stack, Surface } from "@/components/primitives";
 import clsx from "clsx";
@@ -41,6 +43,8 @@ export function CollectionSidebar() {
       >
         <Stack gap={6} className={styles.collectionControl}>
           <CollectionSearch />
+          <CollectionFilter />
+          <CollectionSort />
         </Stack>
       </div>
     </aside>

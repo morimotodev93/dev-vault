@@ -5,11 +5,13 @@
 /* Design Tokens */
 :root {
   --collection-sidebar-width: 14rem;
+  --collection-controll-padding-block: var(--space-5);
 }
 
 @media (min-width: 992px) {
   :root {
     --collection-sidebar-width: 16rem;
+    --collection-controll-padding-block: var(--space-8);
   }
 }
 
@@ -100,5 +102,5 @@
 
 .collectionControl {
   width: 100%;
-  padding: 10rem 1rem;
+  padding: var(--collection-controll-padding-block) var(--space-4);
 }
