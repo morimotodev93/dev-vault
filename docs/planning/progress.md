@@ -8,23 +8,24 @@ The remaining work is primarily refinement and incremental quality improvements 
 
 ## Core Feature Status
 
-| Area                                        | Status                |
-| ------------------------------------------- | --------------------- |
-| Snippet CRUD                                | Done                  |
-| Snippet Search                              | Done                  |
-| Snippet Filtering                           | Done                  |
-| Snippet Sorting                             | Done                  |
-| Snippet Pagination                          | Done                  |
-| Snippet Favorites                           | Done                  |
-| Snippet Tags                                | Done                  |
-| Collection CRUD                             | Done                  |
-| Collection Snippet Linking                  | Done                  |
-| Collection Detail UI                        | Done                  |
-| Collection Metadata UI                      | Done                  |
-| Collection Path Metadata                    | Partially implemented |
-| Direct New Snippet Shortcut from Collection | Planned               |
-| Collection Search / Filter / Sort           | Planned               |
-| Documentation Alignment                     | Done                  |
+| Area                                        | Status |
+| ------------------------------------------- | ------ |
+| Snippet CRUD                                | Done   |
+| Snippet Search                              | Done   |
+| Snippet Filtering                           | Done   |
+| Snippet Sorting                             | Done   |
+| Snippet Pagination                          | Done   |
+| Snippet Favorites                           | Done   |
+| Snippet Tags                                | Done   |
+| Collection CRUD                             | Done   |
+| Collection Snippet Linking                  | Done   |
+| Collection Detail UI                        | Done   |
+| Collection Metadata UI                      | Done   |
+| Collection Path Metadata                    | Done   |
+| Collection Search / Filter / Sort           | Done   |
+| Collection Pagination                       | Done   |
+| Direct New Snippet Shortcut from Collection | Done   |
+| Documentation Alignment                     | Done   |
 
 ## Snippet Management
 
@@ -76,6 +77,12 @@ The remaining work is primarily refinement and incremental quality improvements 
 - [x] Use a dedicated join model for collection ↔ snippet references
 - [x] Preserve original Snippet records instead of duplicating them
 - [x] Display collection-linked snippet metadata and preview
+- [x] Search collections
+- [x] Filter collections by supported metadata
+- [x] Sort collections
+- [x] Paginate collection results
+- [x] Combine search, filtering, sorting, and pagination
+- [x] Provide collection search, filter, and sort controls through the sidebar
 
 ### Current Collection Model
 
@@ -133,11 +140,10 @@ model CollectionSnippet {
 
 ## Current Refinement Items
 
-- [ ] Add a more explicit path input for collection snippet entries
-- [ ] Add a direct New Snippet shortcut from the collection workflow
 - [ ] Review collection detail usability and ordering clarity
-- [ ] Evaluate collection-level search, filter, and sorting requirements
 - [ ] Add further polish for mobile and edge-case UX flows
+- [ ] Review utility and component usage through actual page implementation
+- [ ] Identify reusable UI improvements based on real usage rather than speculative abstraction
 
 ## Documentation Status
 
@@ -152,5 +158,11 @@ model CollectionSnippet {
 
 ## Current Phase Summary
 
-The project is now focused on finishing the collection experience and product polish, while keeping the core snippet workflow stable and well-documented.
-Large-scale architectural changes are not the immediate priority; incremental improvements to the collection workflow and surrounding UX are the primary next steps.
+The core snippet workflow and collection workflow are now implemented and stable.
+Search, filtering, sorting, pagination, and sidebar controls are available for both major browsing workflows.
+
+The project is now moving from feature construction into a refinement and completion phase.
+The immediate focus is to finish the top page, review the application as a whole, and address practical UX or component issues discovered through actual usage.
+
+Further utility and component expansion will be driven by real implementation needs rather than speculative abstraction.
+Large-scale architectural changes and broad feature expansion are not the immediate priority.

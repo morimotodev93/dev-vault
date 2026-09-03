@@ -126,6 +126,23 @@ The changelog records feature-level and project-level changes, and keeps the pro
 - Snippet content stays canonical in the `Snippet` model, while collection membership is tracked in `CollectionSnippet`.
 - Collection UI and data rules are aligned with the actual Prisma schema and app behavior.
 
+## 0.5.1 — Collection Browsing
+
+### Added
+
+- Collection search
+- Collection filtering
+- Collection sorting
+- Collection pagination
+- Combined search, filtering, sorting, and pagination
+- Responsive sidebar controls for collection browsing
+- Direct New Snippet shortcut from collection detail
+
+### Changed
+
+- Collection browsing now supports the same practical navigation patterns established for Snippets.
+- Collection workflow is now considered feature-complete for the current project scope.
+
 ## 0.6.0 — Documentation and Structure Alignment
 
 ### Added
@@ -167,6 +184,14 @@ The app currently includes a working snippet workflow and a collection workflow 
 - Reorder collection membership by position
 - Maintain collection-related metadata
 - Prisma-backed persistence with SQLite for local development
+- Search collections
+- Filter collections
+- Sort collections
+- Paginate collection results
+- Add snippets to collections
+- Reorder collection membership by position
+- Maintain collection-related metadata
+- Create new snippets directly from collection detail
 
 ### Documentation status
 

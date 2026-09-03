@@ -4,8 +4,11 @@ This roadmap reflects the current state of Dev Vault as an implementation-focuse
 
 ## Current Phase
 
-The core snippet workflow is complete, and the collection workflow is implemented and active.
-The project is now in a refinement phase focused on the remaining collection experience details, usability polish, and incremental feature improvements.
+The core snippet and collection workflows are implemented and stable.
+Both workflows support CRUD operations, search, filtering, sorting, and pagination where applicable.
+
+The project is now entering a completion and refinement phase.
+The immediate focus is on finishing the top page, reviewing the application as a whole, and addressing practical UX issues discovered through actual usage.
 
 ## Completed
 
@@ -41,6 +44,13 @@ The project is now in a refinement phase focused on the remaining collection exp
 - Collection snippet removal with confirmation
 - Collection metadata and list ordering logic
 - Collection-specific card presentation and detail flow
+- Collection search
+- Collection filtering
+- Collection sorting
+- Collection pagination
+- Combined search, filter, sort, and pagination behavior
+- Responsive sidebar controls for collection browsing
+- Direct New Snippet shortcut from the collection workflow
 
 ### Documentation
 
@@ -53,24 +63,27 @@ The project is now in a refinement phase focused on the remaining collection exp
 
 ## Near-Term Focus
 
-### Collection Experience Refinement
+### Application Completion
 
-- Add a collection-specific path input for linked snippets
-- Add a direct New Snippet shortcut from the collection workflow
-- Refine ordering and contextual display within collection detail views
-- Keep manual snippet selection and removal as the primary workflow
+- Finish and refine the top page
+- Review the complete application flow from a user perspective
+- Check consistency across snippets, collections, and shared UI
+- Fix practical UX issues discovered through actual usage
+- Apply final responsive and accessibility polish where needed
+
+### Component and Utility Refinement
+
+- Evaluate existing utilities and primitives through real page implementation
+- Add or adjust utilities only when practical usage reveals a clear need
+- Avoid speculative abstraction and unnecessary component expansion
 
 ### Product Polish
 
 - Tighten mobile and responsive usability where needed
 - Improve empty-state, confirmation, and helper text clarity
 - Review collection naming and path semantics for long-term consistency
-
-## Deferred or Intentionally Scoped
-
-- Tag normalization remains deferred until the current serialized tag storage clearly becomes limiting.
-- Snippet category is intentionally outside the current scope.
-- Framework metadata on collections remains display-oriented and is not currently used as a search dimension.
+- Review navigation and information hierarchy across the application
+- Address edge-case UX issues discovered during final application review
 
 ## Mid-Term Opportunities
 
@@ -107,4 +120,8 @@ The project is now in a refinement phase focused on the remaining collection exp
 ## Guiding Principle
 
 Keep the project simple and maintainable while growing the feature set incrementally.
-The current emphasis is on a stable snippet system, a useful collection workflow, and clear documentation that reflects what is actually implemented.
+
+Prioritize completing and using the application over expanding the feature set indefinitely.
+Let real usage drive improvements to utilities, components, and UX rather than designing abstractions speculatively.
+
+The current emphasis is on a stable snippet system, a useful collection workflow, a polished top page, and documentation that reflects the actual implementation.
