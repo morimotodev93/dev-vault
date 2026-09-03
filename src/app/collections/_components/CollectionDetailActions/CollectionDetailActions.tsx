@@ -12,9 +12,20 @@ export function CollectionDetailActions({ id }: DetailActionsProps) {
   return (
     <Stack gap={2} wrap align="center" justify="end" direction="row">
       <DeleteButton id={id} />
+      {/* Edit Collection */}
       <LinkButton size="sm" weight="medium" href={`/collections/${id}/edit`}>
         Edit
       </LinkButton>
+      {/* New Snippets */}
+      <LinkButton
+        size="sm"
+        weight="medium"
+        variant="primary"
+        href="/snippets/new"
+      >
+        New Snippet
+      </LinkButton>
+      {/* New Collection */}
       <Link
         href="/collections/new"
         appearance="content"
@@ -22,12 +33,13 @@ export function CollectionDetailActions({ id }: DetailActionsProps) {
       >
         New Collection
       </Link>
+      {/* Return Collection List*/}
       <Link
         href="/collections"
         appearance="content"
         className={styles.linkButton}
       >
-        Collection List
+        Return
       </Link>
     </Stack>
   );
