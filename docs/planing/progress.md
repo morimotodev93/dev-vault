@@ -140,8 +140,10 @@ model CollectionSnippet {
 
 ## Current Refinement Items
 
+- [x] Finish top page
+- [x] Review responsive behavior of implemented pages
+- [x] Improve mobile navigation behavior
 - [ ] Review collection detail usability and ordering clarity
-- [ ] Add further polish for mobile and edge-case UX flows
 - [ ] Review utility and component usage through actual page implementation
 - [ ] Identify reusable UI improvements based on real usage rather than speculative abstraction
 
@@ -161,8 +163,10 @@ model CollectionSnippet {
 The core snippet workflow and collection workflow are now implemented and stable.
 Search, filtering, sorting, pagination, and sidebar controls are available for both major browsing workflows.
 
-The project is now moving from feature construction into a refinement and completion phase.
-The immediate focus is to finish the top page, review the application as a whole, and address practical UX or component issues discovered through actual usage.
+The project is now in a refinement and completion phase.
+
+The top page and primary application workflows are implemented.
+The remaining work focuses on practical UX refinement, accessibility, edge cases, and final structural cleanup discovered through actual usage.
 
 Further utility and component expansion will be driven by real implementation needs rather than speculative abstraction.
 Large-scale architectural changes and broad feature expansion are not the immediate priority.
