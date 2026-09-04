@@ -164,6 +164,19 @@ The changelog records feature-level and project-level changes, and keeps the pro
 
 The app currently includes a working snippet workflow and a collection workflow that follows the actual persisted data model.
 
+## 0.7.0 — Home and UX Refinement
+
+### Added
+
+- Quick statistics on the home page.
+- Recent snippets section on the home page.
+- Recent collections section on the home page.
+
+### Changed
+
+- Improved the home page as an entry point for snippets and collections.
+- Mobile navigation now closes automatically after navigation.
+
 ### Implemented
 
 - Create snippets
@@ -188,9 +201,6 @@ The app currently includes a working snippet workflow and a collection workflow 
 - Filter collections
 - Sort collections
 - Paginate collection results
-- Add snippets to collections
-- Reorder collection membership by position
-- Maintain collection-related metadata
 - Create new snippets directly from collection detail
 
 ### Documentation status
@@ -207,4 +217,14 @@ The documentation set is now aligned with the current application structure, inc
 
 ### Remaining focus
 
-The project continues to evolve around the collection workflow, particularly around refinement of collection-specific metadata and any future normalization work for tag storage if the current serialized approach becomes limiting.
+The project is currently in a refinement and completion phase.
+
+The immediate focus is:
+
+- final UX review
+- accessibility and edge-case checks
+- responsive behavior verification
+- project structure cleanup
+- final documentation alignment
+
+Large-scale feature expansion is not currently planned.
