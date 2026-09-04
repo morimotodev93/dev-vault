@@ -57,7 +57,7 @@ export function Header({ hidden }: HeaderProps) {
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Mobile Menu */}
-          <HeaderMobileMenu />
+          <HeaderMobileMenu onNavigate={() => setIsMenuOpen(false)} />
         </>
       )}
     </header>
