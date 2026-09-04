@@ -1,76 +1,36 @@
-import { Tag } from "@/components/common";
-import {
-  Button,
-  Container,
-  Heading,
-  Stack,
-  Surface,
-  Text,
-} from "@/components/primitives";
+import { Heading, Link, Stack } from "@/components/primitives";
 import clsx from "clsx";
 import styles from "./RecentSnippets.module.css";
 
-export function RecentSnippets() {
-  return (
-    <>
-      <Container as="section" className={styles.recentSnippets}>
-        <Stack gap={6}>
-          <Heading>Recent Snippets</Heading>
+import { SnippetCard } from "@/app/snippets/_components";
+import type { Snippet } from "@/generated/prisma/client";
 
-          <div className={clsx(styles.snippetsList, "l-auto-grid")}>
-            {/* Snippets Card */}
-            <Surface radius="sm" bordered className={styles.snippetsCard}>
-              <Stack>
-                <Heading size="sm">Title</Heading>
-                <Text>Description</Text>
-                <Stack gap={1}>
-                  {/* Language Tag Area*/}
-                  <Stack direction="row" gap={1}>
-                    <Tag size="sm">Type Script</Tag>
-                    <Tag size="sm">Test</Tag>
-                  </Stack>
-                  {/* Update & Favorit Button Area */}
-                  <Stack direction="row" align="center" justify="between">
-                    <Text size="sm">Updated: 2026/08/11</Text>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={styles.favoritButton}
-                    >
-                      ★
-                    </Button>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Surface>
-            {/* Snippets Card Grid Test */}
-            <Surface radius="sm" bordered className={styles.snippetsCard}>
-              <Stack>
-                <Heading size="sm">Title</Heading>
-                <Text>Description</Text>
-                <Stack gap={1}>
-                  {/* Language Tag Area*/}
-                  <Stack direction="row" gap={1}>
-                    <Tag size="sm">Type Script</Tag>
-                    <Tag size="sm">Test</Tag>
-                  </Stack>
-                  {/* Update & Favorit Button Area */}
-                  <Stack direction="row" align="center" justify="between">
-                    <Text size="sm">Updated: 2026/08/11</Text>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className={styles.favoritButton}
-                    >
-                      ★
-                    </Button>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Surface>
-          </div>
-        </Stack>
-      </Container>
-    </>
+type RecentSnippetsProps = {
+  recentSnippets: Snippet[];
+};
+
+export function RecentSnippets({ recentSnippets }: RecentSnippetsProps) {
+  return (
+    <section>
+      <Stack gap={6}>
+        <Heading>Recent Snippets</Heading>
+
+        <div className={clsx(styles.snippetsList, "l-auto-grid")}>
+          {recentSnippets.map((snippet) => (
+            <SnippetCard key={snippet.id} {...snippet} />
+          ))}
+        </div>
+
+        <Link
+          href="/snippets"
+          appearance="content"
+          className={clsx("u-self-center", "w-fit")}
+        >
+          <Heading as={"h3"} color="subtle">
+            All View
+          </Heading>
+        </Link>
+      </Stack>
+    </section>
   );
 }

@@ -1,26 +1,44 @@
-import { Container, Heading, Stack, Text } from "@/components/primitives";
+import { Heading, Stack, Text } from "@/components/primitives";
 import clsx from "clsx";
 import styles from "./QuickStats.module.css";
 
-export function QuickStats() {
+interface QuickStatsProps {
+  totalSnippets: number;
+  favoriteSnippets: number;
+  totalCollections: number;
+  favoriteCollections: number;
+}
+
+export function QuickStats({
+  totalSnippets,
+  favoriteSnippets,
+  totalCollections,
+  favoriteCollections,
+}: QuickStatsProps) {
   return (
     <>
-      <Container
-        as="section"
-        id="quick-stats"
-        className={clsx(styles.stats, "l-auto-grid")}
-      >
+      <section id="quick-stats" className={clsx(styles.stats, "l-auto-grid")}>
         {/* Total Snippets */}
-        <Stack className={styles.totalSnippets}>
+        <Stack direction="row" gap={1} className={styles.total}>
           <Heading size="sm">Total Snippets</Heading>
-          <Text size="sm">24</Text>
+          <Text>{totalSnippets}</Text>
         </Stack>
-        {/* Favorites */}
-        <Stack className={styles.favorites}>
-          <Heading size="sm">Favorites</Heading>
-          <Text size="sm">8</Text>
+        {/* Favorite Snippets */}
+        <Stack direction="row" gap={1} className={styles.favorites}>
+          <Heading size="sm">Favorite Snippets</Heading>
+          <Text>{favoriteSnippets}</Text>
         </Stack>
-      </Container>
+        {/* Total Collections */}
+        <Stack direction="row" gap={1} className={styles.total}>
+          <Heading size="sm">Total Collections</Heading>
+          <Text>{totalCollections}</Text>
+        </Stack>
+        {/* Favorite Collections */}
+        <Stack direction="row" gap={1} className={styles.favorites}>
+          <Heading size="sm">Favorite Collections</Heading>
+          <Text>{favoriteCollections}</Text>
+        </Stack>
+      </section>
     </>
   );
 }
