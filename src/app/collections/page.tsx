@@ -148,7 +148,11 @@ export default async function Collection({
             </>
           )}
           {/* Button Area */}
-          <Stack direction="row" align="center" justify="end">
+          <Stack direction="row" gap={2} align="center" justify="end">
+            {/* Return */}
+            <LinkButton variant="subtle" size="lg" href="/">
+              Return
+            </LinkButton>
             {/* New Collection Button */}
             <LinkButton size="lg" href="/collections/new">
               New Collection

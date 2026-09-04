@@ -1,11 +1,4 @@
-import {
-  Container,
-  Heading,
-  Link,
-  Stack,
-  Surface,
-  Text,
-} from "@/components/primitives";
+import { Container, Heading, Spacer, Stack } from "@/components/primitives";
 
 import {
   SnippetCard,
@@ -30,6 +23,7 @@ import {
 import clsx from "clsx";
 import { redirect } from "next/navigation";
 
+import { LinkButton } from "@/components/ui";
 import styles from "./snippet.module.css";
 
 export default async function Snippet({
@@ -184,16 +178,17 @@ export default async function Snippet({
           )}
 
           <Stack gap={2} align="center" justify="end" direction="row">
+            {/* Return */}
+            <LinkButton variant="subtle" size="lg" href="/">
+              Return
+            </LinkButton>
             {/* New Snippets */}
-            <Link href="/snippets/new">
-              <Surface radius="md" bordered>
-                <Stack justify="center" align="center">
-                  <Text>New Snippet</Text>
-                </Stack>
-              </Surface>
-            </Link>
+            <LinkButton size="lg" href="/snippets/new">
+              New Snippet
+            </LinkButton>
           </Stack>
         </Stack>
+        <Spacer mobile={48} desktop={80} />
       </Container>
       {/* Sidebar */}
       <SnippetSidebar />
