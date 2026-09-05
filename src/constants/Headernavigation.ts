@@ -16,6 +16,12 @@ export const navigationConfig: AppNavigation = {
       href: "/collections",
       icon: "folder",
     },
+    {
+      id: "about",
+      label: "About",
+      href: "/about",
+      icon: "user",
+    },
   ],
 
   hamburgerNav: [
@@ -34,6 +40,12 @@ export const navigationConfig: AppNavigation = {
           label: "Collections",
           href: "/collections",
           icon: "folder",
+        },
+        {
+          id: "about",
+          label: "About",
+          href: "/about",
+          icon: "user",
         },
       ],
     },

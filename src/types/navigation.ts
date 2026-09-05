@@ -1,7 +1,7 @@
 /**
  * アイコン識別子（Lucide React などのアイコンライブラリのアイコン名文字列）
  */
-export type NavigationIcon = "code" | "folder" | "plus" | "settings";
+export type NavigationIcon = "code" | "folder" | "plus" | "settings" | "user";
 
 /**
  * 個々のナビゲーションリンク項目のインターフェース
