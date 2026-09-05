@@ -1,7 +1,7 @@
 import { Heading, Stack, Text } from "@/components/primitives";
 
+import { FavoriteButton, RatingButton } from "@/app/collections/_components";
 import { Tag } from "@/components/common";
-import { StarIcon } from "@/components/icon";
 
 import {
   COLLECTION_CATEGORY_OPTIONS,
@@ -31,10 +31,22 @@ export function CollectionDetailMetadata(
     : [];
 
   const ratingItems = [
-    ["Priority", collection.priority],
-    ["Interest", collection.interest],
-    ["Practicality", collection.practicality],
-  ];
+    {
+      type: "priority",
+      label: "Priority",
+      value: collection.priority,
+    },
+    {
+      type: "interest",
+      label: "Interest",
+      value: collection.interest,
+    },
+    {
+      type: "practicality",
+      label: "Practicality",
+      value: collection.practicality,
+    },
+  ] as const;
 
   return (
     <Stack gap={6}>
@@ -42,6 +54,7 @@ export function CollectionDetailMetadata(
       <Heading as="h2" size="lg">
         {collection.title}
       </Heading>
+
       {/* Description */}
       <Text>{collection.description}</Text>
 
@@ -62,21 +75,24 @@ export function CollectionDetailMetadata(
         </Stack>
       )}
 
-      <Stack direction="row" gap={4} wrap>
-        {ratingItems.map(([label, value]) => (
-          <Stack key={label} gap={1}>
-            <Text size="sm">{label}</Text>
-            <Text>{value} / 5</Text>
-          </Stack>
-        ))}
-      </Stack>
+      <Stack direction="row" align="center" justify="between" wrap>
+        {/* Rating Items */}
+        <Stack direction="row" align="center" gap={3}>
+          {ratingItems.map((item) => (
+            <Stack key={item.type} gap={1}>
+              <Text size="sm">{item.label}</Text>
 
-      {/* Favorite */}
-      {collection.favorite && (
-        <Stack direction="row" align="center" justify="end">
-          <StarIcon />
+              <RatingButton
+                id={collection.id}
+                type={item.type}
+                value={item.value}
+              />
+            </Stack>
+          ))}
         </Stack>
-      )}
+        {/* Favorite */}
+        <FavoriteButton id={collection.id} favorite={collection.favorite} />
+      </Stack>
     </Stack>
   );
 }

@@ -90,6 +90,7 @@ export interface CollectionCardItem {
 }
 
 export interface CollectionDetailMetadataItem {
+  id: string;
   title: string;
   description: string | null;
   category: string;

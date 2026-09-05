@@ -1,3 +1,4 @@
+import { FavoriteButton } from "@/app/collections/_components";
 import { Tag } from "@/components/common";
 import { Heading, Link, Stack, Surface, Text } from "@/components/primitives";
 import {
@@ -72,11 +73,6 @@ export function CollectionCard({
             <Heading className="u-line-clamp" level={4} size="sm">
               {title}
             </Heading>
-            {favorite && (
-              <Tag color="warning" size="sm">
-                Favorite
-              </Tag>
-            )}
           </Stack>
 
           {description && (
@@ -114,7 +110,10 @@ export function CollectionCard({
           </Stack>
         </Link>
 
-        <Text size="sm">Updated: {updatedAt.toLocaleDateString()}</Text>
+        <Stack direction="row" justify="between">
+          <Text size="sm">Updated: {updatedAt.toLocaleDateString()}</Text>
+          <FavoriteButton id={id} favorite={favorite} />
+        </Stack>
       </Stack>
     </Surface>
   );

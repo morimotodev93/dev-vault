@@ -9,4 +9,6 @@ export * from "./CollectionSidebar";
 export * from "./CollectionSnippetCard";
 export * from "./CollectionSort";
 export * from "./DeleteButton";
+export * from "./FavoriteButton";
+export * from "./RatingButton";
 export * from "./RemoveCollectionSnippetButton";
