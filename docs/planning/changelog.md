@@ -194,14 +194,20 @@ The app currently includes a working snippet workflow and a collection workflow 
 - Update collections
 - Delete collections
 - Add snippets to collections
-- Reorder collection membership by position
+- Remove snippets from collections
+- Maintain collection snippet ordering by position
 - Maintain collection-related metadata
-- Prisma-backed persistence with SQLite for local development
+- Update collection favorites
+- Update collection priority, interest, and practicality ratings
 - Search collections
 - Filter collections
 - Sort collections
 - Paginate collection results
 - Create new snippets directly from collection detail
+- Prisma-backed persistence with SQLite for local development
+- Home page with project introduction, statistics, and recent snippets and collections
+- Project introduction page
+- Responsive mobile navigation with automatic menu closing after navigation
 
 ### Documentation status
 
@@ -214,7 +220,19 @@ The documentation set is now aligned with the current application structure, inc
 - deployment and troubleshooting
 - API and database references
 - roadmap and changelog
+- current development progress
 
 ### Remaining focus
 
-The project continues to evolve around the collection workflow, particularly around refinement of collection-specific metadata and any future normalization work for tag storage if the current serialized approach becomes limiting.
+The project is now in a refinement and completion phase.
+
+The remaining work focuses on:
+
+- final UX refinement
+- accessibility and edge-case checks
+- responsive behavior verification
+- project structure cleanup
+- final documentation review
+- identifying reusable UI improvements based on actual usage
+
+Large-scale feature expansion and speculative architectural changes are not currently a priority.

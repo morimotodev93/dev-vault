@@ -143,9 +143,9 @@ model CollectionSnippet {
 - [x] Finish top page
 - [x] Review responsive behavior of implemented pages
 - [x] Improve mobile navigation behavior
-- [ ] Review collection detail usability and ordering clarity
-- [ ] Review utility and component usage through actual page implementation
-- [ ] Identify reusable UI improvements based on real usage rather than speculative abstraction
+- [x] Review collection detail usability and ordering clarity
+- [x] Review utility and component usage through actual page implementation
+- [x] Identify reusable UI improvements based on real usage rather than speculative abstraction
 
 ## Documentation Status
 
@@ -160,12 +160,12 @@ model CollectionSnippet {
 
 ## Current Phase Summary
 
-The core snippet workflow and collection workflow are now implemented and stable.
-Search, filtering, sorting, pagination, and sidebar controls are available for both major browsing workflows.
+The core Snippet and Collection workflows are now implemented and stable.
+Search, filtering, sorting, pagination, and related controls are available across the main browsing workflows.
 
 The project is now in a refinement and completion phase.
 
-The top page and primary application workflows are implemented.
+The top page, project introduction page, and primary application workflows are implemented.
 The remaining work focuses on practical UX refinement, accessibility, edge cases, and final structural cleanup discovered through actual usage.
 
 Further utility and component expansion will be driven by real implementation needs rather than speculative abstraction.
