@@ -66,3 +66,7 @@ temp/
 # Memo
 memo/
 /src/generated/prisma
+
+# Local SQLite database
+prisma/*.db
+prisma/*.db.*
