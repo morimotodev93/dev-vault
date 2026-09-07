@@ -160,10 +160,6 @@ The changelog records feature-level and project-level changes, and keeps the pro
 - README files and documentation sections were normalized for consistency.
 - Project documentation now reflects the implemented snippet and collection workflows rather than older conceptual plans.
 
-## Current Status
-
-The app currently includes a working snippet workflow and a collection workflow that follows the actual persisted data model.
-
 ## 0.7.0 — Home and UX Refinement
 
 ### Added
@@ -175,6 +171,23 @@ The app currently includes a working snippet workflow and a collection workflow 
 ### Changed
 
 - Improved the home page as an entry point for snippets and collections.
+- Mobile navigation now closes automatically after navigation.
+
+## 0.8.0 — Production Deployment and Refinement
+
+### Added
+
+- Quick statistics on the home page.
+- Recent snippets section on the home page.
+- Recent collections section on the home page.
+- Project introduction page at `/about`.
+
+### Changed
+
+- Improved the home page as an entry point for snippets and collections.
+- Migrated the database from SQLite to PostgreSQL.
+- Migrated production persistence to Prisma Postgres.
+- Production deployment is now handled through Vercel.
 - Mobile navigation now closes automatically after navigation.
 
 ### Implemented
@@ -204,14 +217,17 @@ The app currently includes a working snippet workflow and a collection workflow 
 - Sort collections
 - Paginate collection results
 - Create new snippets directly from collection detail
-- Prisma-backed persistence with SQLite for local development
+- Prisma-backed persistence with PostgreSQL
+- PostgreSQL migration with existing data verification
+- Production deployment with Vercel
+- Prisma Postgres integration for production persistence
 - Home page with project introduction, statistics, and recent snippets and collections
 - Project introduction page
 - Responsive mobile navigation with automatic menu closing after navigation
 
 ### Documentation status
 
-The documentation set is now aligned with the current application structure, including:
+The documentation set is now aligned with the current application structure and deployment environment, including:
 
 - project overview
 - architecture and structure
