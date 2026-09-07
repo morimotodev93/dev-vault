@@ -1,30 +1,53 @@
 # Troubleshooting
 
-This section collects the most common issues encountered while setting up, building, or running Dev Vault.
+This section collects troubleshooting guidance for issues encountered while setting up, building, deploying, or running Dev Vault.
 
 ## Available topics
 
-- [better-sqlite3.md](better-sqlite3.md) — native build issues related to SQLite and `better-sqlite3`
+### Current
+
+No dedicated troubleshooting guides are currently documented.
+
+### Archive
+
+- [better-sqlite3.md](archive/better-sqlite3.md) — historical native build issues from the previous SQLite and `better-sqlite3` setup
+
+Archived documents describe issues from previous project configurations and are kept for historical reference. They are not part of the current application stack.
 
 ## When to use this section
 
 Use this section when:
 
-- `pnpm install` fails at a native dependency step
-- Prisma cannot initialize the client
-- the development app does not start after dependencies are installed
-- Windows-specific runtime requirements block the build
+- `pnpm install` fails
+- Prisma Client cannot be generated or initialized
+- the development app does not start
+- the production build fails
+- database connection or migration issues occur
+- Vercel deployment fails
+- environment variables are missing or incorrectly configured
 
 ## Typical troubleshooting flow
 
 1. Confirm that the Node.js and package manager versions match the project requirements.
-2. Check whether the issue is caused by a native module build problem.
-3. Verify that `DATABASE_URL` is defined correctly.
-4. Run Prisma generation after dependency installation.
-5. Re-run the build or startup command with the correct environment variables in place.
+2. Check the installation and build output for the first reported error.
+3. Verify that the required environment variables are defined correctly.
+4. Run Prisma generation when dependency or Prisma configuration changes are involved.
+5. Check the database connection and migration state when database-related errors occur.
+6. Re-run the build or startup command after correcting the underlying issue.
 
-## Current known issue pattern
+## Current environment
 
-The most common blocker in this project is the `better-sqlite3` native build on Windows. In most cases, this happens because the local environment is missing the required C++ build tooling or Python dependencies.
+Dev Vault currently uses:
 
-For the latest fix path, see [better-sqlite3.md](better-sqlite3.md).
+- Next.js
+- React
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- Prisma Postgres
+- Vercel
+- pnpm
+
+The application no longer uses SQLite or `better-sqlite3`.
+
+For deployment and environment configuration, see [deployment.md](../deployment.md).
