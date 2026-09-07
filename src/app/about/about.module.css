@@ -1,3 +1,7 @@
 .githubLink {
   margin-inline-start: var(--space-2);
 }
+
+.vercelLink {
+  margin-inline-start: var(--space-2);
+}

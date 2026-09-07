@@ -101,7 +101,7 @@ export default function AboutPage() {
 
           <Text>
             Dev Vault is built with Next.js, React, TypeScript, Prisma, and
-            SQLite.
+            PostgreSQL.
           </Text>
 
           <Text>
@@ -158,7 +158,18 @@ export default function AboutPage() {
               View Repository
             </Link>
           </Text>
-          <Text>Live Demo: Coming soon</Text>
+          <Text>
+            Live Demo:{" "}
+            <Link
+              external
+              appearance="content"
+              variant="primary"
+              href="https://dev-vault-livid.vercel.app/"
+              className={styles.vercelLink}
+            >
+              View Live Site
+            </Link>
+          </Text>
         </Stack>
       </Stack>
 
