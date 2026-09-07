@@ -12,6 +12,7 @@ The current codebase includes:
 - a shared Prisma client in `src/lib/prisma.ts`
 - Zod schemas for form validation in `src/types/`
 - server actions for snippet and collection writes
+- PostgreSQL as the application database
 - no dedicated REST or GraphQL contract yet
 
 ## Server Action Pattern
@@ -57,7 +58,7 @@ Current validation flow:
 1. Receive input from form state or server action arguments.
 2. Parse with Zod.
 3. Reject invalid input before Prisma writes.
-4. Store only sanitized, typed values.
+4. Store only validated, typed values.
 
 Examples:
 
@@ -98,45 +99,111 @@ Collection data is validated by `collectionFormSchema` and stored with fields su
 
 The collection also relates to snippets through the `CollectionSnippet` join model.
 
+`CollectionSnippet` stores relationship-specific information:
+
+- `collectionId`
+- `snippetId`
+- `path`
+- `position`
+
+The relation prevents the same Snippet from being added to the same Collection more than once through a composite unique constraint.
+
 ## Prisma Client Setup
 
 The shared Prisma client is created in `src/lib/prisma.ts`.
 
-Current setup:
+The application uses the PostgreSQL adapter provided by `@prisma/adapter-pg`.
+
+The runtime database connection uses `DATABASE_URL`:
 
 ```ts
-import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+const databaseUrl = process.env.DATABASE_URL;
 
-const adapter = new PrismaBetterSqlite3({
-  url: process.env.DATABASE_URL ?? "file:./dev.db",
+const adapter = new PrismaPg({
+  connectionString: databaseUrl,
 });
 
-export const prisma = new PrismaClient({ adapter });
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    adapter,
+  });
 ```
 
-This means the app currently expects a SQLite-backed Prisma configuration through `DATABASE_URL`.
+`DATABASE_URL` is used by the application at runtime and points to the pooled PostgreSQL connection.
+
+Prisma CLI operations such as migrations use `DIRECT_URL`, configured through `prisma.config.ts`.
+
+The current database stack is:
+
+```text
+Next.js
+   │
+   ▼
+Server Actions / Server Components
+   │
+   ▼
+Prisma Client
+   │
+   ▼
+PrismaPg Adapter
+   │
+   ▼
+PostgreSQL
+   │
+   ▼
+Prisma Postgres
+```
+
+## Database Schema
+
+The primary data models are:
+
+- `Snippet`
+- `Collection`
+- `CollectionSnippet`
+
+`CollectionSnippet` is an explicit relation model because the relationship itself stores additional data such as `path` and `position`.
+
+The current Prisma schema is defined in:
+
+`prisma/schema.prisma`
+
+Active PostgreSQL migrations are stored in:
+
+`prisma/migrations/`
+
+Historical SQLite migrations are archived separately in:
+
+`prisma/migrations-sqlite/`
 
 ## Error Handling
 
 The application currently uses simple action-level error responses rather than a formal API error envelope.
 
-Recommended pattern for future expansion:
+The general result pattern is:
 
 ```ts
 type ActionResult<T> =
   { success: true; data: T } | { success: false; error: string };
 ```
 
-## Future API Direction
+This pattern is intended for internal server actions rather than a public HTTP API.
 
-If a public API is added later, the project should document:
+## Public API Status
+
+There is currently no dedicated REST or GraphQL API.
+
+Server actions are considered internal application data-access boundaries and should not be treated as a stable public API contract.
+
+If external clients or integrations are introduced later, a dedicated API layer should document:
 
 - endpoint path
 - HTTP method
 - request shape
 - response shape
 - error payloads
-- auth or access requirements
+- authentication and authorization requirements
+- versioning strategy
 
-At present, it is better to treat the server actions as the app's current data access contract.
+Until then, the server actions and their validation boundaries represent the application's current data-access contract.

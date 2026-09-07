@@ -1,8 +1,10 @@
 # Database Reference
 
-Dev Vault uses Prisma ORM and SQLite for local development.
+Dev Vault uses Prisma ORM with PostgreSQL as its database.
 
-This document describes the current database model and the data patterns the application actually uses today.
+The production database is provided through Prisma Postgres, and the application connects to PostgreSQL through the Prisma PostgreSQL adapter.
+
+This document describes the current database configuration, data model, and data patterns used by the application.
 
 ## 1. Database configuration
 
@@ -10,16 +12,27 @@ The Prisma datasource is configured in `prisma/schema.prisma`:
 
 ```prisma
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 ```
 
-The runtime Prisma client is created in `src/lib/prisma.ts` using `@prisma/adapter-better-sqlite3`.
+The runtime Prisma client is created in `src/lib/prisma.ts` using `@prisma/adapter-pg`.
 
-The app expects a `DATABASE_URL` environment variable, and defaults to:
+The application uses `DATABASE_URL` for the runtime database connection.
 
-```bash
-file:./dev.db
+Prisma CLI operations such as migrations use `DIRECT_URL`, configured through `prisma.config.ts`.
+
+The current configuration separates the application runtime connection from the direct connection used for database administration and migrations.
+
+```text
+DATABASE_URL
+  → Runtime application connection
+  → PrismaPg adapter
+  → PostgreSQL
+
+DIRECT_URL
+  → Prisma CLI / migrations
+  → PostgreSQL
 ```
 
 ## 2. Prisma client output
@@ -34,6 +47,16 @@ generator client {
 ```
 
 The generated client is intentionally kept under `src/generated/prisma` and should not be edited by hand.
+
+The Prisma Client is generated automatically after dependency installation through the `postinstall` script:
+
+```json
+{
+  "scripts": {
+    "postinstall": "prisma generate"
+  }
+}
+```
 
 ## 3. Current data model
 
@@ -116,7 +139,7 @@ model CollectionSnippet {
 | `language`     | `String?`  | No       | Collection language         |
 | `frameworks`   | `Json`     | Yes      | Stored as a framework array |
 | `favorite`     | `Boolean`  | Yes      | Default `false`             |
-| `priority`     | `Int`      | Yes      | Default `0`                 |
+| `priority`     | `Int`      | Yes      | Priority rating             |
 | `interest`     | `Int`      | Yes      | Interest rating             |
 | `practicality` | `Int`      | Yes      | Practicality rating         |
 | `createdAt`    | `DateTime` | Yes      | Created timestamp           |
@@ -134,14 +157,22 @@ model CollectionSnippet {
 | `path`         | `String?` | No       | Optional path metadata               |
 | `position`     | `Int`     | Yes      | Ordering value inside the collection |
 
-The model also has a unique compound key on `(collectionId, snippetId)`.
-Both the collection and snippet relations use cascade deletes, so the relationship record is removed when either related record is deleted.
+The model has a unique compound constraint on `(collectionId, snippetId)`.
+
+This prevents the same Snippet from being added to the same Collection more than once.
+
+Both relations use cascade deletes:
+
+- deleting a Collection removes its `CollectionSnippet` records
+- deleting a Snippet removes its related `CollectionSnippet` records
+
+The `Snippet` or `Collection` itself is not deleted when a relationship record is removed.
 
 ## 7. Tag behavior
 
-The current app still serializes tag values as a single string in Prisma.
+The current app serializes tag values as a single string in Prisma.
 
-Example:
+For example:
 
 ```ts
 ["typescript", "react", "nextjs"];
@@ -149,30 +180,115 @@ Example:
 
 is stored as:
 
-```ts
-"typescript,react,nextjs";
+```text
+"typescript,react,nextjs"
 ```
 
-This is a deliberate current implementation choice, not a normalized tag table.
+The form layer works with a string array, while the database stores the serialized representation.
 
-## 8. Migrations
+This is a deliberate current implementation choice rather than a normalized tag table.
 
-Prisma migrations are stored in:
+Tag normalization and a dedicated `Tag` model remain possible future improvements if the current representation becomes limiting.
+
+## 8. Framework data
+
+Collection frameworks are stored using Prisma's `Json` type.
+
+The application treats the value as an array of framework names.
+
+Example:
+
+```json
+["React", "Next.js", "Prisma"]
+```
+
+The database does not use a separate framework relation.
+
+## 9. Migrations
+
+Active PostgreSQL migrations are stored in:
 
 ```text
 prisma/migrations/
 ```
 
-When the schema changes, create and apply migrations with Prisma CLI commands.
+The current migration history represents the PostgreSQL database schema.
 
-## 9. Future direction
+When the schema changes, create and apply a migration with Prisma CLI commands.
 
-SQLite is sufficient for the current local development workflow, but this project may later move to a production-grade database while keeping Prisma as the access layer.
+For deployment environments, migrations should be applied with:
+
+```bash
+pnpm prisma migrate deploy
+```
+
+The project does not use `prisma migrate reset` against the production database.
+
+### Historical SQLite migrations
+
+The previous SQLite migration history is preserved separately in:
+
+```text
+prisma/migrations-sqlite/
+```
+
+These files are historical reference material and are not part of the active PostgreSQL migration history.
+
+The project no longer uses SQLite or `better-sqlite3`.
+
+## 10. Database environment
+
+The application distinguishes between runtime and migration database connections.
+
+| Variable       | Purpose                                                        |
+| -------------- | -------------------------------------------------------------- |
+| `DATABASE_URL` | Runtime PostgreSQL connection used by the application          |
+| `DIRECT_URL`   | Direct PostgreSQL connection used by Prisma CLI and migrations |
+
+Both values are environment-specific secrets and should not be committed to the repository.
+
+In production, these values are configured through the deployment environment.
+
+## 11. Current database architecture
+
+The current data-access flow is:
+
+```text
+Next.js App Router
+       │
+       ▼
+Server Components / Server Actions
+       │
+       ▼
+Prisma Client
+       │
+       ▼
+PrismaPg Adapter
+       │
+       ▼
+PostgreSQL
+       │
+       ▼
+Prisma Postgres
+```
+
+Prisma remains the application's database access layer.
+
+The application does not expose a public database API directly.
+
+## 12. Future direction
+
+The database migration to PostgreSQL is complete.
+
+Future database-related work should be driven by actual application requirements rather than by replacing the current architecture speculatively.
 
 Potential future extensions include:
 
 - `User`
-- `Tag` as a dedicated model
+- a dedicated `Tag` model
 - revision history
 - more structured collection metadata
 - richer access control
+- additional relationship metadata
+
+These are not currently part of the application's implemented data model.
